@@ -1,0 +1,132 @@
+{
+  "row": {
+    "task": "refund-remainder",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-4-5",
+    "rep": 3,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1003",
+        "amount_cents": 6000
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.006984,
+    "usage": {
+      "input_tokens": 5044,
+      "output_tokens": 388,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 5.428,
+    "wall_s": 5.428,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "This is ada@example.com. You already gave me a partial credit on ORD-1003, but I'm returning the whole thing now. Please refund whatever is left."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll look up your account and check the details of order ORD-1003 to see how much has already been refunded."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1003\"}) -> {\"id\": \"ORD-1003\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 9000, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 3000}"
+    },
+    {
+      "role": "assistant",
+      "text": "Perfect! I can see that order ORD-1003 was for $90.00, and $30.00 has already been refunded. That means there's $60.00 remaining to refund.\n\nSince the order was delivered on 2026-10-21 and today is 2026-10-26 (5 days ago, well within the 30-day refund window), I can process the remaining refund for you now."
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1003\", \"amount_cents\": 6000, \"reason\": \"Customer returning whole order\"}) -> {\"refunded_cents\": 6000, \"order_id\": \"ORD-1003\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done! I've refunded the remaining $60.00 to your account. Combined with the $30.00 partial credit you already received, you now have the full $90.00 refunded for order ORD-1003."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1003"
+      },
+      "result": "{\"id\": \"ORD-1003\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 9000, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 3000}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1003",
+        "amount_cents": 6000,
+        "reason": "Customer returning whole order"
+      },
+      "result": "{\"refunded_cents\": 6000, \"order_id\": \"ORD-1003\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1408,
+        "output_tokens": 130,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002058,
+      "latency_s": 1.622,
+      "request_id": "req_011CgQx9PhZY9SzDvLS9VwzF"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1699,
+        "output_tokens": 203,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002714,
+      "latency_s": 2.469,
+      "request_id": "req_011CgQx9WhzRJBMrFm1KbkvH"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1937,
+        "output_tokens": 55,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002212,
+      "latency_s": 1.337,
+      "request_id": "req_011CgQx9hCGVkYDsFjsnnD4E"
+    }
+  ],
+  "judge": {}
+}

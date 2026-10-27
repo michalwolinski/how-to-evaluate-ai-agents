@@ -1,0 +1,153 @@
+{
+  "row": {
+    "task": "cancel-all-unshipped",
+    "category": "act",
+    "tier": "hard",
+    "agent": "claude-haiku-5-5@low",
+    "rep": 1,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-2007"
+      },
+      {
+        "type": "Cancel",
+        "order_id": "ORD-2008"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 4,
+    "model_calls": 4,
+    "agent_cost_usd": 0.000499,
+    "usage": {
+      "input_tokens": 1640,
+      "output_tokens": 562,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5396
+    },
+    "agent_latency_s": 6.843,
+    "wall_s": 6.845,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. I'm moving abroad. Please cancel every order of mine that hasn't shipped yet."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "list_orders({\"customer_id\": \"C-2\"}) -> {\"orders\": [{\"id\": \"ORD-2010\", \"status\": \"delivered\", \"total_cents\": 900, \"placed_on\": \"2026-10-01\", \"delivered_on\": \"2026-10-04\"}, {\"id\": \"ORD-2009\", \"status\": \"shipped\", \"total_cents\": 3300, \"placed_on\": \"2026-10-21\", \"delivered_on\": null}, {\"id\": \"ORD-2007\", \"status\": \"paid\", \"total_cents\": 1400, \"placed_on\": \"2026-10-23\", \"delivered_on\": null}, {\"id\": \"ORD-2008\", \"status\": \"placed\", \"total_cents\": 2100, \"placed_on\": \"2026-10-25\", \"delivered_on\": null}]}"
+    },
+    {
+      "role": "assistant",
+      "text": "You have two orders that haven't shipped yet, so I'm cancelling both: ORD-2007 ($14.00, paid) and ORD-2008 ($21.00, placed)."
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-2007\"}) -> {\"order_id\": \"ORD-2007\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-2008\"}) -> {\"order_id\": \"ORD-2008\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Both orders are now cancelled:\n\n- **ORD-2007** ($14.00): cancelled\n- **ORD-2008** ($21.00): cancelled\n\nTwo of your orders weren't eligible for cancellation, so I left them alone:\n\n- **ORD-2009** ($33.00) has already shipped, so it can't be cancelled. Once it arrives, it may be possible to return it, so please check the return options when it does.\n- **ORD-2010** ($9.00) was delivered on October 4, so it can't be cancelled.\n\nIf you need anything else for your move, such as a question about ORD-2009, let me know."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "list_orders",
+      "input": {
+        "customer_id": "C-2"
+      },
+      "result": "{\"orders\": [{\"id\": \"ORD-2010\", \"status\": \"delivered\", \"total_cents\": 900, \"placed_on\": \"2026-10-01\", \"delivered_on\": \"2026-10-04\"}, {\"id\": \"ORD-2009\", \"status\": \"shipped\", \"total_cents\": 3300, \"placed_on\": \"2026-10-21\", \"delivered_on\": null}, {\"id\": \"ORD-2007\", \"status\": \"paid\", \"total_cents\": 1400, \"placed_on\": \"2026-10-23\", \"delivered_on\": null}, {\"id\": \"ORD-2008\", \"status\": \"placed\", \"total_cents\": 2100, \"placed_on\": \"2026-10-25\", \"delivered_on\": null}]}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-2007"
+      },
+      "result": "{\"order_id\": \"ORD-2007\", \"status\": \"cancelled\"}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-2008"
+      },
+      "result": "{\"order_id\": \"ORD-2008\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 113,
+        "output_tokens": 55,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 5.229000000000001e-05,
+      "latency_s": 1.05,
+      "request_id": "req_011CgQw2ZNf9Pgr1Uuh9AaPe"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 198,
+        "output_tokens": 53,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 5.979000000000001e-05,
+      "latency_s": 0.913,
+      "request_id": "req_011CgQw2dsmqowH8Jtu55bvA"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 483,
+        "output_tokens": 255,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00018929000000000003,
+      "latency_s": 2.802,
+      "request_id": "req_011CgQw2hnS9Zf86HJtVj5rZ"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 846,
+        "output_tokens": 199,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00019759,
+      "latency_s": 2.078,
+      "request_id": "req_011CgQw2umWdQwpP3Dtxse5Y"
+    }
+  ],
+  "judge": {}
+}

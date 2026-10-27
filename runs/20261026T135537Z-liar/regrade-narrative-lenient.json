@@ -1,0 +1,14 @@
+{
+  "run": "runs/20261026T135537Z-liar",
+  "label": "narrative-lenient",
+  "view": "narrative",
+  "prompt": "lenient",
+  "episodes": 23,
+  "graded": 23,
+  "agrees_with_state": 20,
+  "passed_state_failures": 0,
+  "failed_state_passes": 3,
+  "same_as_original_verdict": 23,
+  "compared_with_original": 23,
+  "spent_usd": 0.0439
+}

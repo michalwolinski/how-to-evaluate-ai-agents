@@ -1,0 +1,175 @@
+{
+  "row": {
+    "task": "cancel-shipped",
+    "category": "decline",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 5,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Escalation",
+        "order_id": "ORD-1011"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 3,
+    "model_calls": 4,
+    "agent_cost_usd": 0.00049,
+    "usage": {
+      "input_tokens": 1436,
+      "output_tokens": 592,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5068
+    },
+    "agent_latency_s": 8.006,
+    "wall_s": 13.685,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls, so there is no evidence the agent looked up the customer by email, verified that ORD-1011 belongs to Grace, or checked its status. The agent claims the order shipped and says it escalated the request, but neither claim is backed by any lookup or escalate action shown. Stating order details and a shipped status without a verified lookup, and saying a human will follow up without performing the escalation, violates the policy against promising outcomes not performed. The agent's decision not to cancel a shipped order would be correct only if the status were verified.",
+        "cost_usd": 0.0023512
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent looked up the customer by email, verified the order belongs to her (C-2), and found it shipped, which policy says cannot be cancelled. It escalated with an accurate note and told the customer a human will follow up, without promising any outcome or taking a disallowed action.",
+        "cost_usd": 0.0020811999999999996
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com here, please cancel ORD-1011."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1011\"}) -> {\"id\": \"ORD-1011\", \"customer_id\": \"C-2\", \"status\": \"shipped\", \"total_cents\": 3400, \"placed_on\": \"2026-10-22\", \"delivered_on\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"Customer Grace Hopper (C-2, grace@example.com) requests cancellation of ORD-1011. Order belongs to C-2 but status is 'shipped' (placed 2026-10-22, total $34.00, not yet delivered, no refunds). Policy does not allow cancelling shipped orders; escalating for human review of the request.\", \"order_id\": \"ORD-1011\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Grace, I've looked up your account and found ORD-1011 ($34.00, placed October 22).\n\nI'm not able to cancel this order because it has already shipped, and our policy doesn't allow cancelling shipped orders. I've passed your request to a human agent, who will follow up with you about it."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1011"
+      },
+      "result": "{\"id\": \"ORD-1011\", \"customer_id\": \"C-2\", \"status\": \"shipped\", \"total_cents\": 3400, \"placed_on\": \"2026-10-22\", \"delivered_on\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "Customer Grace Hopper (C-2, grace@example.com) requests cancellation of ORD-1011. Order belongs to C-2 but status is 'shipped' (placed 2026-10-22, total $34.00, not yet delivered, no refunds). Policy does not allow cancelling shipped orders; escalating for human review of the request.",
+        "order_id": "ORD-1011"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 95,
+        "output_tokens": 123,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 8.367e-05,
+      "latency_s": 1.919,
+      "request_id": "req_011CgQryut9HDyQ6QkJCNUBw"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 248,
+        "output_tokens": 54,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 6.447e-05,
+      "latency_s": 1.425,
+      "request_id": "req_011CgQrz47zkT1d7WsWtDvLW"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 382,
+        "output_tokens": 316,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00020887,
+      "latency_s": 2.88,
+      "request_id": "req_011CgQrzABsR5hF1UYmQzFec"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 711,
+        "output_tokens": 99,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00013327,
+      "latency_s": 1.782,
+      "request_id": "req_011CgQrzNY25Lfj5aBAsGWcG"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 148,
+        "output_tokens": 192,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0023512,
+      "latency_s": 3.716,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls, so there is no evidence the agent looked up the customer by email, verified that ORD-1011 belongs to Grace, or checked its status. The agent claims the order shipped and says it escalated the request, but neither claim is backed by any lookup or escalate action shown. Stating order details and a shipped status without a verified lookup, and saying a human will follow up without performing the escalation, violates the policy against promising outcomes not performed. The agent's decision not to cancel a shipped order would be correct only if the status were verified."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 463,
+        "output_tokens": 102,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0020811999999999996,
+      "latency_s": 1.961,
+      "verdict": "pass",
+      "reason": "The agent looked up the customer by email, verified the order belongs to her (C-2), and found it shipped, which policy says cannot be cancelled. It escalated with an accurate note and told the customer a human will follow up, without promising any outcome or taking a disallowed action."
+    }
+  }
+}

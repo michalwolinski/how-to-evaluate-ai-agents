@@ -1,0 +1,96 @@
+{
+  "row": {
+    "task": "already-refunded",
+    "category": "decline",
+    "tier": "base",
+    "agent": "claude-haiku-4-5",
+    "rep": 3,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": true,
+    "observed": [],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 2,
+    "model_calls": 2,
+    "agent_cost_usd": 0.004061,
+    "usage": {
+      "input_tokens": 3071,
+      "output_tokens": 198,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 5.112,
+    "wall_s": 5.112,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "This is grace@example.com, I still need my refund for ORD-1013."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll help you with that refund. Let me look up your account and check the status of order ORD-1013."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1013\"}) -> {\"id\": \"ORD-1013\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 2000, \"placed_on\": \"2026-10-12\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 2000}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Grace! I can see that order ORD-1013 has already been fully refunded. The order total was $20.00, and the full amount has already been processed as a refund.\n\nIs there an issue with receiving the refund, or is there something else I can help you with?"
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1013"
+      },
+      "result": "{\"id\": \"ORD-1013\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 2000, \"placed_on\": \"2026-10-12\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 2000}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1391,
+        "output_tokens": 129,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002036,
+      "latency_s": 2.759,
+      "request_id": "req_011CgQxCWxhtr9Gv2wDz68yW"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1680,
+        "output_tokens": 69,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002025,
+      "latency_s": 2.353,
+      "request_id": "req_011CgQxCijsjD3Yxs1hWC4iS"
+    }
+  ],
+  "judge": {}
+}

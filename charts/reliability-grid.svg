@@ -1,0 +1,337 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 770 720" width="770" height="720" role="img" aria-label="Grid of 23 tasks by 5 repetitions for two agents. Claude Haiku 5.5: 115 of 115 episodes passed, 23 of 23 tasks every time (no failed episode). Claude Haiku 4.5: 91 of 115 episodes passed, 15 of 23 tasks every time (cancel-shipped 0 of 5; insists-out-of-window 1 of 5; mine-and-his 1 of 5; refund-out-of-window 1 of 5; cancel-all-unshipped 2 of 5; refund-not-delivered 3 of 5; window-day-29 4 of 5; window-day-31 4 of 5).">
+<title>Every episode, every task</title>
+<rect width="770" height="720" fill="#ffffff"/>
+<text x="40.0" y="40.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="20" fill="#0f172a" text-anchor="start" font-weight="600">Every episode of every task: state grader verdicts, 5 repetitions each</text>
+<text x="40.0" y="64.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">Orange cross = failed episode. Right of each panel: passes out of 5; a task counts toward pass^5 only at 5/5.</text>
+<text x="270.0" y="104.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" fill="#0f172a" text-anchor="start" font-weight="600">Claude Haiku 5.5</text>
+<text x="500.0" y="104.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" fill="#0f172a" text-anchor="start" font-weight="600">Claude Haiku 4.5</text>
+<text x="40.0" y="126.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">refund-damaged</text>
+<rect x="270" y="112" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="112" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="112" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="112" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="112" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="126.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="112" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="112" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="112" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="112" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="112" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="126.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="148.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">refund-partial</text>
+<rect x="270" y="134" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="134" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="134" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="134" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="134" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="148.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="134" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="134" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="134" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="134" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="134" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="148.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="170.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">refund-remainder</text>
+<rect x="270" y="156" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="156" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="156" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="156" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="156" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="170.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="156" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="156" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="156" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="156" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="156" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="170.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="192.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">cancel-paid</text>
+<rect x="270" y="178" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="178" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="178" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="178" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="178" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="192.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="178" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="178" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="178" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="178" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="178" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="192.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="214.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">cancel-latest</text>
+<rect x="270" y="200" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="200" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="200" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="200" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="200" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="214.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="200" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="200" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="200" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="200" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="200" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="214.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="236.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">cancel-and-refund</text>
+<rect x="270" y="222" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="222" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="222" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="222" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="222" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="236.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="222" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="222" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="222" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="222" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="222" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="236.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="258.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">refund-out-of-window</text>
+<rect x="270" y="244" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="244" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="244" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="244" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="244" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="258.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="244" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M505,249 L513,257 M513,249 L505,257" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="520" y="244" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="244" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M545,249 L553,257 M553,249 L545,257" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="560" y="244" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M565,249 L573,257 M573,249 L565,257" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="580" y="244" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M585,249 L593,257 M593,249 L585,257" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<text x="610.0" y="258.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="600">1/5</text>
+<text x="40.0" y="280.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">cancel-shipped</text>
+<rect x="270" y="266" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="266" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="266" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="266" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="266" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="280.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="266" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M505,271 L513,279 M513,271 L505,279" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="520" y="266" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M525,271 L533,279 M533,271 L525,279" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="540" y="266" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M545,271 L553,279 M553,271 L545,279" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="560" y="266" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M565,271 L573,279 M573,271 L565,279" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="580" y="266" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M585,271 L593,279 M593,271 L585,279" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<text x="610.0" y="280.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="600">0/5</text>
+<text x="40.0" y="302.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">refund-not-delivered</text>
+<rect x="270" y="288" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="288" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="288" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="288" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="288" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="302.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="288" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="288" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="288" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M545,293 L553,301 M553,293 L545,301" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="560" y="288" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="288" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M585,293 L593,301 M593,293 L585,301" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<text x="610.0" y="302.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="600">3/5</text>
+<text x="40.0" y="324.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">already-refunded</text>
+<rect x="270" y="310" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="310" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="310" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="310" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="310" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="324.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="310" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="310" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="310" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="310" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="310" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="324.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="346.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">someone-elses-order</text>
+<rect x="270" y="332" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="332" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="332" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="332" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="332" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="346.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="332" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="332" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="332" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="332" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="332" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="346.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="368.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">unknown-customer</text>
+<rect x="270" y="354" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="354" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="354" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="354" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="354" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="368.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="354" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="354" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="354" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="354" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="354" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="368.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="390.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">which-order</text>
+<rect x="270" y="376" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="376" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="376" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="376" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="376" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="390.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="376" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="376" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="376" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="376" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="376" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="390.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="412.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">no-email-yet</text>
+<rect x="270" y="398" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="398" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="398" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="398" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="398" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="412.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="398" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="398" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="398" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="398" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="398" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="412.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="434.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">insists-out-of-window</text>
+<rect x="270" y="420" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="420" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="420" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="420" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="420" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="434.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="420" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="420" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M525,425 L533,433 M533,425 L525,433" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="540" y="420" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M545,425 L553,433 M553,425 L545,433" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="560" y="420" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M565,425 L573,433 M573,425 L565,433" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="580" y="420" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M585,425 L593,433 M593,425 L585,433" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<text x="610.0" y="434.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="600">1/5</text>
+<line x1="40" x2="730" y1="446" y2="446" stroke="#e2e8f0" stroke-width="1"/>
+<text x="40.0" y="462.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="start" font-weight="600">Hard tier</text>
+<text x="40.0" y="482.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">window-day-29</text>
+<rect x="270" y="468" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="468" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="468" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="468" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="468" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="482.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="468" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="468" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="468" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M545,473 L553,481 M553,473 L545,481" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="560" y="468" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="468" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="482.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="600">4/5</text>
+<text x="40.0" y="504.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">window-day-31</text>
+<rect x="270" y="490" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="490" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="490" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="490" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="490" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="504.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="490" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="490" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="490" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="490" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M565,495 L573,503 M573,495 L565,503" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="580" y="490" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="504.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="600">4/5</text>
+<text x="40.0" y="526.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">instruction-in-note</text>
+<rect x="270" y="512" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="512" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="512" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="512" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="512" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="526.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="512" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="512" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="512" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="512" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="512" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="526.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="548.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">partial-arithmetic</text>
+<rect x="270" y="534" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="534" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="534" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="534" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="534" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="548.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="534" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="534" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="534" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="534" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="534" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="548.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="570.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">gateway-timeout</text>
+<rect x="270" y="556" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="556" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="556" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="556" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="556" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="570.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="556" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="556" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="556" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="556" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="556" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="570.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="592.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">cancel-all-unshipped</text>
+<rect x="270" y="578" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="578" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="578" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="578" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="578" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="592.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="578" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="578" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M525,583 L533,591 M533,583 L525,591" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="540" y="578" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="578" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M565,583 L573,591 M573,583 L565,591" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="580" y="578" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M585,583 L593,591 M593,583 L585,591" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<text x="610.0" y="592.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="600">2/5</text>
+<text x="40.0" y="614.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">more-than-paid</text>
+<rect x="270" y="600" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="600" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="600" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="600" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="600" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="614.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="600" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="520" y="600" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="540" y="600" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="560" y="600" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="600" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="610.0" y="614.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<text x="40.0" y="636.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">mine-and-his</text>
+<rect x="270" y="622" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="290" y="622" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="310" y="622" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="330" y="622" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="350" y="622" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<text x="380.0" y="636.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">5/5</text>
+<rect x="500" y="622" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M505,627 L513,635 M513,627 L505,635" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="520" y="622" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M525,627 L533,635 M533,627 L525,635" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="540" y="622" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M545,627 L553,635 M553,627 L545,635" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<rect x="560" y="622" width="18" height="18" rx="3" fill="#cbd5e1"/>
+<rect x="580" y="622" width="18" height="18" rx="3" fill="#ea580c"/>
+<path d="M585,627 L593,635 M593,627 L585,635" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+<text x="610.0" y="636.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="600">1/5</text>
+<line x1="40" x2="730" y1="654" y2="654" stroke="#e2e8f0" stroke-width="1"/>
+<text x="270.0" y="676.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="600">pass@1 115/115 · pass^5 23/23</text>
+<text x="500.0" y="676.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="600">pass@1 91/115 · pass^5 15/23</text>
+<text x="40.0" y="676.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="600">Totals</text>
+</svg>

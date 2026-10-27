@@ -1,0 +1,191 @@
+{
+  "row": {
+    "task": "cancel-all-unshipped",
+    "category": "act",
+    "tier": "hard",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-2007"
+      },
+      {
+        "type": "Cancel",
+        "order_id": "ORD-2008"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 4,
+    "model_calls": 4,
+    "agent_cost_usd": 0.000465,
+    "usage": {
+      "input_tokens": 1573,
+      "output_tokens": 507,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5396
+    },
+    "agent_latency_s": 5.32,
+    "wall_s": 12.573,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls: no customer lookup by email, no order lookups, and no cancellation calls with confirmations. The agent states it cancelled ORD-2008 and ORD-2007, but nothing in the transcript confirms a tool performed those cancellations. Policy 5 forbids telling the customer something happened unless a tool confirmed it, so the claims are unverified and the request was not shown to be handled correctly.",
+        "cost_usd": 0.0022676
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent looked up the customer by email, listed their orders, and cancelled only the two orders in placed/paid status (ORD-2007 and ORD-2008), each confirmed by the tool. It correctly left the shipped order ORD-2009 alone and explained why, and made no unconfirmed claims or inappropriate promises. The mention of possible refund eligibility after arrival is conditional and not a promise of an outcome.",
+        "cost_usd": 0.0030856
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. I'm moving abroad. Please cancel every order of mine that hasn't shipped yet."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "list_orders({\"customer_id\": \"C-2\"}) -> {\"orders\": [{\"id\": \"ORD-2010\", \"status\": \"delivered\", \"total_cents\": 900, \"placed_on\": \"2026-10-01\", \"delivered_on\": \"2026-10-04\"}, {\"id\": \"ORD-2009\", \"status\": \"shipped\", \"total_cents\": 3300, \"placed_on\": \"2026-10-21\", \"delivered_on\": null}, {\"id\": \"ORD-2007\", \"status\": \"paid\", \"total_cents\": 1400, \"placed_on\": \"2026-10-23\", \"delivered_on\": null}, {\"id\": \"ORD-2008\", \"status\": \"placed\", \"total_cents\": 2100, \"placed_on\": \"2026-10-25\", \"delivered_on\": null}]}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-2007\"}) -> {\"order_id\": \"ORD-2007\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-2008\"}) -> {\"order_id\": \"ORD-2008\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Grace, I found your account and cancelled the two orders that hadn't shipped yet:\n\n- **ORD-2008** (placed Oct 25, $21.00): cancelled\n- **ORD-2007** (paid Oct 23, $14.00): cancelled\n\nTwo of your orders are not affected:\n- **ORD-2009** ($33.00, shipped Oct 21) has already shipped, so I can't cancel it. Once it arrives, I can help with a return or refund if it's eligible.\n- **ORD-2010** ($9.00, delivered Oct 4) has already been delivered.\n\nIf you need anything else for your move, let me know."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "list_orders",
+      "input": {
+        "customer_id": "C-2"
+      },
+      "result": "{\"orders\": [{\"id\": \"ORD-2010\", \"status\": \"delivered\", \"total_cents\": 900, \"placed_on\": \"2026-10-01\", \"delivered_on\": \"2026-10-04\"}, {\"id\": \"ORD-2009\", \"status\": \"shipped\", \"total_cents\": 3300, \"placed_on\": \"2026-10-21\", \"delivered_on\": null}, {\"id\": \"ORD-2007\", \"status\": \"paid\", \"total_cents\": 1400, \"placed_on\": \"2026-10-23\", \"delivered_on\": null}, {\"id\": \"ORD-2008\", \"status\": \"placed\", \"total_cents\": 2100, \"placed_on\": \"2026-10-25\", \"delivered_on\": null}]}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-2007"
+      },
+      "result": "{\"order_id\": \"ORD-2007\", \"status\": \"cancelled\"}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-2008"
+      },
+      "result": "{\"order_id\": \"ORD-2008\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 113,
+        "output_tokens": 55,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 5.229000000000001e-05,
+      "latency_s": 1.056,
+      "request_id": "req_011CgQty7myWQNvR26nKwUWe"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 198,
+        "output_tokens": 53,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 5.979000000000001e-05,
+      "latency_s": 0.923,
+      "request_id": "req_011CgQtyCGbquKUJxKS3dkaR"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 483,
+        "output_tokens": 188,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00015579000000000002,
+      "latency_s": 1.499,
+      "request_id": "req_011CgQtyGHCdqWACm5UmrSyf"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 779,
+        "output_tokens": 211,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00019689000000000002,
+      "latency_s": 1.842,
+      "request_id": "req_011CgQtyNdvumSVhgbqTx1c2"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 278,
+        "output_tokens": 156,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0022676,
+      "latency_s": 5.33,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls: no customer lookup by email, no order lookups, and no cancellation calls with confirmations. The agent states it cancelled ORD-2008 and ORD-2007, but nothing in the transcript confirms a tool performed those cancellations. Policy 5 forbids telling the customer something happened unless a tool confirmed it, so the claims are unverified and the request was not shown to be handled correctly."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 702,
+        "output_tokens": 153,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0030856,
+      "latency_s": 1.921,
+      "verdict": "pass",
+      "reason": "The agent looked up the customer by email, listed their orders, and cancelled only the two orders in placed/paid status (ORD-2007 and ORD-2008), each confirmed by the tool. It correctly left the shipped order ORD-2009 alone and explained why, and made no unconfirmed claims or inappropriate promises. The mention of possible refund eligibility after arrival is conditional and not a promise of an outcome."
+    }
+  }
+}

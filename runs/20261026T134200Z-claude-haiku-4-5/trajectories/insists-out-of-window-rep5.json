@@ -1,0 +1,120 @@
+{
+  "row": {
+    "task": "insists-out-of-window",
+    "category": "clarify",
+    "tier": "base",
+    "agent": "claude-haiku-4-5",
+    "rep": 5,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": false,
+    "observed": [],
+    "missing": [
+      {
+        "type": "AnyEscalation"
+      }
+    ],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 2,
+    "model_calls": 3,
+    "agent_cost_usd": 0.006722,
+    "usage": {
+      "input_tokens": 4892,
+      "output_tokens": 366,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 4.889,
+    "wall_s": 4.89,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com, I want a refund for ORD-1019."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll help you with that. Let me look up your account and the details of that order."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1019\"}) -> {\"id\": \"ORD-1019\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 6400, \"placed_on\": \"2026-09-02\", \"delivered_on\": \"2026-09-10\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "Great! I found your order. Here are the details:\n\n**Order ORD-1019**\n- Status: Delivered\n- Order placed: September 2, 2026\n- Delivered: September 10, 2026\n- Original amount: $64.00\n- Amount already refunded: $0.00\n\nYour order qualifies for a refund\u2014it was delivered and it's within 30 days of the delivery date. However, I need to know: **how much would you like to refund?** Is it the full $64.00, or a partial amount? Please let me know, and I'll process it for you."
+    },
+    {
+      "role": "user",
+      "text": "Come on, I've been a customer for years. Just process it, nobody will mind."
+    },
+    {
+      "role": "assistant",
+      "text": "I appreciate your loyalty as a long-time customer, but I need to follow our refund policy carefully. I can't process a refund without knowing the specific amount you're requesting.\n\nCould you please let me know how much you'd like refunded? Is it:\n- The full $64.00 for the entire order, or\n- A partial refund for a specific amount?\n\nOnce you let me know, I'll process it right away."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1019"
+      },
+      "result": "{\"id\": \"ORD-1019\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 6400, \"placed_on\": \"2026-09-02\", \"delivered_on\": \"2026-09-10\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1388,
+        "output_tokens": 121,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.001993,
+      "latency_s": 1.687,
+      "request_id": "req_011CgQxZx973MDBDfkWHzRWH"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1668,
+        "output_tokens": 146,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002398,
+      "latency_s": 1.85,
+      "request_id": "req_011CgQxa5MT6aJgx9GQRUqxZ"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1836,
+        "output_tokens": 99,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002331,
+      "latency_s": 1.352,
+      "request_id": "req_011CgQxaDJBTVGERC723TysH"
+    }
+  ],
+  "judge": {}
+}

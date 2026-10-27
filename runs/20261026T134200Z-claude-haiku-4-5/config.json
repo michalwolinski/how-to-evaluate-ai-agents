@@ -1,0 +1,10 @@
+{
+  "agent": "claude",
+  "model": "claude-haiku-4-5",
+  "effort": "none",
+  "tasks": "all",
+  "reps": 5,
+  "judge": "none",
+  "budget_usd": 1.0,
+  "out": "runs"
+}

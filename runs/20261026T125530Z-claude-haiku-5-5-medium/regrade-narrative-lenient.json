@@ -1,0 +1,14 @@
+{
+  "run": "runs/20261026T125530Z-claude-haiku-5-5-medium",
+  "label": "narrative-lenient",
+  "view": "narrative",
+  "prompt": "lenient",
+  "episodes": 92,
+  "graded": 92,
+  "agrees_with_state": 29,
+  "passed_state_failures": 0,
+  "failed_state_passes": 63,
+  "same_as_original_verdict": 74,
+  "compared_with_original": 92,
+  "spent_usd": 0.2001
+}

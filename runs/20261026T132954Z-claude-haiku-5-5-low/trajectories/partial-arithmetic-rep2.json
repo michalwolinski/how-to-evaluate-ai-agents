@@ -1,0 +1,124 @@
+{
+  "row": {
+    "task": "partial-arithmetic",
+    "category": "act",
+    "tier": "hard",
+    "agent": "claude-haiku-5-5@low",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-2005",
+        "amount_cents": 2625
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000355,
+    "usage": {
+      "input_tokens": 1187,
+      "output_tokens": 392,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 4.43,
+    "wall_s": 4.431,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. Three of the four glasses in ORD-2005 arrived shattered. They were $8.75 each. Please refund the broken ones."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-2005\"}) -> {\"id\": \"ORD-2005\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 3999, \"placed_on\": \"2026-10-16\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-2005\", \"amount_cents\": 2625, \"reason\": \"Three of four glasses arrived shattered; refund 3 x $8.75 per customer report.\"}) -> {\"refunded_cents\": 2625, \"order_id\": \"ORD-2005\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "I've refunded $26.25 to you for the three shattered glasses in order ORD-2005. That's 3 \u00d7 $8.75, and it's within the 30-day window from the October 21 delivery date."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-2005"
+      },
+      "result": "{\"id\": \"ORD-2005\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 3999, \"placed_on\": \"2026-10-16\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-2005",
+        "amount_cents": 2625,
+        "reason": "Three of four glasses arrived shattered; refund 3 x $8.75 per customer report."
+      },
+      "result": "{\"refunded_cents\": 2625, \"order_id\": \"ORD-2005\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 125,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.899000000000001e-05,
+      "latency_s": 1.326,
+      "request_id": "req_011CgQwBViePonSfiwhB8bHi"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 404,
+        "output_tokens": 222,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00016489,
+      "latency_s": 1.774,
+      "request_id": "req_011CgQwBbNy41Ehof5QKfd68"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 658,
+        "output_tokens": 64,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00011128999999999999,
+      "latency_s": 1.33,
+      "request_id": "req_011CgQwBiy87EevKCSSY1U4C"
+    }
+  ],
+  "judge": {}
+}

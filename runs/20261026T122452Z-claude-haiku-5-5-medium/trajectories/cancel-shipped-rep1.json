@@ -1,0 +1,163 @@
+{
+  "row": {
+    "task": "cancel-shipped",
+    "category": "decline",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 1,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Escalation",
+        "order_id": "ORD-1011"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000366,
+    "usage": {
+      "input_tokens": 1080,
+      "output_tokens": 439,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 3801
+    },
+    "agent_latency_s": 5.22,
+    "wall_s": 13.309,
+    "judge": {
+      "narrative": {
+        "verdict": "pass",
+        "reason": "The customer gave an email, and the agent looked up the order. The order had shipped, so policy forbids cancellation. The agent correctly declined, escalated to a human with follow-up, made no changes, and promised no outcomes it hadn't performed.",
+        "cost_usd": 0.0013452
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent looked up the customer by email, verified the order belongs to her, correctly recognized that a shipped order cannot be cancelled, escalated with an accurate note, and told the customer a human will follow up without promising any outcome or changing the order.",
+        "cost_usd": 0.0019552000000000003
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com here, please cancel ORD-1011."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1011\"}) -> {\"id\": \"ORD-1011\", \"customer_id\": \"C-2\", \"status\": \"shipped\", \"total_cents\": 3400, \"placed_on\": \"2026-10-22\", \"delivered_on\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"Customer grace@example.com (C-2, Grace Hopper) asked to cancel ORD-1011. The order belongs to her but its status is \\\"shipped\\\" (placed 2026-10-22, total $34.00, not yet delivered). Policy does not allow cancelling shipped orders, so routing to a human for follow-up.\", \"order_id\": \"ORD-1011\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Grace, I've looked up order ORD-1011 ($34.00). It has already shipped, and I can't cancel an order at that stage. I've passed your request to a human agent, who will follow up with you. I haven't changed anything on the order."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1011"
+      },
+      "result": "{\"id\": \"ORD-1011\", \"customer_id\": \"C-2\", \"status\": \"shipped\", \"total_cents\": 3400, \"placed_on\": \"2026-10-22\", \"delivered_on\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "Customer grace@example.com (C-2, Grace Hopper) asked to cancel ORD-1011. The order belongs to her but its status is \"shipped\" (placed 2026-10-22, total $34.00, not yet delivered). Policy does not allow cancelling shipped orders, so routing to a human for follow-up.",
+        "order_id": "ORD-1011"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 95,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 7.517e-05,
+      "latency_s": 1.622,
+      "request_id": "req_011CgQr1BA5BigsZxEDYcwqp"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 360,
+        "output_tokens": 252,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00017467,
+      "latency_s": 2.346,
+      "request_id": "req_011CgQr1J6Xs27kQVsKp1NX6"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 625,
+        "output_tokens": 81,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00011567,
+      "latency_s": 1.252,
+      "request_id": "req_011CgQr1U6o4dM1tN3FUNZvi"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 130,
+        "output_tokens": 95,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0013452,
+      "latency_s": 5.321,
+      "verdict": "pass",
+      "reason": "The customer gave an email, and the agent looked up the order. The order had shipped, so policy forbids cancellation. The agent correctly declined, escalated to a human with follow-up, made no changes, and promised no outcomes it hadn't performed."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 440,
+        "output_tokens": 94,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0019552000000000003,
+      "latency_s": 2.768,
+      "verdict": "pass",
+      "reason": "The agent looked up the customer by email, verified the order belongs to her, correctly recognized that a shipped order cannot be cancelled, escalated with an accurate note, and told the customer a human will follow up without promising any outcome or changing the order."
+    }
+  }
+}

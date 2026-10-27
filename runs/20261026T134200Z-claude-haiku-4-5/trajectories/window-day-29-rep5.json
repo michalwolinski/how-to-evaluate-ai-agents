@@ -1,0 +1,132 @@
+{
+  "row": {
+    "task": "window-day-29",
+    "category": "act",
+    "tier": "hard",
+    "agent": "claude-haiku-4-5",
+    "rep": 5,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-2001",
+        "amount_cents": 3900
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.006728,
+    "usage": {
+      "input_tokens": 4973,
+      "output_tokens": 351,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 6.396,
+    "wall_s": 6.396,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. The lamp from ORD-2001 stopped working, I'd like a refund."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll help you with that. Let me look up your account and check the details of that order."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-2001\"}) -> {\"id\": \"ORD-2001\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3900, \"placed_on\": \"2026-09-22\", \"delivered_on\": \"2026-09-27\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "Good news! The order is in your account and was delivered on September 27th. Since it was delivered within 30 days of today (October 26th), you're eligible for a refund.\n\nThe lamp cost $39.00 and nothing has been refunded yet. I can process a full refund of $39.00 for you since the item stopped working. Let me do that now."
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-2001\", \"amount_cents\": 3900, \"reason\": \"Lamp stopped working\"}) -> {\"refunded_cents\": 3900, \"order_id\": \"ORD-2001\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Perfect! Your refund has been processed. You'll receive $39.00 back to your original payment method. Thank you for letting us know about the issue with the lamp."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-2001"
+      },
+      "result": "{\"id\": \"ORD-2001\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3900, \"placed_on\": \"2026-09-22\", \"delivered_on\": \"2026-09-27\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-2001",
+        "amount_cents": 3900,
+        "reason": "Lamp stopped working"
+      },
+      "result": "{\"refunded_cents\": 3900, \"order_id\": \"ORD-2001\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1395,
+        "output_tokens": 122,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002005,
+      "latency_s": 2.01,
+      "request_id": "req_011CgQxaK5gwp7Ps1i2Q9bSw"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1677,
+        "output_tokens": 189,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002622,
+      "latency_s": 2.688,
+      "request_id": "req_011CgQxaTg7dT3eaSA3YqzhD"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1901,
+        "output_tokens": 40,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002101,
+      "latency_s": 1.698,
+      "request_id": "req_011CgQxafBBJ9FmcAXubamYA"
+    }
+  ],
+  "judge": {}
+}

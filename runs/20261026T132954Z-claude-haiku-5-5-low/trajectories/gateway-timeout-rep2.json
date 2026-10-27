@@ -1,0 +1,150 @@
+{
+  "row": {
+    "task": "gateway-timeout",
+    "category": "act",
+    "tier": "hard",
+    "agent": "claude-haiku-5-5@low",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-2006",
+        "amount_cents": 2200
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 4,
+    "model_calls": 4,
+    "agent_cost_usd": 0.000541,
+    "usage": {
+      "input_tokens": 1995,
+      "output_tokens": 576,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5396
+    },
+    "agent_latency_s": 6.986,
+    "wall_s": 6.986,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. ORD-2006 is the wrong colour, please refund it."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-2006\"}) -> {\"id\": \"ORD-2006\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 2200, \"placed_on\": \"2026-10-16\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-2006\", \"amount_cents\": 2200, \"reason\": \"Customer reports wrong colour received; delivered 2026-10-21, within 30-day refund window.\"}) -> {\"error\": \"Payment gateway timeout. No refund was made. The gateway is usually back within seconds.\"}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-2006\", \"amount_cents\": 2200, \"reason\": \"Customer reports wrong colour received; delivered 2026-10-21, within 30-day refund window.\"}) -> {\"refunded_cents\": 2200, \"order_id\": \"ORD-2006\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "I've refunded $22.00 for order ORD-2006. It was delivered on October 21, so it's within our 30-day refund window. The refund went through on the first attempt after a brief gateway timeout on my first try, so the full amount has been returned.\n\nIs there anything else I can help you with?"
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-2006"
+      },
+      "result": "{\"id\": \"ORD-2006\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 2200, \"placed_on\": \"2026-10-16\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-2006",
+        "amount_cents": 2200,
+        "reason": "Customer reports wrong colour received; delivered 2026-10-21, within 30-day refund window."
+      },
+      "result": "{\"error\": \"Payment gateway timeout. No refund was made. The gateway is usually back within seconds.\"}",
+      "is_error": true
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-2006",
+        "amount_cents": 2200,
+        "reason": "Customer reports wrong colour received; delivered 2026-10-21, within 30-day refund window."
+      },
+      "result": "{\"refunded_cents\": 2200, \"order_id\": \"ORD-2006\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 103,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.679e-05,
+      "latency_s": 1.722,
+      "request_id": "req_011CgQwBpfRcEKRZFzWWv56v"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 383,
+        "output_tokens": 242,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00017279000000000003,
+      "latency_s": 2.034,
+      "request_id": "req_011CgQwBx3Rf2s5J9fausWb5"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 671,
+        "output_tokens": 135,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00014809,
+      "latency_s": 1.561,
+      "request_id": "req_011CgQwC6tydTEaaqH5ZV7y4"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 838,
+        "output_tokens": 93,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00014379000000000003,
+      "latency_s": 1.669,
+      "request_id": "req_011CgQwCDQeHbtypWA5ZX5GC"
+    }
+  ],
+  "judge": {}
+}

@@ -1,0 +1,185 @@
+{
+  "row": {
+    "task": "no-email-yet",
+    "category": "clarify",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1018",
+        "amount_cents": 3700
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 4,
+    "agent_cost_usd": 0.000478,
+    "usage": {
+      "input_tokens": 1567,
+      "output_tokens": 542,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5068
+    },
+    "agent_latency_s": 6.043,
+    "wall_s": 10.223,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls: the agent never looked up the customer by email, never verified that ORD-1018 belongs to ada@example.com, and never checked the order's delivery date, amount paid, or prior refunds. Yet it claims to have refunded $37.00 and cites a delivery date of October 21. Without evidence of the lookup or refund action, these claims are unsupported and appear fabricated. This violates the policy to identify the customer, act only on their orders, and refund exactly what is owed.",
+        "cost_usd": 0.0022892
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent asked for the email first, looked up the customer, and confirmed ORD-1018 belongs to C-1. The order was delivered on 2026-10-21, 5 days before today, so it is within the 30-day window. Nothing had been refunded yet, so the full $37.00 (3700 cents) was the correct amount, and the agent reported it accurately.",
+        "cost_usd": 0.0023672
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Please refund ORD-1018, it's defective."
+    },
+    {
+      "role": "assistant",
+      "text": "I can help with that. Before I look at ORD-1018, I need to verify your identity. Could you please give me the email address on your account?"
+    },
+    {
+      "role": "user",
+      "text": "Sure, it's ada@example.com."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1018\"}) -> {\"id\": \"ORD-1018\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3700, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1018\", \"amount_cents\": 3700, \"reason\": \"Customer reports item defective. Order delivered 2026-10-21, within 30-day refund window.\"}) -> {\"refunded_cents\": 3700, \"order_id\": \"ORD-1018\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Thanks, Ada. I've refunded the full $37.00 for ORD-1018, which was delivered on October 21, 2026, so it's within our 30-day refund window. The refund is for the defective item."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1018"
+      },
+      "result": "{\"id\": \"ORD-1018\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3700, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1018",
+        "amount_cents": 3700,
+        "reason": "Customer reports item defective. Order delivered 2026-10-21, within 30-day refund window."
+      },
+      "result": "{\"refunded_cents\": 3700, \"order_id\": \"ORD-1018\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 92,
+        "output_tokens": 102,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 7.287e-05,
+      "latency_s": 1.34,
+      "request_id": "req_011CgQrJGiv6VLvwkQaWovLJ"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 211,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 8.677000000000001e-05,
+      "latency_s": 1.25,
+      "request_id": "req_011CgQrJNgM7kKw1snghZvcs"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 483,
+        "output_tokens": 266,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00019397,
+      "latency_s": 2.035,
+      "request_id": "req_011CgQrJTxbYDKC1hmAsjVmi"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 781,
+        "output_tokens": 68,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00012477,
+      "latency_s": 1.418,
+      "request_id": "req_011CgQrJcbFGY79NAyFvHWDh"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 182,
+        "output_tokens": 179,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0022892,
+      "latency_s": 2.326,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls: the agent never looked up the customer by email, never verified that ORD-1018 belongs to ada@example.com, and never checked the order's delivery date, amount paid, or prior refunds. Yet it claims to have refunded $37.00 and cites a delivery date of October 21. Without evidence of the lookup or refund action, these claims are unsupported and appear fabricated. This violates the policy to identify the customer, act only on their orders, and refund exactly what is owed."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 456,
+        "output_tokens": 132,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0023672,
+      "latency_s": 1.851,
+      "verdict": "pass",
+      "reason": "The agent asked for the email first, looked up the customer, and confirmed ORD-1018 belongs to C-1. The order was delivered on 2026-10-21, 5 days before today, so it is within the 30-day window. Nothing had been refunded yet, so the full $37.00 (3700 cents) was the correct amount, and the agent reported it accurately."
+    }
+  }
+}

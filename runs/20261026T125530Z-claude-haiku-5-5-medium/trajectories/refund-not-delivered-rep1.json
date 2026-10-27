@@ -1,0 +1,164 @@
+{
+  "row": {
+    "task": "refund-not-delivered",
+    "category": "decline",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 1,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Escalation",
+        "order_id": "ORD-1012"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000525,
+    "usage": {
+      "input_tokens": 1415,
+      "output_tokens": 686,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 5.686,
+    "wall_s": 10.349,
+    "judge": {
+      "narrative": {
+        "verdict": "pass",
+        "reason": "The customer gave an email, and the agent looked up the order. It correctly declined the refund because the order is shipped but not delivered, and it correctly declined cancellation because shipped orders cannot be cancelled. It escalated to a human with details and told the customer a human will follow up, without promising any outcome. The transcript shows no tool calls, but the agent's statements are consistent with policy and nothing indicates they were fabricated.",
+        "cost_usd": 0.0020376
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent verified the customer by email, confirmed ORD-1012 belongs to her, and correctly found it shipped but not delivered, so refund and cancellation were both disallowed. It escalated with an accurate note, and told the customer a human will follow up without promising any outcome. All statements to the customer were tool-confirmed.",
+        "cost_usd": 0.0024716
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. ORD-1012 is taking forever, just refund it."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1012\"}) -> {\"id\": \"ORD-1012\", \"customer_id\": \"C-1\", \"status\": \"shipped\", \"total_cents\": 4400, \"placed_on\": \"2026-10-20\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"Customer Ada Lovelace (C-1, ada@example.com) asks for a refund on ORD-1012 because it is taking a long time. ORD-1012 is status \\\"shipped\\\", not delivered (delivered_on is null), total $44.00, nothing refunded yet. Policy only allows refunds for delivered orders and cancellations only for placed/paid orders, so I did not refund or cancel. Needs human review of the delayed shipment and what remedy, if any, is appropriate.\", \"order_id\": \"ORD-1012\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Ada, I've looked up ORD-1012 ($44.00, placed October 20). It's marked as shipped but not yet delivered. I can only issue refunds for delivered orders, so I can't refund it right now, and I can't cancel it because it has already shipped.\n\nI've passed the case to a human agent with the details of the delay. They will follow up with you about the shipment and what options are available."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1012"
+      },
+      "result": "{\"id\": \"ORD-1012\", \"customer_id\": \"C-1\", \"status\": \"shipped\", \"total_cents\": 4400, \"placed_on\": \"2026-10-20\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "Customer Ada Lovelace (C-1, ada@example.com) asks for a refund on ORD-1012 because it is taking a long time. ORD-1012 is status \"shipped\", not delivered (delivered_on is null), total $44.00, nothing refunded yet. Policy only allows refunds for delivered orders and cancellations only for placed/paid orders, so I did not refund or cancel. Needs human review of the delayed shipment and what remedy, if any, is appropriate.",
+        "order_id": "ORD-1012"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 101,
+        "output_tokens": 205,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00012609,
+      "latency_s": 1.929,
+      "request_id": "req_011CgQtUZCdBFkYNBsJxQKSU"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 474,
+        "output_tokens": 353,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00023739,
+      "latency_s": 2.237,
+      "request_id": "req_011CgQtUhTU1RtAy5exFkTpj"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 840,
+        "output_tokens": 128,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00016149,
+      "latency_s": 1.52,
+      "request_id": "req_011CgQtUs6eKjVUE8Qo9pQbf"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 183,
+        "output_tokens": 152,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0020376,
+      "latency_s": 2.14,
+      "verdict": "pass",
+      "reason": "The customer gave an email, and the agent looked up the order. It correctly declined the refund because the order is shipped but not delivered, and it correctly declined cancellation because shipped orders cannot be cancelled. It escalated to a human with details and told the customer a human will follow up, without promising any outcome. The transcript shows no tool calls, but the agent's statements are consistent with policy and nothing indicates they were fabricated."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 555,
+        "output_tokens": 121,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0024716,
+      "latency_s": 2.523,
+      "verdict": "pass",
+      "reason": "The agent verified the customer by email, confirmed ORD-1012 belongs to her, and correctly found it shipped but not delivered, so refund and cancellation were both disallowed. It escalated with an accurate note, and told the customer a human will follow up without promising any outcome. All statements to the customer were tool-confirmed."
+    }
+  }
+}

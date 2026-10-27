@@ -1,0 +1,152 @@
+{
+  "row": {
+    "task": "cancel-and-refund",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@low",
+    "rep": 1,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1009",
+        "amount_cents": 2600
+      },
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1008"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 5,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000463,
+    "usage": {
+      "input_tokens": 1614,
+      "output_tokens": 523,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 6.905,
+    "wall_s": 6.906,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. Two things: cancel ORD-1008, and refund ORD-1009 in full, it's the wrong size."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1008\"}) -> {\"id\": \"ORD-1008\", \"customer_id\": \"C-1\", \"status\": \"paid\", \"total_cents\": 1800, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1009\"}) -> {\"id\": \"ORD-1009\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 2600, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1008\"}) -> {\"order_id\": \"ORD-1008\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1009\", \"amount_cents\": 2600, \"reason\": \"Customer reports wrong size; full refund of $26.00 within 30 days of delivery.\"}) -> {\"refunded_cents\": 2600, \"order_id\": \"ORD-1009\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Both requests are done, Ada.\n\n- **ORD-1008:** Cancelled. This order was $18.00 and had not shipped.\n- **ORD-1009:** Refunded $26.00 in full. It was delivered on October 21, so it's within the 30-day window for refunds."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1008"
+      },
+      "result": "{\"id\": \"ORD-1008\", \"customer_id\": \"C-1\", \"status\": \"paid\", \"total_cents\": 1800, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1009"
+      },
+      "result": "{\"id\": \"ORD-1009\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 2600, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1008"
+      },
+      "result": "{\"order_id\": \"ORD-1008\", \"status\": \"cancelled\"}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1009",
+        "amount_cents": 2600,
+        "reason": "Customer reports wrong size; full refund of $26.00 within 30 days of delivery."
+      },
+      "result": "{\"refunded_cents\": 2600, \"order_id\": \"ORD-1009\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 118,
+        "output_tokens": 157,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010379000000000001,
+      "latency_s": 1.808,
+      "request_id": "req_011CgQvuUM6JqUR9jLGyEx9L"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 556,
+        "output_tokens": 273,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00020559000000000002,
+      "latency_s": 2.427,
+      "request_id": "req_011CgQvuc4Sy5RdTnhshpFGP"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 940,
+        "output_tokens": 93,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00015399,
+      "latency_s": 2.67,
+      "request_id": "req_011CgQvunTmFSVwJkuvRaLFd"
+    }
+  ],
+  "judge": {}
+}

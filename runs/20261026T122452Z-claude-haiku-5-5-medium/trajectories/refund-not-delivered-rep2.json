@@ -1,0 +1,163 @@
+{
+  "row": {
+    "task": "refund-not-delivered",
+    "category": "decline",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Escalation",
+        "order_id": "ORD-1012"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.00047,
+    "usage": {
+      "input_tokens": 1311,
+      "output_tokens": 602,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 3801
+    },
+    "agent_latency_s": 5.057,
+    "wall_s": 9.208,
+    "judge": {
+      "narrative": {
+        "verdict": "pass",
+        "reason": "The customer gave an email, and the agent correctly declined the refund because the order is shipped but not delivered, and noted it cannot be cancelled since it shipped. The agent escalated with a note and told the customer a human will follow up, as policy requires, without promising any outcome it hadn't performed.",
+        "cost_usd": 0.0015952
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent identified the customer by email, verified ORD-1012 belongs to C-1, and correctly found it is shipped and undelivered, so it is neither refundable nor cancellable. It did not perform any disallowed action, escalated with a clear note, and told the customer a human will follow up without promising any outcome.",
+        "cost_usd": 0.0023092
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. ORD-1012 is taking forever, just refund it."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1012\"}) -> {\"id\": \"ORD-1012\", \"customer_id\": \"C-1\", \"status\": \"shipped\", \"total_cents\": 4400, \"placed_on\": \"2026-10-20\", \"delivered_on\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"Customer Ada Lovelace (C-1) requests a refund on ORD-1012 ($44.00, total paid, no prior refunds). Order status is \\\"shipped\\\" with no delivery date, so it is not eligible for a refund under policy (refunds only for delivered orders) and cannot be cancelled (shipped). Customer says the order is taking too long. Needs human review.\", \"order_id\": \"ORD-1012\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Ada, I've looked at ORD-1012 ($44.00). I can't refund it right now. The order shows as shipped but not yet delivered, and refunds are only available for delivered orders. It also can't be cancelled because it has already shipped.\n\nI've passed the case to a human agent with a note about the delay, and they will follow up with you. I'm sorry it's taking so long."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1012"
+      },
+      "result": "{\"id\": \"ORD-1012\", \"customer_id\": \"C-1\", \"status\": \"shipped\", \"total_cents\": 4400, \"placed_on\": \"2026-10-20\", \"delivered_on\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "Customer Ada Lovelace (C-1) requests a refund on ORD-1012 ($44.00, total paid, no prior refunds). Order status is \"shipped\" with no delivery date, so it is not eligible for a refund under policy (refunds only for delivered orders) and cannot be cancelled (shipped). Customer says the order is taking too long. Needs human review.",
+        "order_id": "ORD-1012"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 101,
+        "output_tokens": 198,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00012177000000000001,
+      "latency_s": 1.66,
+      "request_id": "req_011CgQrEVhQyxWkeoGtckSGt"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 459,
+        "output_tokens": 279,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00019807,
+      "latency_s": 2.021,
+      "request_id": "req_011CgQrEcnnszmJJoztGSahk"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 751,
+        "output_tokens": 125,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00015027,
+      "latency_s": 1.376,
+      "request_id": "req_011CgQrEmSCNXPRep34ezwi7"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 180,
+        "output_tokens": 110,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0015952,
+      "latency_s": 1.791,
+      "verdict": "pass",
+      "reason": "The customer gave an email, and the agent correctly declined the refund because the order is shipped but not delivered, and noted it cannot be cancelled since it shipped. The agent escalated with a note and told the customer a human will follow up, as policy requires, without promising any outcome it hadn't performed."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 507,
+        "output_tokens": 116,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0023092,
+      "latency_s": 2.358,
+      "verdict": "pass",
+      "reason": "The agent identified the customer by email, verified ORD-1012 belongs to C-1, and correctly found it is shipped and undelivered, so it is neither refundable nor cancellable. It did not perform any disallowed action, escalated with a clear note, and told the customer a human will follow up without promising any outcome."
+    }
+  }
+}

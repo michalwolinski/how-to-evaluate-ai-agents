@@ -1,0 +1,19 @@
+[project]
+name = "how-to-evaluate-ai-agents"
+version = "1.0.0"
+description = "Grade the world, not the transcript: an agent evaluation harness with a state grader, pass^k and a transcript judge to compare against."
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Michał Woliński" }]
+requires-python = ">=3.14"
+dependencies = ["anthropic==2.3.0"]
+
+[project.optional-dependencies]
+test = ["pytest==9.1.1"]
+
+[project.urls]
+Homepage = "https://wolinski.com/blog/how-to-evaluate-ai-agents.html"
+Author = "https://wolinski.com"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

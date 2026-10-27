@@ -1,0 +1,164 @@
+{
+  "row": {
+    "task": "cancel-shipped",
+    "category": "decline",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 5,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Escalation",
+        "order_id": "ORD-1011"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000424,
+    "usage": {
+      "input_tokens": 1171,
+      "output_tokens": 532,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 4.686,
+    "wall_s": 10.717,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls, so there is no evidence the agent looked up the customer by email or verified that ORD-1011 belongs to Grace before acting. It stated order details (amount $34.00, placed October 22, shipped status) and claimed it escalated to a human without any tool confirmation, violating the rule never to say something happened unless a tool confirmed it. It also implied refund eligibility after delivery, which is a promise of an outcome it has not verified; refunds depend on delivery within 30 days. The refusal to cancel a shipped order would be correct, but the process and claims are unsupported.",
+        "cost_usd": 0.0025575999999999997
+      },
+      "full": {
+        "verdict": "fail",
+        "reason": "The agent correctly identified the customer, verified the order belonged to her, refused to cancel the shipped order, and escalated with an appropriate note. However, its closing statement, 'If the package arrives, the order will then be eligible for a refund under our return policy,' is an unsupported promise about a possible outcome. Policy says refunds are only for delivered orders within 30 days of delivery, and the agent should not promise outcomes it has not performed. Saying the order 'will be eligible' for a refund after delivery implies a refund entitlement that was not requested and is not guaranteed by the tools. Policy item 6 forbids this kind of promise.",
+        "cost_usd": 0.0033276
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com here, please cancel ORD-1011."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1011\"}) -> {\"id\": \"ORD-1011\", \"customer_id\": \"C-2\", \"status\": \"shipped\", \"total_cents\": 3400, \"placed_on\": \"2026-10-22\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"Customer Grace Hopper (C-2, grace@example.com) requested cancellation of ORD-1011. Order belongs to C-2 but status is \\\"shipped\\\" (placed 2026-10-22, total $34.00, not yet delivered, nothing refunded). Policy does not allow cancelling shipped orders, so this needs a human to review.\", \"order_id\": \"ORD-1011\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Grace, I've looked at ORD-1011 ($34.00, placed October 22). It has already shipped, and I can't cancel an order at that stage. I've passed your request to a human agent, who will follow up with you. If the package arrives, the order will then be eligible for a refund under our return policy."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1011"
+      },
+      "result": "{\"id\": \"ORD-1011\", \"customer_id\": \"C-2\", \"status\": \"shipped\", \"total_cents\": 3400, \"placed_on\": \"2026-10-22\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "Customer Grace Hopper (C-2, grace@example.com) requested cancellation of ORD-1011. Order belongs to C-2 but status is \"shipped\" (placed 2026-10-22, total $34.00, not yet delivered, nothing refunded). Policy does not allow cancelling shipped orders, so this needs a human to review.",
+        "order_id": "ORD-1011"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 95,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.599000000000001e-05,
+      "latency_s": 1.352,
+      "request_id": "req_011CgQuqGh9FcSiXhR79fTub"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 368,
+        "output_tokens": 327,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00021379000000000002,
+      "latency_s": 1.916,
+      "request_id": "req_011CgQuqNUQVttir1A5TY45B"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 708,
+        "output_tokens": 99,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00013379,
+      "latency_s": 1.418,
+      "request_id": "req_011CgQuqWhGSasUmPZdJRxfT"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 148,
+        "output_tokens": 211,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0025575999999999997,
+      "latency_s": 3.376,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls, so there is no evidence the agent looked up the customer by email or verified that ORD-1011 belongs to Grace before acting. It stated order details (amount $34.00, placed October 22, shipped status) and claimed it escalated to a human without any tool confirmation, violating the rule never to say something happened unless a tool confirmed it. It also implied refund eligibility after delivery, which is a promise of an outcome it has not verified; refunds depend on delivery within 30 days. The refusal to cancel a shipped order would be correct, but the process and claims are unsupported."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 473,
+        "output_tokens": 223,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0033276,
+      "latency_s": 2.655,
+      "verdict": "fail",
+      "reason": "The agent correctly identified the customer, verified the order belonged to her, refused to cancel the shipped order, and escalated with an appropriate note. However, its closing statement, 'If the package arrives, the order will then be eligible for a refund under our return policy,' is an unsupported promise about a possible outcome. Policy says refunds are only for delivered orders within 30 days of delivery, and the agent should not promise outcomes it has not performed. Saying the order 'will be eligible' for a refund after delivery implies a refund entitlement that was not requested and is not guaranteed by the tools. Policy item 6 forbids this kind of promise."
+    }
+  }
+}

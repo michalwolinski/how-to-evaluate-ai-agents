@@ -1,0 +1,124 @@
+{
+  "row": {
+    "task": "refund-remainder",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@low",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1003",
+        "amount_cents": 6000
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.00034,
+    "usage": {
+      "input_tokens": 1172,
+      "output_tokens": 364,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 6.003,
+    "wall_s": 6.003,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "This is ada@example.com. You already gave me a partial credit on ORD-1003, but I'm returning the whole thing now. Please refund whatever is left."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1003\"}) -> {\"id\": \"ORD-1003\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 9000, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 3000}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1003\", \"amount_cents\": 6000, \"reason\": \"Full return of ORD-1003; refunding remaining balance after prior partial refund of $30.00.\"}) -> {\"refunded_cents\": 6000, \"order_id\": \"ORD-1003\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "I've refunded the remaining $60.00 on ORD-1003. Together with the earlier $30.00 partial credit, you've now received the full $90.00 paid for this order."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1003"
+      },
+      "result": "{\"id\": \"ORD-1003\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 9000, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 3000}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1003",
+        "amount_cents": 6000,
+        "reason": "Full return of ORD-1003; refunding remaining balance after prior partial refund of $30.00."
+      },
+      "result": "{\"refunded_cents\": 6000, \"order_id\": \"ORD-1003\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 126,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.909e-05,
+      "latency_s": 1.91,
+      "request_id": "req_011CgQw5CLxwKSb1vnQFkfEg"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 407,
+        "output_tokens": 200,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00015418999999999999,
+      "latency_s": 2.323,
+      "request_id": "req_011CgQw5LVMcd67hkQi1vHFe"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 639,
+        "output_tokens": 58,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010639000000000002,
+      "latency_s": 1.77,
+      "request_id": "req_011CgQw5WWMbSF1kzzLqjRNL"
+    }
+  ],
+  "judge": {}
+}

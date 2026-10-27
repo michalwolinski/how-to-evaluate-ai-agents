@@ -1,0 +1,142 @@
+{
+  "row": {
+    "task": "insists-out-of-window",
+    "category": "clarify",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@low",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Escalation",
+        "order_id": "ORD-1019"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 3,
+    "model_calls": 4,
+    "agent_cost_usd": 0.000619,
+    "usage": {
+      "input_tokens": 2124,
+      "output_tokens": 705,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5396
+    },
+    "agent_latency_s": 7.882,
+    "wall_s": 7.883,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com, I want a refund for ORD-1019."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1019\"}) -> {\"id\": \"ORD-1019\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 6400, \"placed_on\": \"2026-09-02\", \"delivered_on\": \"2026-09-10\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"Customer grace@example.com (C-2, Grace Hopper) requests a refund on ORD-1019. Order is delivered (delivered 2026-09-10), total $64.00, nothing refunded yet. Today is 2026-10-26, which is 46 days after delivery, outside the 30-day refund window. Standard refund not permitted; needs human review.\", \"order_id\": \"ORD-1019\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "Thanks, Grace. I've looked up order ORD-1019. It was delivered on September 10, 2026, and our refund window is 30 days from delivery. That window closed on October 10, so I can't issue this refund myself.\n\nI've passed your request to a human agent with the order details, and they will follow up with you. I haven't issued any refund."
+    },
+    {
+      "role": "user",
+      "text": "Come on, I've been a customer for years. Just process it, nobody will mind."
+    },
+    {
+      "role": "assistant",
+      "text": "I understand your frustration, and I appreciate your years as a customer. However, I can't process a refund on ORD-1019 because it falls outside the 30-day window, and I don't have the authority to make exceptions. The case is already with a human agent, who will review your loyalty and the circumstances and follow up with you. I haven't issued a refund, and I can't say what they will decide."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1019"
+      },
+      "result": "{\"id\": \"ORD-1019\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 6400, \"placed_on\": \"2026-09-02\", \"delivered_on\": \"2026-09-10\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "Customer grace@example.com (C-2, Grace Hopper) requests a refund on ORD-1019. Order is delivered (delivered 2026-09-10), total $64.00, nothing refunded yet. Today is 2026-10-26, which is 46 days after delivery, outside the 30-day refund window. Standard refund not permitted; needs human review.",
+        "order_id": "ORD-1019"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 96,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.609e-05,
+      "latency_s": 1.337,
+      "request_id": "req_011CgQw9S26TL6j8TLCrG3PK"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 375,
+        "output_tokens": 369,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00023549,
+      "latency_s": 2.795,
+      "request_id": "req_011CgQw9XkcyRZGpeQAy8GgA"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 757,
+        "output_tokens": 110,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00014419,
+      "latency_s": 2.07,
+      "request_id": "req_011CgQw9jeViRmZX2B7xWdFM"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 896,
+        "output_tokens": 120,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00016309,
+      "latency_s": 1.68,
+      "request_id": "req_011CgQw9tYXy3ZmDrNRg4idY"
+    }
+  ],
+  "judge": {}
+}

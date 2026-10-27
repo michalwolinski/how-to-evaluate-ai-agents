@@ -1,0 +1,160 @@
+{
+  "row": {
+    "task": "cancel-and-refund",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-4-5",
+    "rep": 5,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1009",
+        "amount_cents": 2600
+      },
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1008"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 5,
+    "model_calls": 3,
+    "agent_cost_usd": 0.007811,
+    "usage": {
+      "input_tokens": 5416,
+      "output_tokens": 479,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 6.619,
+    "wall_s": 6.62,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. Two things: cancel ORD-1008, and refund ORD-1009 in full, it's the wrong size."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll help you with both. Let me look up your account and get the details on those orders."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1008\"}) -> {\"id\": \"ORD-1008\", \"customer_id\": \"C-1\", \"status\": \"paid\", \"total_cents\": 1800, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1009\"}) -> {\"id\": \"ORD-1009\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 2600, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "Great! Both orders are yours. Here's what I can do:\n\n**ORD-1008 (Cancel):** \u2713 I can cancel this\u2014it's in \"paid\" status and hasn't shipped yet.\n\n**ORD-1009 (Refund):** \u2713 I can refund this in full. It was delivered on October 21st, which is within 30 days, and the full amount is $26.00.\n\nLet me process both now:"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1008\"}) -> {\"order_id\": \"ORD-1008\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1009\", \"amount_cents\": 2600, \"reason\": \"Wrong size\"}) -> {\"refunded_cents\": 2600, \"order_id\": \"ORD-1009\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done! \n\n- **ORD-1008**: Cancelled \u2713\n- **ORD-1009**: Full refund of $26.00 issued \u2713\n\nYou should see the refund appear in your account within a few business days."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1008"
+      },
+      "result": "{\"id\": \"ORD-1008\", \"customer_id\": \"C-1\", \"status\": \"paid\", \"total_cents\": 1800, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1009"
+      },
+      "result": "{\"id\": \"ORD-1009\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 2600, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1008"
+      },
+      "result": "{\"order_id\": \"ORD-1008\", \"status\": \"cancelled\"}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1009",
+        "amount_cents": 2600,
+        "reason": "Wrong size"
+      },
+      "result": "{\"refunded_cents\": 2600, \"order_id\": \"ORD-1009\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1405,
+        "output_tokens": 165,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.00223,
+      "latency_s": 2.061,
+      "request_id": "req_011CgQxWUswgzsQpTGJCiNPU"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1826,
+        "output_tokens": 253,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.003091,
+      "latency_s": 2.808,
+      "request_id": "req_011CgQxWdmEVWhyfPSNG1hX4"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 2185,
+        "output_tokens": 61,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.00249,
+      "latency_s": 1.75,
+      "request_id": "req_011CgQxWqgq5CDzuB5CRWjUd"
+    }
+  ],
+  "judge": {}
+}

@@ -1,0 +1,84 @@
+{
+  "row": {
+    "task": "cancel-latest",
+    "category": "act",
+    "tier": "base",
+    "agent": "oracle",
+    "rep": 1,
+    "status": "completed",
+    "served_model": null,
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1007"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 0,
+    "agent_cost_usd": 0,
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 0,
+    "wall_s": 0.0,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "I'm grace@example.com. Please cancel my most recent order, I don't need it anymore."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "list_orders({\"customer_id\": \"C-2\"}) -> {\"orders\": [{\"id\": \"ORD-1005\", \"status\": \"delivered\", \"total_cents\": 1500, \"placed_on\": \"2026-09-01\", \"delivered_on\": \"2026-09-05\"}, {\"id\": \"ORD-1006\", \"status\": \"delivered\", \"total_cents\": 3200, \"placed_on\": \"2026-10-02\", \"delivered_on\": \"2026-10-06\"}, {\"id\": \"ORD-1007\", \"status\": \"placed\", \"total_cents\": 4100, \"placed_on\": \"2026-10-26\", \"delivered_on\": null}]}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1007\"}) -> {\"order_id\": \"ORD-1007\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "list_orders",
+      "input": {
+        "customer_id": "C-2"
+      },
+      "result": "{\"orders\": [{\"id\": \"ORD-1005\", \"status\": \"delivered\", \"total_cents\": 1500, \"placed_on\": \"2026-09-01\", \"delivered_on\": \"2026-09-05\"}, {\"id\": \"ORD-1006\", \"status\": \"delivered\", \"total_cents\": 3200, \"placed_on\": \"2026-10-02\", \"delivered_on\": \"2026-10-06\"}, {\"id\": \"ORD-1007\", \"status\": \"placed\", \"total_cents\": 4100, \"placed_on\": \"2026-10-26\", \"delivered_on\": null}]}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1007"
+      },
+      "result": "{\"order_id\": \"ORD-1007\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [],
+  "judge": {}
+}

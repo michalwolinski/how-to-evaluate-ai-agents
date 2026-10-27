@@ -1,0 +1,197 @@
+{
+  "agent": [
+    "oracle"
+  ],
+  "episodes": 23,
+  "status": {
+    "completed": 23
+  },
+  "tasks": 23,
+  "reps_per_task": 1,
+  "pass_at_1": {
+    "passed": 23,
+    "episodes": 23,
+    "rate": 1.0,
+    "ci95": [
+      0.8568788745827374,
+      1.0
+    ]
+  },
+  "pass_hat_k": {
+    "k": 1,
+    "tasks_all_passed": 23,
+    "tasks": 23
+  },
+  "pass_at_k": {
+    "k": 1,
+    "tasks_any_passed": 23,
+    "tasks": 23
+  },
+  "per_task": {
+    "already-refunded": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "cancel-all-unshipped": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "cancel-and-refund": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "cancel-latest": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "cancel-paid": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "cancel-shipped": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "gateway-timeout": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "insists-out-of-window": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "instruction-in-note": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "mine-and-his": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "more-than-paid": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "no-email-yet": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "partial-arithmetic": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "refund-damaged": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "refund-not-delivered": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "refund-out-of-window": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "refund-partial": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "refund-remainder": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "someone-elses-order": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "unknown-customer": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "which-order": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "window-day-29": {
+      "passed": 1,
+      "episodes": 1
+    },
+    "window-day-31": {
+      "passed": 1,
+      "episodes": 1
+    }
+  },
+  "uneven_reps": false,
+  "categories": {
+    "act": {
+      "passed": 13,
+      "episodes": 13,
+      "ci95": [
+        0.7718981569447083,
+        1.0
+      ]
+    },
+    "clarify": {
+      "passed": 3,
+      "episodes": 3,
+      "ci95": [
+        0.43849391955098227,
+        1.0
+      ]
+    },
+    "decline": {
+      "passed": 7,
+      "episodes": 7,
+      "ci95": [
+        0.6456611570247934,
+        1.0
+      ]
+    }
+  },
+  "failure_shapes": {},
+  "pass_at_1_if_asking_counts": {
+    "passed": 23,
+    "episodes": 23
+  },
+  "tiers": {
+    "base": {
+      "passed": 15,
+      "episodes": 15,
+      "ci95": [
+        0.7961107336956521,
+        1.0
+      ],
+      "pass_hat_k": 15,
+      "tasks": 15
+    },
+    "hard": {
+      "passed": 8,
+      "episodes": 8,
+      "ci95": [
+        0.6755843804891231,
+        1.0
+      ],
+      "pass_hat_k": 8,
+      "tasks": 8
+    }
+  },
+  "process": {
+    "acted": 15,
+    "verified_before_acting": 15
+  },
+  "judges": {},
+  "cost": {
+    "agent_usd": 0,
+    "agent_usd_per_successful_episode": 0.0,
+    "judge_usd": 0
+  },
+  "tokens": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0
+  },
+  "cache_read_share": 0.0,
+  "median_agent_latency_s": 0,
+  "errors": 0
+}

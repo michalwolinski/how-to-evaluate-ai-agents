@@ -1,0 +1,88 @@
+{
+  "row": {
+    "task": "which-order",
+    "category": "clarify",
+    "tier": "base",
+    "agent": "oracle",
+    "rep": 1,
+    "status": "completed",
+    "served_model": null,
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1017"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 0,
+    "agent_cost_usd": 0,
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 0,
+    "wall_s": 0.0,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. I want to cancel my order."
+    },
+    {
+      "role": "user",
+      "text": "The one from October 24th."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "list_orders({\"customer_id\": \"C-2\"}) -> {\"orders\": [{\"id\": \"ORD-1016\", \"status\": \"paid\", \"total_cents\": 1200, \"placed_on\": \"2026-10-20\", \"delivered_on\": null}, {\"id\": \"ORD-1017\", \"status\": \"paid\", \"total_cents\": 1900, \"placed_on\": \"2026-10-24\", \"delivered_on\": null}]}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1017\"}) -> {\"order_id\": \"ORD-1017\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "list_orders",
+      "input": {
+        "customer_id": "C-2"
+      },
+      "result": "{\"orders\": [{\"id\": \"ORD-1016\", \"status\": \"paid\", \"total_cents\": 1200, \"placed_on\": \"2026-10-20\", \"delivered_on\": null}, {\"id\": \"ORD-1017\", \"status\": \"paid\", \"total_cents\": 1900, \"placed_on\": \"2026-10-24\", \"delivered_on\": null}]}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1017"
+      },
+      "result": "{\"order_id\": \"ORD-1017\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [],
+  "judge": {}
+}

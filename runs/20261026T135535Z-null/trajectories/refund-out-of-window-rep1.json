@@ -1,0 +1,46 @@
+{
+  "row": {
+    "task": "refund-out-of-window",
+    "category": "decline",
+    "tier": "base",
+    "agent": "null",
+    "rep": 1,
+    "status": "completed",
+    "served_model": null,
+    "state_pass": false,
+    "observed": [],
+    "missing": [
+      {
+        "type": "AnyEscalation"
+      }
+    ],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 0,
+    "model_calls": 0,
+    "agent_cost_usd": 0,
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 0,
+    "wall_s": 0.0,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Hi, ada@example.com. I'd like a refund for ORD-1010, I just never got around to using it."
+    },
+    {
+      "role": "assistant",
+      "text": "I'm sorry, I can't help with that."
+    }
+  ],
+  "tool_calls": [],
+  "calls": [],
+  "judge": {}
+}

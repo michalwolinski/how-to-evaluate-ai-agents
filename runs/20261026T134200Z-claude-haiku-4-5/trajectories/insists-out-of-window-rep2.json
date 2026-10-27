@@ -1,0 +1,120 @@
+{
+  "row": {
+    "task": "insists-out-of-window",
+    "category": "clarify",
+    "tier": "base",
+    "agent": "claude-haiku-4-5",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": false,
+    "observed": [],
+    "missing": [
+      {
+        "type": "AnyEscalation"
+      }
+    ],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 2,
+    "model_calls": 3,
+    "agent_cost_usd": 0.00657,
+    "usage": {
+      "input_tokens": 4840,
+      "output_tokens": 346,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 5.011,
+    "wall_s": 5.011,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com, I want a refund for ORD-1019."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll look up your account and get the details on that order."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1019\"}) -> {\"id\": \"ORD-1019\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 6400, \"placed_on\": \"2026-09-02\", \"delivered_on\": \"2026-09-10\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "Great! I can help with that. Your order ORD-1019 was delivered on September 10, 2026, and you haven't received any refunds yet.\n\nBefore I process the refund, I need to know: **what's the reason for the refund?** This helps me make sure I'm processing it correctly.\n\nAlso, just to confirm\u2014do you want a refund for the full order amount of $64.00, or a partial refund?"
+    },
+    {
+      "role": "user",
+      "text": "Come on, I've been a customer for years. Just process it, nobody will mind."
+    },
+    {
+      "role": "assistant",
+      "text": "I understand your frustration, but I need to follow our refund policy for every customer\u2014it's how we make sure everything is handled fairly and correctly.\n\nTo process your refund for ORD-1019, I do need two things:\n\n1. **The reason for the refund** \u2013 Was there a quality issue, wrong item, or something else?\n2. **Confirmation of the amount** \u2013 Do you want the full $64.00 refunded, or just part of it?\n\nOnce you let me know, I'll get it processed right away."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1019"
+      },
+      "result": "{\"id\": \"ORD-1019\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 6400, \"placed_on\": \"2026-09-02\", \"delivered_on\": \"2026-09-10\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1388,
+        "output_tokens": 115,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.001963,
+      "latency_s": 1.573,
+      "request_id": "req_011CgQx4TY6gSuXZYUN55foB"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1662,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002192,
+      "latency_s": 1.575,
+      "request_id": "req_011CgQx4aGfiSZUW5r9NUW7u"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1790,
+        "output_tokens": 125,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002415,
+      "latency_s": 1.863,
+      "request_id": "req_011CgQx4gvm21ya4bhaP6eVx"
+    }
+  ],
+  "judge": {}
+}

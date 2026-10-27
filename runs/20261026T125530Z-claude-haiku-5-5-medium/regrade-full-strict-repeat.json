@@ -1,0 +1,14 @@
+{
+  "run": "runs/20261026T125530Z-claude-haiku-5-5-medium",
+  "label": "full-strict-repeat",
+  "view": "full",
+  "prompt": "strict",
+  "episodes": 115,
+  "graded": 115,
+  "agrees_with_state": 113,
+  "passed_state_failures": 0,
+  "failed_state_passes": 2,
+  "same_as_original_verdict": 115,
+  "compared_with_original": 115,
+  "spent_usd": 0.3053
+}

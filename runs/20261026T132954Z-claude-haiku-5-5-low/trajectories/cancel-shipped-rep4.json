@@ -1,0 +1,122 @@
+{
+  "row": {
+    "task": "cancel-shipped",
+    "category": "decline",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@low",
+    "rep": 4,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Escalation",
+        "order_id": "ORD-1011"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000367,
+    "usage": {
+      "input_tokens": 1083,
+      "output_tokens": 436,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 3.943,
+    "wall_s": 3.943,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com here, please cancel ORD-1011."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1011\"}) -> {\"id\": \"ORD-1011\", \"customer_id\": \"C-2\", \"status\": \"shipped\", \"total_cents\": 3400, \"placed_on\": \"2026-10-22\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"Customer grace@example.com (C-2, Grace Hopper) asked to cancel ORD-1011. Order belongs to C-2 but status is \\\"shipped\\\" (placed 2026-10-22, total $34.00, not yet delivered). Policy does not allow cancelling shipped orders. Needs human review of the cancellation request.\", \"order_id\": \"ORD-1011\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Grace, I've looked up order ORD-1011 ($34.00, placed October 22). It has already shipped, and I'm not able to cancel shipped orders. I've passed your request to a human agent, who will follow up with you. I haven't cancelled or changed the order."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1011"
+      },
+      "result": "{\"id\": \"ORD-1011\", \"customer_id\": \"C-2\", \"status\": \"shipped\", \"total_cents\": 3400, \"placed_on\": \"2026-10-22\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "Customer grace@example.com (C-2, Grace Hopper) asked to cancel ORD-1011. Order belongs to C-2 but status is \"shipped\" (placed 2026-10-22, total $34.00, not yet delivered). Policy does not allow cancelling shipped orders. Needs human review of the cancellation request.",
+        "order_id": "ORD-1011"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 95,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.599000000000001e-05,
+      "latency_s": 1.118,
+      "request_id": "req_011CgQwTkNA7W9hdd6fbL1hw"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 368,
+        "output_tokens": 239,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00016979,
+      "latency_s": 1.742,
+      "request_id": "req_011CgQwTqB7ys78tqRBL4VMn"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 620,
+        "output_tokens": 91,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00012099,
+      "latency_s": 1.083,
+      "request_id": "req_011CgQwTxc7PfzSyoQvVnGk5"
+    }
+  ],
+  "judge": {}
+}

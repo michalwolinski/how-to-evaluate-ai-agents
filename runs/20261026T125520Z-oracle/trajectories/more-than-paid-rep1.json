@@ -1,0 +1,108 @@
+{
+  "row": {
+    "task": "more-than-paid",
+    "category": "act",
+    "tier": "hard",
+    "agent": "oracle",
+    "rep": 1,
+    "status": "completed",
+    "served_model": null,
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-2011",
+        "amount_cents": 4999
+      },
+      {
+        "type": "Escalation",
+        "order_id": "ORD-2011"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 4,
+    "model_calls": 0,
+    "agent_cost_usd": 0,
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 0,
+    "wall_s": 0.0,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. ORD-2011 arrived broken. Refund me $60 for it, the extra is for my wasted afternoon."
+    },
+    {
+      "role": "user",
+      "text": "Fine, refund the $49.99 then."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-2011\"}) -> {\"id\": \"ORD-2011\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 4999, \"placed_on\": \"2026-10-16\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-2011\", \"amount_cents\": 4999, \"reason\": \"arrived broken\"}) -> {\"refunded_cents\": 4999, \"order_id\": \"ORD-2011\"}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"customer asks for $10.01 goodwill on top of the refund\", \"order_id\": \"ORD-2011\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-2011"
+      },
+      "result": "{\"id\": \"ORD-2011\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 4999, \"placed_on\": \"2026-10-16\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-2011",
+        "amount_cents": 4999,
+        "reason": "arrived broken"
+      },
+      "result": "{\"refunded_cents\": 4999, \"order_id\": \"ORD-2011\"}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "customer asks for $10.01 goodwill on top of the refund",
+        "order_id": "ORD-2011"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [],
+  "judge": {}
+}

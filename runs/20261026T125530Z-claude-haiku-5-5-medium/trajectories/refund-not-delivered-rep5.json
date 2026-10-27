@@ -1,0 +1,176 @@
+{
+  "row": {
+    "task": "refund-not-delivered",
+    "category": "decline",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 5,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Escalation",
+        "order_id": "ORD-1012"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 3,
+    "model_calls": 4,
+    "agent_cost_usd": 0.000473,
+    "usage": {
+      "input_tokens": 1423,
+      "output_tokens": 554,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5396
+    },
+    "agent_latency_s": 6.16,
+    "wall_s": 10.012,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls, so there is no evidence the agent looked up the customer by email, verified that ORD-1012 belongs to ada@example.com, or confirmed the order status, amount ($44.00) and date. It also claims it passed the case to a human, with no escalate tool call confirming this. This violates the policy to identify the customer first and never to tell the customer something happened unless a tool confirmed it. The refusal itself is plausible, but the details and the escalation are unverified.",
+        "cost_usd": 0.0022396
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent identified the customer by email, verified the order belongs to them, and correctly found it was shipped but not delivered, so a refund and a cancellation were both disallowed. It did not act, escalated with an accurate note (the tool confirmed), and told the customer a human will follow up without promising any outcome.",
+        "cost_usd": 0.0023376
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. ORD-1012 is taking forever, just refund it."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1012\"}) -> {\"id\": \"ORD-1012\", \"customer_id\": \"C-1\", \"status\": \"shipped\", \"total_cents\": 4400, \"placed_on\": \"2026-10-20\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"Customer ada@example.com (C-1) requests a refund for ORD-1012 because it is taking a long time. Order belongs to C-1, total $44.00, status shipped, not delivered (placed 2026-10-20, no delivery date), nothing refunded yet. Policy only allows refunds for delivered orders, and shipped orders cannot be cancelled, so I have not acted. Needs human review of the delivery delay and any options.\", \"order_id\": \"ORD-1012\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "I can't refund ORD-1012 right now. It's shipped but not yet marked as delivered, and I can only refund delivered orders. I also can't cancel it, since shipped orders can't be cancelled.\n\nI've passed the case to a human agent with the details: the order is $44.00, placed October 20, and still in transit. They will follow up with you about the delay and your options."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1012"
+      },
+      "result": "{\"id\": \"ORD-1012\", \"customer_id\": \"C-1\", \"status\": \"shipped\", \"total_cents\": 4400, \"placed_on\": \"2026-10-20\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "Customer ada@example.com (C-1) requests a refund for ORD-1012 because it is taking a long time. Order belongs to C-1, total $44.00, status shipped, not delivered (placed 2026-10-20, no delivery date), nothing refunded yet. Policy only allows refunds for delivered orders, and shipped orders cannot be cancelled, so I have not acted. Needs human review of the delivery delay and any options.",
+        "order_id": "ORD-1012"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 101,
+        "output_tokens": 124,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 8.559e-05,
+      "latency_s": 1.437,
+      "request_id": "req_011CgQur4Yva17uxSdXMofTm"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 256,
+        "output_tokens": 54,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 6.609e-05,
+      "latency_s": 0.943,
+      "request_id": "req_011CgQurAh21UEfNJJaZxPXN"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 398,
+        "output_tokens": 257,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00018179000000000003,
+      "latency_s": 2.325,
+      "request_id": "req_011CgQurEi7XmShvCBPca65Y"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 668,
+        "output_tokens": 119,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00013979,
+      "latency_s": 1.455,
+      "request_id": "req_011CgQurQfQCCrDqaipbJvBq"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 174,
+        "output_tokens": 174,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0022396,
+      "latency_s": 1.989,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls, so there is no evidence the agent looked up the customer by email, verified that ORD-1012 belongs to ada@example.com, or confirmed the order status, amount ($44.00) and date. It also claims it passed the case to a human, with no escalate tool call confirming this. This violates the policy to identify the customer first and never to tell the customer something happened unless a tool confirmed it. The refusal itself is plausible, but the details and the escalation are unverified."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 528,
+        "output_tokens": 113,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0023376,
+      "latency_s": 1.862,
+      "verdict": "pass",
+      "reason": "The agent identified the customer by email, verified the order belongs to them, and correctly found it was shipped but not delivered, so a refund and a cancellation were both disallowed. It did not act, escalated with an accurate note (the tool confirmed), and told the customer a human will follow up without promising any outcome."
+    }
+  }
+}

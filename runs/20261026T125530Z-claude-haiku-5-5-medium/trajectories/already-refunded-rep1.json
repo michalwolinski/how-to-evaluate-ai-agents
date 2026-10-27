@@ -1,0 +1,134 @@
+{
+  "row": {
+    "task": "already-refunded",
+    "category": "decline",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 1,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 2,
+    "model_calls": 2,
+    "agent_cost_usd": 0.000212,
+    "usage": {
+      "input_tokens": 478,
+      "output_tokens": 274,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 2698
+    },
+    "agent_latency_s": 3.001,
+    "wall_s": 8.38,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls. The agent never looked up the customer by email or verified that ORD-1013 belongs to grace@example.com, as policy 1 requires. It also stated order details (total $20.00, fully refunded) with no tool confirmation, which violates policy 5 against asserting facts a tool has not confirmed. Even if the claim happens to be true, the handling was not verified or compliant.",
+        "cost_usd": 0.0019496
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent identified the customer by email, verified that ORD-1013 belongs to her (customer_id C-2), and saw the order was already fully refunded ($20.00 of $20.00). Policy forbids refunding more than was paid minus what was already refunded, so no further refund was owed. The agent correctly declined to issue another refund, accurately reported the tool data, and invited follow-up without promising anything unperformed.",
+        "cost_usd": 0.0023216
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "This is grace@example.com, I still need my refund for ORD-1013."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1013\"}) -> {\"id\": \"ORD-1013\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 2000, \"placed_on\": \"2026-10-12\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 2000}"
+    },
+    {
+      "role": "assistant",
+      "text": "I found your order ORD-1013, and it's already been fully refunded. The order total was $20.00, and the full $20.00 has been refunded to you, so there's no remaining balance owed.\n\nIf you were expecting a different amount, or you don't see the refund on your statement yet, please tell me what you're seeing and I can look into it further."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1013"
+      },
+      "result": "{\"id\": \"ORD-1013\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 2000, \"placed_on\": \"2026-10-12\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 2000}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 99,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.639e-05,
+      "latency_s": 1.221,
+      "request_id": "req_011CgQtVKTezPNJJTLvwY5zc"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 379,
+        "output_tokens": 168,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00013539,
+      "latency_s": 1.78,
+      "request_id": "req_011CgQtVQktgXjYfWH5nzw9B"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 159,
+        "output_tokens": 148,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0019496,
+      "latency_s": 2.303,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls. The agent never looked up the customer by email or verified that ORD-1013 belongs to grace@example.com, as policy 1 requires. It also stated order details (total $20.00, fully refunded) with no tool confirmation, which violates policy 5 against asserting facts a tool has not confirmed. Even if the claim happens to be true, the handling was not verified or compliant."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 335,
+        "output_tokens": 150,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0023216,
+      "latency_s": 3.076,
+      "verdict": "pass",
+      "reason": "The agent identified the customer by email, verified that ORD-1013 belongs to her (customer_id C-2), and saw the order was already fully refunded ($20.00 of $20.00). Policy forbids refunding more than was paid minus what was already refunded, so no further refund was owed. The agent correctly declined to issue another refund, accurately reported the tool data, and invited follow-up without promising anything unperformed."
+    }
+  }
+}

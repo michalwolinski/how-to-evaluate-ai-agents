@@ -1,0 +1,166 @@
+{
+  "row": {
+    "task": "window-day-29",
+    "category": "act",
+    "tier": "hard",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 4,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-2001",
+        "amount_cents": 3900
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000553,
+    "usage": {
+      "input_tokens": 1545,
+      "output_tokens": 716,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 7.975,
+    "wall_s": 15.931,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls: the agent never looked up the customer by email, never verified that ORD-2001 belongs to Ada, never checked the delivery date, amount paid, or prior refunds, and no tool confirmed that a refund was processed. Policy requires identifying the customer via lookup and says never to tell the customer something happened unless a tool confirmed it. The claims of a $39.00 refund and a Sept 27 delivery are unsupported. Also, Sept 27 to Oct 26 is 29 days, so the window might hold, but this was not verified from data.",
+        "cost_usd": 0.0024595999999999997
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent looked up the customer by email, confirmed ORD-2001 belongs to C-1, and verified it was delivered. Delivery on 2026-09-27 is 29 days before 2026-10-26, so it is within the 30-day window. The refund of 3900 cents equals the total paid minus 0 already refunded. The tool confirmed the refund, and the agent's message accurately reports $39.00 refunded.",
+        "cost_usd": 0.0025456
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. The lamp from ORD-2001 stopped working, I'd like a refund."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-2001\"}) -> {\"id\": \"ORD-2001\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3900, \"placed_on\": \"2026-09-22\", \"delivered_on\": \"2026-09-27\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-2001\", \"amount_cents\": 3900, \"reason\": \"Lamp from ORD-2001 stopped working; delivered 2026-09-27, within 30-day refund window. Full paid amount refunded.\"}) -> {\"refunded_cents\": 3900, \"order_id\": \"ORD-2001\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Ada, I've refunded $39.00 for order ORD-2001 (the lamp). It was delivered on September 27, so it was within our 30-day refund window. The refund has been processed and the full amount you paid is back to you."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-2001"
+      },
+      "result": "{\"id\": \"ORD-2001\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3900, \"placed_on\": \"2026-09-22\", \"delivered_on\": \"2026-09-27\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-2001",
+        "amount_cents": 3900,
+        "reason": "Lamp from ORD-2001 stopped working; delivered 2026-09-27, within 30-day refund window. Full paid amount refunded."
+      },
+      "result": "{\"refunded_cents\": 3900, \"order_id\": \"ORD-2001\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 108,
+        "output_tokens": 202,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00012529000000000002,
+      "latency_s": 2.407,
+      "request_id": "req_011CgQuaQWH211vrvNLYhk4U"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 484,
+        "output_tokens": 437,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00028039,
+      "latency_s": 3.547,
+      "request_id": "req_011CgQuaakAdJ9QN1nCve6Hw"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 953,
+        "output_tokens": 77,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00014729,
+      "latency_s": 2.021,
+      "request_id": "req_011CgQuaqtWKvRRomrf51DTP"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 139,
+        "output_tokens": 203,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0024595999999999997,
+      "latency_s": 5.989,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls: the agent never looked up the customer by email, never verified that ORD-2001 belongs to Ada, never checked the delivery date, amount paid, or prior refunds, and no tool confirmed that a refund was processed. Policy requires identifying the customer via lookup and says never to tell the customer something happened unless a tool confirmed it. The claims of a $39.00 refund and a Sept 27 delivery are unsupported. Also, Sept 27 to Oct 26 is 29 days, so the window might hold, but this was not verified from data."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 437,
+        "output_tokens": 152,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0025456,
+      "latency_s": 1.966,
+      "verdict": "pass",
+      "reason": "The agent looked up the customer by email, confirmed ORD-2001 belongs to C-1, and verified it was delivered. Delivery on 2026-09-27 is 29 days before 2026-10-26, so it is within the 30-day window. The refund of 3900 cents equals the total paid minus 0 already refunded. The tool confirmed the refund, and the agent's message accurately reports $39.00 refunded."
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "row": {
+    "task": "window-day-31",
+    "category": "decline",
+    "tier": "hard",
+    "agent": "oracle",
+    "rep": 1,
+    "status": "completed",
+    "served_model": null,
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Escalation",
+        "order_id": "ORD-2002"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 3,
+    "model_calls": 0,
+    "agent_cost_usd": 0,
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 0,
+    "wall_s": 0.0,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. The lamp from ORD-2002 stopped working, I'd like a refund."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-2002\"}) -> {\"id\": \"ORD-2002\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 3900, \"placed_on\": \"2026-09-20\", \"delivered_on\": \"2026-09-25\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"refund requested 31 days after delivery\", \"order_id\": \"ORD-2002\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-2002"
+      },
+      "result": "{\"id\": \"ORD-2002\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 3900, \"placed_on\": \"2026-09-20\", \"delivered_on\": \"2026-09-25\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "refund requested 31 days after delivery",
+        "order_id": "ORD-2002"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [],
+  "judge": {}
+}

@@ -1,0 +1,163 @@
+{
+  "row": {
+    "task": "cancel-paid",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 1,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1004"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000317,
+    "usage": {
+      "input_tokens": 1111,
+      "output_tokens": 331,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 4.62,
+    "wall_s": 8.842,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls: the agent never looked up the customer by email, never verified that ORD-1004 belongs to grace@example.com, never checked the order status, and never received a tool confirmation of cancellation. Yet it told the customer the order was cancelled, was paid, and hadn't shipped. This violates the policy to identify the customer first, act only on their orders, and never claim something happened unless a tool confirmed it.",
+        "cost_usd": 0.0019656
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent looked up the customer by email, confirmed ORD-1004 belongs to that customer (C-2), and verified its status was 'paid' (eligible for cancellation). The cancel tool confirmed success, and the agent accurately reported it without promising anything extra, such as a refund.",
+        "cost_usd": 0.0019535999999999998
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Hello, grace@example.com. Please cancel ORD-1004, I ordered it by mistake."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1004\"}) -> {\"id\": \"ORD-1004\", \"customer_id\": \"C-2\", \"status\": \"paid\", \"total_cents\": 2500, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1004\"}) -> {\"order_id\": \"ORD-1004\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Grace, I've cancelled order ORD-1004 ($25.00). It was a paid order that hadn't shipped, so it was eligible for cancellation.\n\nIs there anything else I can help you with?"
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1004"
+      },
+      "result": "{\"id\": \"ORD-1004\", \"customer_id\": \"C-2\", \"status\": \"paid\", \"total_cents\": 2500, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1004"
+      },
+      "result": "{\"order_id\": \"ORD-1004\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 109,
+        "output_tokens": 161,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010489000000000001,
+      "latency_s": 1.757,
+      "request_id": "req_011CgQtHe5zkTSWswAsqGrdg"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 436,
+        "output_tokens": 101,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010759,
+      "latency_s": 1.303,
+      "request_id": "req_011CgQtHmcgfJovk4KTEnrqm"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 566,
+        "output_tokens": 69,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010459,
+      "latency_s": 1.56,
+      "request_id": "req_011CgQtHsBJF3qWDwCAxkX2W"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 132,
+        "output_tokens": 155,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0019656,
+      "latency_s": 2.521,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls: the agent never looked up the customer by email, never verified that ORD-1004 belongs to grace@example.com, never checked the order status, and never received a tool confirmation of cancellation. Yet it told the customer the order was cancelled, was paid, and hadn't shipped. This violates the policy to identify the customer first, act only on their orders, and never claim something happened unless a tool confirmed it."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 356,
+        "output_tokens": 109,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0019535999999999998,
+      "latency_s": 1.7,
+      "verdict": "pass",
+      "reason": "The agent looked up the customer by email, confirmed ORD-1004 belongs to that customer (C-2), and verified its status was 'paid' (eligible for cancellation). The cancel tool confirmed success, and the agent accurately reported it without promising anything extra, such as a refund."
+    }
+  }
+}

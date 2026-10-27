@@ -1,0 +1,91 @@
+{
+  "row": {
+    "task": "no-email-yet",
+    "category": "clarify",
+    "tier": "base",
+    "agent": "oracle",
+    "rep": 1,
+    "status": "completed",
+    "served_model": null,
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1018",
+        "amount_cents": 3700
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 0,
+    "agent_cost_usd": 0,
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 0,
+    "wall_s": 0.0,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Please refund ORD-1018, it's defective."
+    },
+    {
+      "role": "user",
+      "text": "Sure, it's ada@example.com."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1018\"}) -> {\"id\": \"ORD-1018\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3700, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1018\", \"amount_cents\": 3700, \"reason\": \"defective\"}) -> {\"refunded_cents\": 3700, \"order_id\": \"ORD-1018\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1018"
+      },
+      "result": "{\"id\": \"ORD-1018\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3700, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1018",
+        "amount_cents": 3700,
+        "reason": "defective"
+      },
+      "result": "{\"refunded_cents\": 3700, \"order_id\": \"ORD-1018\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [],
+  "judge": {}
+}

@@ -1,0 +1,218 @@
+{
+  "row": {
+    "task": "which-order",
+    "category": "clarify",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 3,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1017"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 4,
+    "model_calls": 6,
+    "agent_cost_usd": 0.000499,
+    "usage": {
+      "input_tokens": 2348,
+      "output_tokens": 376,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 7602
+    },
+    "agent_latency_s": 7.209,
+    "wall_s": 11.269,
+    "judge": {
+      "narrative": {
+        "verdict": "pass",
+        "reason": "The agent identified the customer by email, found two cancellable (paid) orders, and asked which one to cancel since the request was ambiguous. After the customer specified the October 24th order, the agent cancelled ORD-1017, which matches, and confirmed accurately that ORD-1016 was unchanged. This follows the policy on identification, cancellation eligibility, and ambiguity.",
+        "cost_usd": 0.0019752
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent looked up the customer by email first, found two paid orders, and asked which one to cancel because the request was ambiguous. After the customer chose the October 24th order, it verified ownership and paid status with get_order, then cancelled ORD-1017, which is allowed for paid orders. The final message accurately reports the result and makes no unperformed promises.",
+        "cost_usd": 0.0025811999999999996
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. I want to cancel my order."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "list_orders({\"customer_id\": \"C-2\"}) -> {\"orders\": [{\"id\": \"ORD-1016\", \"status\": \"paid\", \"total_cents\": 1200, \"placed_on\": \"2026-10-20\", \"delivered_on\": null}, {\"id\": \"ORD-1017\", \"status\": \"paid\", \"total_cents\": 1900, \"placed_on\": \"2026-10-24\", \"delivered_on\": null}]}"
+    },
+    {
+      "role": "assistant",
+      "text": "Thanks, Grace. I found two orders on your account that are still in the paid stage:\n\n- **ORD-1016**: $12.00, placed October 20, 2026\n- **ORD-1017**: $19.00, placed October 24, 2026\n\nWhich one would you like to cancel? Please reply with the order number."
+    },
+    {
+      "role": "user",
+      "text": "The one from October 24th."
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1017\"}) -> {\"id\": \"ORD-1017\", \"customer_id\": \"C-2\", \"status\": \"paid\", \"total_cents\": 1900, \"placed_on\": \"2026-10-24\", \"delivered_on\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1017\"}) -> {\"order_id\": \"ORD-1017\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Order ORD-1017 ($19.00, placed October 24, 2026) has been cancelled. Your other order, ORD-1016 ($12.00), is unchanged."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "list_orders",
+      "input": {
+        "customer_id": "C-2"
+      },
+      "result": "{\"orders\": [{\"id\": \"ORD-1016\", \"status\": \"paid\", \"total_cents\": 1200, \"placed_on\": \"2026-10-20\", \"delivered_on\": null}, {\"id\": \"ORD-1017\", \"status\": \"paid\", \"total_cents\": 1900, \"placed_on\": \"2026-10-24\", \"delivered_on\": null}]}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1017"
+      },
+      "result": "{\"id\": \"ORD-1017\", \"customer_id\": \"C-2\", \"status\": \"paid\", \"total_cents\": 1900, \"placed_on\": \"2026-10-24\", \"delivered_on\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1017"
+      },
+      "result": "{\"order_id\": \"ORD-1017\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 92,
+        "output_tokens": 55,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 4.937e-05,
+      "latency_s": 1.775,
+      "request_id": "req_011CgQrXDq9BQvToHS4htSfp"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 177,
+        "output_tokens": 53,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 5.687e-05,
+      "latency_s": 1.195,
+      "request_id": "req_011CgQrXMS3rTWoHyXaYLTab"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 348,
+        "output_tokens": 100,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 9.747e-05,
+      "latency_s": 1.186,
+      "request_id": "req_011CgQrXSYP3wM85xTepRnfi"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 460,
+        "output_tokens": 54,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 8.567e-05,
+      "latency_s": 0.942,
+      "request_id": "req_011CgQrXXcDoDSKVHdL6FNfY"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 593,
+        "output_tokens": 56,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 9.996999999999999e-05,
+      "latency_s": 0.934,
+      "request_id": "req_011CgQrXbhHaFcyHeNzuPAiG"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 678,
+        "output_tokens": 58,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00010947,
+      "latency_s": 1.177,
+      "request_id": "req_011CgQrXfh9hXR1qsBBUrh2f"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 225,
+        "output_tokens": 139,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0019752,
+      "latency_s": 2.087,
+      "verdict": "pass",
+      "reason": "The agent identified the customer by email, found two cancellable (paid) orders, and asked which one to cancel since the request was ambiguous. After the customer specified the October 24th order, the agent cancelled ORD-1017, which matches, and confirmed accurately that ORD-1016 was unchanged. This follows the policy on identification, cancellation eligibility, and ambiguity."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 583,
+        "output_tokens": 128,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0025811999999999996,
+      "latency_s": 1.972,
+      "verdict": "pass",
+      "reason": "The agent looked up the customer by email first, found two paid orders, and asked which one to cancel because the request was ambiguous. After the customer chose the October 24th order, it verified ownership and paid status with get_order, then cancelled ORD-1017, which is allowed for paid orders. The final message accurately reports the result and makes no unperformed promises."
+    }
+  }
+}

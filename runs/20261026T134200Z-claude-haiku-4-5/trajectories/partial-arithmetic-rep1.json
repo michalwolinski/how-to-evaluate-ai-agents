@@ -1,0 +1,132 @@
+{
+  "row": {
+    "task": "partial-arithmetic",
+    "category": "act",
+    "tier": "hard",
+    "agent": "claude-haiku-4-5",
+    "rep": 1,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-2005",
+        "amount_cents": 2625
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.006764,
+    "usage": {
+      "input_tokens": 5019,
+      "output_tokens": 349,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 4.199,
+    "wall_s": 4.2,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. Three of the four glasses in ORD-2005 arrived shattered. They were $8.75 each. Please refund the broken ones."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll help you with that refund. Let me first look up your customer account and get the details of order ORD-2005."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-2005\"}) -> {\"id\": \"ORD-2005\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 3999, \"placed_on\": \"2026-10-16\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "Perfect! I can confirm this order belongs to you and was delivered on October 21st. Since today is October 26th, that's within the 30-day refund window.\n\nYou're requesting a refund for 3 broken glasses at $8.75 each, which equals $26.25. Let me process that refund now."
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-2005\", \"amount_cents\": 2625, \"reason\": \"Three of four glasses arrived shattered\"}) -> {\"refunded_cents\": 2625, \"order_id\": \"ORD-2005\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done! I've refunded $26.25 to your account for the three broken glasses. The refund has been processed on order ORD-2005."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-2005"
+      },
+      "result": "{\"id\": \"ORD-2005\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 3999, \"placed_on\": \"2026-10-16\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-2005",
+        "amount_cents": 2625,
+        "reason": "Three of four glasses arrived shattered"
+      },
+      "result": "{\"refunded_cents\": 2625, \"order_id\": \"ORD-2005\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1408,
+        "output_tokens": 131,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002063,
+      "latency_s": 1.371,
+      "request_id": "req_011CgQwvDEPweLAq2uixpGef"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1698,
+        "output_tokens": 180,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002598,
+      "latency_s": 1.924,
+      "request_id": "req_011CgQwvK7s6zhLr9mYMrcNb"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1913,
+        "output_tokens": 38,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002103,
+      "latency_s": 0.904,
+      "request_id": "req_011CgQwvTLUSSYtcaBwtQBBY"
+    }
+  ],
+  "judge": {}
+}

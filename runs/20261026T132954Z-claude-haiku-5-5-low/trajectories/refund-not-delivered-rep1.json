@@ -1,0 +1,122 @@
+{
+  "row": {
+    "task": "refund-not-delivered",
+    "category": "decline",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@low",
+    "rep": 1,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Escalation",
+        "order_id": "ORD-1012"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000429,
+    "usage": {
+      "input_tokens": 1175,
+      "output_tokens": 543,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 5.418,
+    "wall_s": 5.418,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. ORD-1012 is taking forever, just refund it."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1012\"}) -> {\"id\": \"ORD-1012\", \"customer_id\": \"C-1\", \"status\": \"shipped\", \"total_cents\": 4400, \"placed_on\": \"2026-10-20\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"Customer Ada Lovelace (C-1, ada@example.com) requests a refund on ORD-1012 because shipping is taking a long time. ORD-1012 is status \\\"shipped\\\", not delivered (placed 2026-10-20, total $44.00, nothing refunded). Policy only allows refunds on delivered orders, so I did not issue one. Needs human review.\", \"order_id\": \"ORD-1012\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "Thanks, Ada. I looked up ORD-1012 ($44.00, placed October 20). It's marked as shipped but not yet delivered. I can only issue refunds for delivered orders, so I haven't refunded it.\n\nI've passed the case to a human agent with a note about the delay. They will follow up with you. I can't cancel it either, since shipped orders can't be cancelled."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1012"
+      },
+      "result": "{\"id\": \"ORD-1012\", \"customer_id\": \"C-1\", \"status\": \"shipped\", \"total_cents\": 4400, \"placed_on\": \"2026-10-20\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "Customer Ada Lovelace (C-1, ada@example.com) requests a refund on ORD-1012 because shipping is taking a long time. ORD-1012 is status \"shipped\", not delivered (placed 2026-10-20, total $44.00, nothing refunded). Policy only allows refunds on delivered orders, so I did not issue one. Needs human review.",
+        "order_id": "ORD-1012"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 101,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.659e-05,
+      "latency_s": 1.7,
+      "request_id": "req_011CgQvvwbxpztVwu8fcoyMM"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 375,
+        "output_tokens": 311,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00020649,
+      "latency_s": 2.087,
+      "request_id": "req_011CgQvw4sGrCixn2YWj8Uk6"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 699,
+        "output_tokens": 126,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00014639,
+      "latency_s": 1.631,
+      "request_id": "req_011CgQvwDnopnAUzFH71X7ZY"
+    }
+  ],
+  "judge": {}
+}

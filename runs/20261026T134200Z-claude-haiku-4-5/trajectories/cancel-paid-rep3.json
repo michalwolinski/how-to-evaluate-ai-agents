@@ -1,0 +1,129 @@
+{
+  "row": {
+    "task": "cancel-paid",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-4-5",
+    "rep": 3,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1004"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.006238,
+    "usage": {
+      "input_tokens": 4858,
+      "output_tokens": 276,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 4.742,
+    "wall_s": 4.743,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Hello, grace@example.com. Please cancel ORD-1004, I ordered it by mistake."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll help you with that. Let me first look up your account and then check on that order."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1004\"}) -> {\"id\": \"ORD-1004\", \"customer_id\": \"C-2\", \"status\": \"paid\", \"total_cents\": 2500, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "Perfect! I can see that ORD-1004 is in your account and has a status of \"paid\" (it hasn't shipped yet). I can cancel this order for you."
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1004\"}) -> {\"order_id\": \"ORD-1004\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done! Your order ORD-1004 has been cancelled. Since it was still in \"paid\" status and hadn't shipped, the cancellation was successful. You should see the refund processed back to your original payment method shortly."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1004"
+      },
+      "result": "{\"id\": \"ORD-1004\", \"customer_id\": \"C-2\", \"status\": \"paid\", \"total_cents\": 2500, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1004"
+      },
+      "result": "{\"order_id\": \"ORD-1004\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1392,
+        "output_tokens": 122,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002002,
+      "latency_s": 1.731,
+      "request_id": "req_011CgQx9nu5QfFueMWT4BwEr"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1667,
+        "output_tokens": 101,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002172,
+      "latency_s": 1.507,
+      "request_id": "req_011CgQx9vK4kZx8pTvJXZAPV"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1799,
+        "output_tokens": 53,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002064,
+      "latency_s": 1.504,
+      "request_id": "req_011CgQxA2m1Rdhu8cS2icRbZ"
+    }
+  ],
+  "judge": {}
+}

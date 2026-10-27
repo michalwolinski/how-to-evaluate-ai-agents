@@ -1,0 +1,96 @@
+{
+  "row": {
+    "task": "already-refunded",
+    "category": "decline",
+    "tier": "base",
+    "agent": "claude-haiku-4-5",
+    "rep": 4,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": true,
+    "observed": [],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 2,
+    "model_calls": 2,
+    "agent_cost_usd": 0.004127,
+    "usage": {
+      "input_tokens": 3062,
+      "output_tokens": 213,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 5.289,
+    "wall_s": 5.289,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "This is grace@example.com, I still need my refund for ORD-1013."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll help you with that! Let me look up your account and check on that order."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1013\"}) -> {\"id\": \"ORD-1013\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 2000, \"placed_on\": \"2026-10-12\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 2000}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Grace! I can see that order ORD-1013 has already been fully refunded\u2014the entire $20.00 has been credited back to you. The order was delivered on October 21st and shows a refund of $20.00 already processed.\n\nIs it possible you haven't seen the refund appear in your account yet, or is there something else I can help clarify about this order?"
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1013"
+      },
+      "result": "{\"id\": \"ORD-1013\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 2000, \"placed_on\": \"2026-10-12\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 2000}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1391,
+        "output_tokens": 120,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.001991,
+      "latency_s": 2.636,
+      "request_id": "req_011CgQxN3dv94bB9fkuPR4Vh"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1671,
+        "output_tokens": 93,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002136,
+      "latency_s": 2.653,
+      "request_id": "req_011CgQxNEx4u2od2kt5dBPrV"
+    }
+  ],
+  "judge": {}
+}

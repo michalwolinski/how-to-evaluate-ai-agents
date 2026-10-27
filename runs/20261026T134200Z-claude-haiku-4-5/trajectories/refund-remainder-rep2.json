@@ -1,0 +1,120 @@
+{
+  "row": {
+    "task": "refund-remainder",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-4-5",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1003",
+        "amount_cents": 6000
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": false,
+    "tool_calls": 2,
+    "model_calls": 3,
+    "agent_cost_usd": 0.006473,
+    "usage": {
+      "input_tokens": 4798,
+      "output_tokens": 335,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 4.907,
+    "wall_s": 4.908,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "This is ada@example.com. You already gave me a partial credit on ORD-1003, but I'm returning the whole thing now. Please refund whatever is left."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll help you with that. Let me look up your order to see how much has already been refunded and what's left."
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1003\"}) -> {\"id\": \"ORD-1003\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 9000, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 3000}"
+    },
+    {
+      "role": "assistant",
+      "text": "Perfect. I can see that ORD-1003 was delivered on October 21st and you've already received a partial refund of $30. The original order total was $90, so the remaining balance to refund is $60.\n\nSince the order was delivered within 30 days (it arrived 5 days ago), I can process this refund for you."
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1003\", \"amount_cents\": 6000, \"reason\": \"Customer returning entire order\"}) -> {\"refunded_cents\": 6000, \"order_id\": \"ORD-1003\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done! I've refunded the remaining $60 on ORD-1003. Combined with the $30 partial credit you already received, that's a full $90 refund for the entire order. You should see the $60 credit back to your original payment method shortly."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1003"
+      },
+      "result": "{\"id\": \"ORD-1003\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 9000, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 3000}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1003",
+        "amount_cents": 6000,
+        "reason": "Customer returning entire order"
+      },
+      "result": "{\"refunded_cents\": 6000, \"order_id\": \"ORD-1003\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1408,
+        "output_tokens": 88,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.001848,
+      "latency_s": 1.443,
+      "request_id": "req_011CgQwyHs363Cp4DedWDgio"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1586,
+        "output_tokens": 183,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002501,
+      "latency_s": 2.073,
+      "request_id": "req_011CgQwyQ5M4Z33jjWoNmhfu"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1804,
+        "output_tokens": 64,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002124,
+      "latency_s": 1.391,
+      "request_id": "req_011CgQwyYvQpp8QdR4UUUbBC"
+    }
+  ],
+  "judge": {}
+}

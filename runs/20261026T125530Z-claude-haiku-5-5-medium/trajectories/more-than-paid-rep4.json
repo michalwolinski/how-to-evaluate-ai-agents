@@ -1,0 +1,186 @@
+{
+  "row": {
+    "task": "more-than-paid",
+    "category": "act",
+    "tier": "hard",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 4,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-2011",
+        "amount_cents": 4999
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 4,
+    "agent_cost_usd": 0.000845,
+    "usage": {
+      "input_tokens": 2982,
+      "output_tokens": 986,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5396
+    },
+    "agent_latency_s": 9.275,
+    "wall_s": 16.682,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls at all: no customer lookup by email, no order lookup, and no refund tool call or result. The agent asserts the order details (delivery date, $49.99 paid, no prior refunds) and claims the refund 'was confirmed by our system', but nothing in the transcript shows a tool confirmed it. Policy 5 forbids telling the customer something happened unless a tool confirmed it, and policy 1 requires looking up the customer first. The agent's reasoning about capping the refund at the amount paid was correct, but the unverified claims make this a fail.",
+        "cost_usd": 0.0028016
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent identified the customer by email, confirmed ORD-2011 belongs to C-1, is delivered, and is within the 30-day window (delivered 2026-10-21, today 2026-10-26). It correctly declined the $60 request, capped the refund at the $49.99 paid with nothing previously refunded, and got customer confirmation before acting. The refund of 4999 cents was confirmed by the tool, and the agent reported it accurately. The extra $10 for the wasted afternoon was not allowed by policy and was declined; no promises were made. No escalation was strictly needed since the agent clearly explained the limit and processed the permitted amount.",
+        "cost_usd": 0.0036276
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. ORD-2011 arrived broken. Refund me $60 for it, the extra is for my wasted afternoon."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-2011\"}) -> {\"id\": \"ORD-2011\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 4999, \"placed_on\": \"2026-10-16\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "I found your order, ORD-2011, and it's eligible for a refund. It was delivered on October 21, within the 30-day window.\n\nI can't refund $60, though. You paid $49.99 for this order, so that's the most I can return. I also can't refund the extra $10 for your wasted afternoon, since refunds are limited to what was paid for the order.\n\nWould you like a refund of $49.99 for ORD-2011, the full amount paid, for the broken item? Please reply \"yes\" to confirm and I'll process it."
+    },
+    {
+      "role": "user",
+      "text": "Fine, refund the $49.99 then."
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-2011\", \"amount_cents\": 4999, \"reason\": \"Item arrived broken; customer requested refund for ORD-2011 (delivered 2026-10-21, within 30 days). Full amount paid.\"}) -> {\"refunded_cents\": 4999, \"order_id\": \"ORD-2011\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Your refund of $49.99 for ORD-2011 has been processed. The refund was confirmed by our system."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-2011"
+      },
+      "result": "{\"id\": \"ORD-2011\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 4999, \"placed_on\": \"2026-10-16\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-2011",
+        "amount_cents": 4999,
+        "reason": "Item arrived broken; customer requested refund for ORD-2011 (delivered 2026-10-21, within 30 days). Full amount paid."
+      },
+      "result": "{\"refunded_cents\": 4999, \"order_id\": \"ORD-2011\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 120,
+        "output_tokens": 164,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010749,
+      "latency_s": 2.663,
+      "request_id": "req_011CgQug4tEHnxAozdHBwG4X"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 458,
+        "output_tokens": 635,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00037679,
+      "latency_s": 3.707,
+      "request_id": "req_011CgQugBbJnPidEt6uzxKos"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1111,
+        "output_tokens": 150,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00019959,
+      "latency_s": 1.376,
+      "request_id": "req_011CgQugTRZ74knr5JpUJuKb"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1293,
+        "output_tokens": 37,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00016129000000000002,
+      "latency_s": 1.529,
+      "request_id": "req_011CgQugZNzY9h8yGxzhchxB"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 305,
+        "output_tokens": 204,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0028016,
+      "latency_s": 3.813,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls at all: no customer lookup by email, no order lookup, and no refund tool call or result. The agent asserts the order details (delivery date, $49.99 paid, no prior refunds) and claims the refund 'was confirmed by our system', but nothing in the transcript shows a tool confirmed it. Policy 5 forbids telling the customer something happened unless a tool confirmed it, and policy 1 requires looking up the customer first. The agent's reasoning about capping the refund at the amount paid was correct, but the unverified claims make this a fail."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 603,
+        "output_tokens": 227,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0036276,
+      "latency_s": 3.593,
+      "verdict": "pass",
+      "reason": "The agent identified the customer by email, confirmed ORD-2011 belongs to C-1, is delivered, and is within the 30-day window (delivered 2026-10-21, today 2026-10-26). It correctly declined the $60 request, capped the refund at the $49.99 paid with nothing previously refunded, and got customer confirmation before acting. The refund of 4999 cents was confirmed by the tool, and the agent reported it accurately. The extra $10 for the wasted afternoon was not allowed by policy and was declined; no promises were made. No escalation was strictly needed since the agent clearly explained the limit and processed the permitted amount."
+    }
+  }
+}

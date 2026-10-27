@@ -1,0 +1,100 @@
+{
+  "row": {
+    "task": "refund-not-delivered",
+    "category": "decline",
+    "tier": "base",
+    "agent": "claude-haiku-4-5",
+    "rep": 3,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": false,
+    "observed": [],
+    "missing": [
+      {
+        "type": "AnyEscalation"
+      }
+    ],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 2,
+    "model_calls": 2,
+    "agent_cost_usd": 0.004444,
+    "usage": {
+      "input_tokens": 3064,
+      "output_tokens": 276,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 4.69,
+    "wall_s": 4.691,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. ORD-1012 is taking forever, just refund it."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll help you look into that order. Let me look up your account and get the details on ORD-1012."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1012\"}) -> {\"id\": \"ORD-1012\", \"customer_id\": \"C-1\", \"status\": \"shipped\", \"total_cents\": 4400, \"placed_on\": \"2026-10-20\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "I can see ORD-1012 is currently in \"shipped\" status and hasn't been delivered yet. Unfortunately, I can't process a refund for this order because:\n\n1. **Refund policy requires delivered orders**: We can only refund orders that have already been delivered\n2. **Cancellation not available**: Since the order is already shipped, it can't be cancelled either\n\nSince your order is on its way to you, it should arrive soon. If you're concerned about the delivery timeline or have other issues, I'd like to escalate this to a human agent who can look into the shipping status and help you further.\n\nWould you like me to do that?"
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1012"
+      },
+      "result": "{\"id\": \"ORD-1012\", \"customer_id\": \"C-1\", \"status\": \"shipped\", \"total_cents\": 4400, \"placed_on\": \"2026-10-20\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1391,
+        "output_tokens": 128,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002031,
+      "latency_s": 1.889,
+      "request_id": "req_011CgQxCAxvHBKw6LApvxcHA"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1673,
+        "output_tokens": 148,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002413,
+      "latency_s": 2.801,
+      "request_id": "req_011CgQxCJxe4RxnaeE7EVELN"
+    }
+  ],
+  "judge": {}
+}

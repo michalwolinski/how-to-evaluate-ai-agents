@@ -1,0 +1,163 @@
+{
+  "row": {
+    "task": "cancel-paid",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 1,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1004"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000327,
+    "usage": {
+      "input_tokens": 1150,
+      "output_tokens": 344,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 5.454,
+    "wall_s": 9.394,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls: the agent never looked up the customer by email, never verified that ORD-1004 belongs to grace@example.com, and never checked the order's status. It also never made a cancel call that confirmed the cancellation. Yet it told the customer the order was paid, unshipped, and now cancelled. Policy requires identifying the customer first, acting only on their own orders, and not claiming something happened unless a tool confirmed it, so this response violates those requirements.",
+        "cost_usd": 0.0021035999999999997
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent looked up the customer by email, confirmed ORD-1004 belongs to Grace (C-2), and saw it was in 'paid' status, which is eligible for cancellation. The cancel_order tool confirmed the cancellation, and the agent reported only what the tool confirmed. It made no unsupported promises, such as a refund timeline.",
+        "cost_usd": 0.0021416
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Hello, grace@example.com. Please cancel ORD-1004, I ordered it by mistake."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1004\"}) -> {\"id\": \"ORD-1004\", \"customer_id\": \"C-2\", \"status\": \"paid\", \"total_cents\": 2500, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1004\"}) -> {\"order_id\": \"ORD-1004\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Grace, I've cancelled order ORD-1004 ($25.00). It was paid and not yet shipped, so it was eligible for cancellation. Its status is now cancelled."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1004"
+      },
+      "result": "{\"id\": \"ORD-1004\", \"customer_id\": \"C-2\", \"status\": \"paid\", \"total_cents\": 2500, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1004"
+      },
+      "result": "{\"order_id\": \"ORD-1004\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 109,
+        "output_tokens": 181,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00011489,
+      "latency_s": 2.742,
+      "request_id": "req_011CgQsPy3a9BuT5jdumeaXg"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 456,
+        "output_tokens": 100,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010909,
+      "latency_s": 1.328,
+      "request_id": "req_011CgQsQAnWbYJA6TgDqRZiH"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 585,
+        "output_tokens": 63,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010349000000000001,
+      "latency_s": 1.384,
+      "request_id": "req_011CgQsQGU4b28BWetTtD572"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 126,
+        "output_tokens": 170,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0021035999999999997,
+      "latency_s": 2.157,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls: the agent never looked up the customer by email, never verified that ORD-1004 belongs to grace@example.com, and never checked the order's status. It also never made a cancel call that confirmed the cancellation. Yet it told the customer the order was paid, unshipped, and now cancelled. Policy requires identifying the customer first, acting only on their own orders, and not claiming something happened unless a tool confirmed it, so this response violates those requirements."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 350,
+        "output_tokens": 129,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0021416,
+      "latency_s": 1.781,
+      "verdict": "pass",
+      "reason": "The agent looked up the customer by email, confirmed ORD-1004 belongs to Grace (C-2), and saw it was in 'paid' status, which is eligible for cancellation. The cancel_order tool confirmed the cancellation, and the agent reported only what the tool confirmed. It made no unsupported promises, such as a refund timeline."
+    }
+  }
+}

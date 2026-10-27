@@ -1,0 +1,120 @@
+{
+  "row": {
+    "task": "refund-remainder",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-4-5",
+    "rep": 5,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1003",
+        "amount_cents": 6000
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": false,
+    "tool_calls": 2,
+    "model_calls": 3,
+    "agent_cost_usd": 0.006545,
+    "usage": {
+      "input_tokens": 4825,
+      "output_tokens": 344,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 4.843,
+    "wall_s": 4.844,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "This is ada@example.com. You already gave me a partial credit on ORD-1003, but I'm returning the whole thing now. Please refund whatever is left."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll help you with that. Let me first check the details of order ORD-1003 to see what's been refunded and what's left to refund."
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1003\"}) -> {\"id\": \"ORD-1003\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 9000, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 3000}"
+    },
+    {
+      "role": "assistant",
+      "text": "Perfect! I can see that order ORD-1003 was delivered on 2026-10-21 (within the 30-day refund window), and $30.00 has already been refunded. The order total was $90.00, so the remaining amount to refund is $60.00.\n\nSince you're returning the whole thing, I'll process the remaining refund now:"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1003\", \"amount_cents\": 6000, \"reason\": \"Customer returning entire order\"}) -> {\"refunded_cents\": 6000, \"order_id\": \"ORD-1003\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "All done! I've refunded the remaining $60.00 to your account. Combined with the $30.00 partial credit from before, you've now received the full $90.00 refund for order ORD-1003."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1003"
+      },
+      "result": "{\"id\": \"ORD-1003\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 9000, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 3000}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1003",
+        "amount_cents": 6000,
+        "reason": "Customer returning entire order"
+      },
+      "result": "{\"refunded_cents\": 6000, \"order_id\": \"ORD-1003\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1408,
+        "output_tokens": 98,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.001898,
+      "latency_s": 1.43,
+      "request_id": "req_011CgQxVT231j7qGbCBJAcHh"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1596,
+        "output_tokens": 190,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002546,
+      "latency_s": 2.0,
+      "request_id": "req_011CgQxVZ7erNB9a8HcffWwp"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1821,
+        "output_tokens": 56,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002101,
+      "latency_s": 1.413,
+      "request_id": "req_011CgQxVhes6kKnz1DRFbwwi"
+    }
+  ],
+  "judge": {}
+}

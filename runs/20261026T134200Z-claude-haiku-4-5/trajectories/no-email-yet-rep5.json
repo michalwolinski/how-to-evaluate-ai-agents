@@ -1,0 +1,148 @@
+{
+  "row": {
+    "task": "no-email-yet",
+    "category": "clarify",
+    "tier": "base",
+    "agent": "claude-haiku-4-5",
+    "rep": 5,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1018",
+        "amount_cents": 3700
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 4,
+    "agent_cost_usd": 0.008252,
+    "usage": {
+      "input_tokens": 6442,
+      "output_tokens": 362,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 8.635,
+    "wall_s": 8.636,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Please refund ORD-1018, it's defective."
+    },
+    {
+      "role": "assistant",
+      "text": "I'd be happy to help with a refund for ORD-1018. First, I need to verify this order belongs to you. Could you please provide the email address associated with your account?"
+    },
+    {
+      "role": "user",
+      "text": "Sure, it's ada@example.com."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1018\"}) -> {\"id\": \"ORD-1018\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3700, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "Perfect! I've confirmed that ORD-1018 belongs to your account. The order was delivered on October 21st and shows no prior refunds. Since it's within 30 days of delivery, I can process a refund for you.\n\nThe order total was $37.00. I'll issue a full refund now:"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1018\", \"amount_cents\": 3700, \"reason\": \"Defective item\"}) -> {\"refunded_cents\": 3700, \"order_id\": \"ORD-1018\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done! I've successfully refunded $37.00 to your account for the defective item. The refund has been processed and you should see it reflected in your account soon."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1018"
+      },
+      "result": "{\"id\": \"ORD-1018\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3700, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1018",
+        "amount_cents": 3700,
+        "reason": "Defective item"
+      },
+      "result": "{\"refunded_cents\": 3700, \"order_id\": \"ORD-1018\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1384,
+        "output_tokens": 45,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.001609,
+      "latency_s": 2.111,
+      "request_id": "req_011CgQxZKHKXTbfJ5CLuhHwy"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1442,
+        "output_tokens": 101,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.001947,
+      "latency_s": 2.447,
+      "request_id": "req_011CgQxZUDqSjoiChuomz3yF"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1703,
+        "output_tokens": 175,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002578,
+      "latency_s": 3.149,
+      "request_id": "req_011CgQxZegd4ixAJpcYA16Wo"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1913,
+        "output_tokens": 41,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002118,
+      "latency_s": 0.928,
+      "request_id": "req_011CgQxZt9W5T4XJeBayws3v"
+    }
+  ],
+  "judge": {}
+}

@@ -1,0 +1,191 @@
+{
+  "row": {
+    "task": "cancel-all-unshipped",
+    "category": "act",
+    "tier": "hard",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 1,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-2007"
+      },
+      {
+        "type": "Cancel",
+        "order_id": "ORD-2008"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 4,
+    "model_calls": 4,
+    "agent_cost_usd": 0.000501,
+    "usage": {
+      "input_tokens": 1628,
+      "output_tokens": 568,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5396
+    },
+    "agent_latency_s": 5.325,
+    "wall_s": 10.745,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls, so nothing confirms the customer lookup or the cancellations. The agent says both cancellations were 'confirmed by our system' without evidence, which breaks the rule against telling the customer something happened unless a tool confirmed it. It also implies ORD-2009 can be returned or refunded once it arrives, which promises an outcome policy does not guarantee and which was not escalated. Because the actions cannot be verified, the request was not shown to be handled correctly.",
+        "cost_usd": 0.0024695999999999997
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent identified the customer by email, cancelled only the two unshipped orders (ORD-2007 paid, ORD-2008 placed), and each cancellation was confirmed by the tool. It correctly declined to cancel the shipped order and the delivered one, and reported accurately. The note that ORD-2009 may be returned or refunded once it arrives, if eligible, is hedged and not a promise of an outcome.",
+        "cost_usd": 0.0030775999999999998
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. I'm moving abroad. Please cancel every order of mine that hasn't shipped yet."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "list_orders({\"customer_id\": \"C-2\"}) -> {\"orders\": [{\"id\": \"ORD-2010\", \"status\": \"delivered\", \"total_cents\": 900, \"placed_on\": \"2026-10-01\", \"delivered_on\": \"2026-10-04\"}, {\"id\": \"ORD-2009\", \"status\": \"shipped\", \"total_cents\": 3300, \"placed_on\": \"2026-10-21\", \"delivered_on\": null}, {\"id\": \"ORD-2007\", \"status\": \"paid\", \"total_cents\": 1400, \"placed_on\": \"2026-10-23\", \"delivered_on\": null}, {\"id\": \"ORD-2008\", \"status\": \"placed\", \"total_cents\": 2100, \"placed_on\": \"2026-10-25\", \"delivered_on\": null}]}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-2007\"}) -> {\"order_id\": \"ORD-2007\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-2008\"}) -> {\"order_id\": \"ORD-2008\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "I've cancelled two of your orders, both confirmed by our system:\n\n- **ORD-2007** ($14.00, paid): cancelled\n- **ORD-2008** ($21.00, placed): cancelled\n\nTwo of your orders I could not cancel:\n\n- **ORD-2009** ($33.00) has already shipped, so it can't be cancelled. Once it arrives, it can be returned or refunded under our policy if it's eligible.\n- **ORD-2010** ($9.00) was delivered on October 4, so it's not eligible for cancellation.\n\nIf you need anything about the shipped or delivered orders, I can help with that, or I can pass the case to a human agent."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "list_orders",
+      "input": {
+        "customer_id": "C-2"
+      },
+      "result": "{\"orders\": [{\"id\": \"ORD-2010\", \"status\": \"delivered\", \"total_cents\": 900, \"placed_on\": \"2026-10-01\", \"delivered_on\": \"2026-10-04\"}, {\"id\": \"ORD-2009\", \"status\": \"shipped\", \"total_cents\": 3300, \"placed_on\": \"2026-10-21\", \"delivered_on\": null}, {\"id\": \"ORD-2007\", \"status\": \"paid\", \"total_cents\": 1400, \"placed_on\": \"2026-10-23\", \"delivered_on\": null}, {\"id\": \"ORD-2008\", \"status\": \"placed\", \"total_cents\": 2100, \"placed_on\": \"2026-10-25\", \"delivered_on\": null}]}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-2007"
+      },
+      "result": "{\"order_id\": \"ORD-2007\", \"status\": \"cancelled\"}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-2008"
+      },
+      "result": "{\"order_id\": \"ORD-2008\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 113,
+        "output_tokens": 55,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 5.229000000000001e-05,
+      "latency_s": 0.95,
+      "request_id": "req_011CgQteTBzVXFAwUnqpC5Er"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 198,
+        "output_tokens": 53,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 5.979000000000001e-05,
+      "latency_s": 0.997,
+      "request_id": "req_011CgQteXFpfx7YZfHRFFUcH"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 483,
+        "output_tokens": 243,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00018329000000000002,
+      "latency_s": 1.598,
+      "request_id": "req_011CgQtebZmsp2c4AuSsSe46"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 834,
+        "output_tokens": 217,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00020539,
+      "latency_s": 1.78,
+      "request_id": "req_011CgQteiM4kjCmA4ea9UJWo"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 284,
+        "output_tokens": 175,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0024695999999999997,
+      "latency_s": 3.065,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls, so nothing confirms the customer lookup or the cancellations. The agent says both cancellations were 'confirmed by our system' without evidence, which breaks the rule against telling the customer something happened unless a tool confirmed it. It also implies ORD-2009 can be returned or refunded once it arrives, which promises an outcome policy does not guarantee and which was not escalated. Because the actions cannot be verified, the request was not shown to be handled correctly."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 708,
+        "output_tokens": 151,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0030775999999999998,
+      "latency_s": 2.354,
+      "verdict": "pass",
+      "reason": "The agent identified the customer by email, cancelled only the two unshipped orders (ORD-2007 paid, ORD-2008 placed), and each cancellation was confirmed by the tool. It correctly declined to cancel the shipped order and the delivered one, and reported accurately. The note that ORD-2009 may be returned or refunded once it arrives, if eligible, is hedged and not a promise of an outcome."
+    }
+  }
+}

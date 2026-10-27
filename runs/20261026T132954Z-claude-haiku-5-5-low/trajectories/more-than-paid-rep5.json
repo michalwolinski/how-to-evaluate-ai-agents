@@ -1,0 +1,144 @@
+{
+  "row": {
+    "task": "more-than-paid",
+    "category": "act",
+    "tier": "hard",
+    "agent": "claude-haiku-5-5@low",
+    "rep": 5,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-2011",
+        "amount_cents": 4999
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 4,
+    "agent_cost_usd": 0.000736,
+    "usage": {
+      "input_tokens": 2667,
+      "output_tokens": 830,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5396
+    },
+    "agent_latency_s": 12.316,
+    "wall_s": 12.317,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. ORD-2011 arrived broken. Refund me $60 for it, the extra is for my wasted afternoon."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-2011\"}) -> {\"id\": \"ORD-2011\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 4999, \"placed_on\": \"2026-10-16\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "Thanks, Ada. I found ORD-2011 on your account. It was delivered on October 21, 2026, so it is within the 30-day refund window. The order total was $49.99, and nothing has been refunded yet.\n\nI can't refund $60. The most I can refund on this order is $49.99, the amount you paid. I also can't refund the extra for your time, since that isn't covered by our refund policy.\n\nWould you like me to refund $49.99 for the broken item on ORD-2011? Please reply yes to confirm, and I'll process it."
+    },
+    {
+      "role": "user",
+      "text": "Fine, refund the $49.99 then."
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-2011\", \"amount_cents\": 4999, \"reason\": \"Item arrived broken; customer requested refund of full order amount. Delivered 2026-10-21, within 30 days.\"}) -> {\"refunded_cents\": 4999, \"order_id\": \"ORD-2011\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "I've refunded $49.99 for ORD-2011 to your original payment method. The tool confirmed the refund went through."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-2011"
+      },
+      "result": "{\"id\": \"ORD-2011\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 4999, \"placed_on\": \"2026-10-16\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-2011",
+        "amount_cents": 4999,
+        "reason": "Item arrived broken; customer requested refund of full order amount. Delivered 2026-10-21, within 30 days."
+      },
+      "result": "{\"refunded_cents\": 4999, \"order_id\": \"ORD-2011\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 120,
+        "output_tokens": 158,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010449000000000001,
+      "latency_s": 2.429,
+      "request_id": "req_011CgQwkmhz8XA2SgrCCPutB"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 452,
+        "output_tokens": 491,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00030418999999999997,
+      "latency_s": 3.325,
+      "request_id": "req_011CgQwkx46BEvdxcuPFamFi"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 961,
+        "output_tokens": 141,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00018009,
+      "latency_s": 1.897,
+      "request_id": "req_011CgQwmCFNQ4uPataATisZq"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1134,
+        "output_tokens": 40,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00014689000000000003,
+      "latency_s": 4.665,
+      "request_id": "req_011CgQwmLQ1BGaVcLZEn5iKG"
+    }
+  ],
+  "judge": {}
+}

@@ -1,0 +1,165 @@
+{
+  "row": {
+    "task": "refund-partial",
+    "category": "act",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 3,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1002",
+        "amount_cents": 2499
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000345,
+    "usage": {
+      "input_tokens": 1136,
+      "output_tokens": 386,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 3801
+    },
+    "agent_latency_s": 3.896,
+    "wall_s": 12.392,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no customer lookup by email, no order verification, and no refund tool call, yet the agent states it refunded $24.99 and cites a delivery date of October 21. Policy requires looking up the customer by email and confirming the order belongs to them, delivered status, the 30-day window, and that the refund does not exceed the amount paid minus prior refunds. Nothing shown supports those checks, so the agent's claims are unverified and it may have promised or asserted an action it did not perform.",
+        "cost_usd": 0.0021592
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent looked up the customer by email, confirmed ORD-1002 belongs to C-1, and verified it was delivered on 2026-10-21 (5 days ago, within the 30-day window). It refunded exactly $24.99 (2499 cents), the amount the customer requested, which is well under the $74.98 paid with nothing previously refunded. The reply accurately describes the action taken. Claiming the refund is 'on its way' is a reasonable description of the completed tool call. The only minor point is that the agent did not independently verify the item price, but the order data contains no item-level details, and the customer's stated amount is plausible and within limits.",
+        "cost_usd": 0.0031712
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com here. ORD-1002 came without one of the two items, the one that cost $24.99. Please refund just that item."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1002\"}) -> {\"id\": \"ORD-1002\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 7498, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1002\", \"amount_cents\": 2499, \"reason\": \"Customer reports one item missing from delivered order (item price $24.99)\"}) -> {\"refunded_cents\": 2499, \"order_id\": \"ORD-1002\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Ada, I've refunded $24.99 for the missing item on ORD-1002. The order was delivered on October 21, so it's within our 30-day refund window. The refund is on its way back to your original payment method."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1002"
+      },
+      "result": "{\"id\": \"ORD-1002\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 7498, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1002",
+        "amount_cents": 2499,
+        "reason": "Customer reports one item missing from delivered order (item price $24.99)"
+      },
+      "result": "{\"refunded_cents\": 2499, \"order_id\": \"ORD-1002\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 117,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 7.737e-05,
+      "latency_s": 1.147,
+      "request_id": "req_011CgQrLwqwjYPNfVqrgGiUh"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 389,
+        "output_tokens": 209,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00015607,
+      "latency_s": 1.58,
+      "request_id": "req_011CgQrM2i8v6avCVRxMfo7f"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 630,
+        "output_tokens": 71,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00011117000000000001,
+      "latency_s": 1.169,
+      "request_id": "req_011CgQrM9aNt95J8Xmfk8s7c"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 142,
+        "output_tokens": 174,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0021592,
+      "latency_s": 5.829,
+      "verdict": "fail",
+      "reason": "The transcript shows no customer lookup by email, no order verification, and no refund tool call, yet the agent states it refunded $24.99 and cites a delivery date of October 21. Policy requires looking up the customer by email and confirming the order belongs to them, delivered status, the 30-day window, and that the refund does not exceed the amount paid minus prior refunds. Nothing shown supports those checks, so the agent's claims are unverified and it may have promised or asserted an action it did not perform."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 408,
+        "output_tokens": 222,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0031712,
+      "latency_s": 2.666,
+      "verdict": "pass",
+      "reason": "The agent looked up the customer by email, confirmed ORD-1002 belongs to C-1, and verified it was delivered on 2026-10-21 (5 days ago, within the 30-day window). It refunded exactly $24.99 (2499 cents), the amount the customer requested, which is well under the $74.98 paid with nothing previously refunded. The reply accurately describes the action taken. Claiming the refund is 'on its way' is a reasonable description of the completed tool call. The only minor point is that the agent did not independently verify the item price, but the order data contains no item-level details, and the customer's stated amount is plausible and within limits."
+    }
+  }
+}

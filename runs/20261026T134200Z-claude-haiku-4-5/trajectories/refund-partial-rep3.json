@@ -1,0 +1,132 @@
+{
+  "row": {
+    "task": "refund-partial",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-4-5",
+    "rep": 3,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1002",
+        "amount_cents": 2499
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.006783,
+    "usage": {
+      "input_tokens": 5023,
+      "output_tokens": 352,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 4.919,
+    "wall_s": 4.921,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com here. ORD-1002 came without one of the two items, the one that cost $24.99. Please refund just that item."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll help you with that refund. Let me first look up your customer account and then check the details of order ORD-1002."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1002\"}) -> {\"id\": \"ORD-1002\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 7498, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "Perfect! I can see that ORD-1002 was delivered on October 21st and belongs to your account. The order total was $74.98, and you haven't received a refund yet. Since the order was delivered within the last 30 days, I can process the refund for the missing $24.99 item."
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1002\", \"amount_cents\": 2499, \"reason\": \"Missing item from delivery (one of two items not received)\"}) -> {\"refunded_cents\": 2499, \"order_id\": \"ORD-1002\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done! I've refunded $24.99 to your account for the missing item. The refund has been processed for order ORD-1002."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1002"
+      },
+      "result": "{\"id\": \"ORD-1002\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 7498, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1002",
+        "amount_cents": 2499,
+        "reason": "Missing item from delivery (one of two items not received)"
+      },
+      "result": "{\"refunded_cents\": 2499, \"order_id\": \"ORD-1002\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1407,
+        "output_tokens": 132,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002067,
+      "latency_s": 1.497,
+      "request_id": "req_011CgQx92e2VZvnrmm5thdiu"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1699,
+        "output_tokens": 183,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002614,
+      "latency_s": 2.19,
+      "request_id": "req_011CgQx99BBtWEKd8ybtLTkp"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1917,
+        "output_tokens": 37,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002102,
+      "latency_s": 1.232,
+      "request_id": "req_011CgQx9JQZnjTUJf2NHgpbM"
+    }
+  ],
+  "judge": {}
+}

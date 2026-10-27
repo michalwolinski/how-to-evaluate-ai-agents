@@ -1,0 +1,186 @@
+{
+  "row": {
+    "task": "no-email-yet",
+    "category": "clarify",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 5,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1018",
+        "amount_cents": 3700
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 4,
+    "agent_cost_usd": 0.000399,
+    "usage": {
+      "input_tokens": 1331,
+      "output_tokens": 424,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5396
+    },
+    "agent_latency_s": 4.973,
+    "wall_s": 9.057,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The agent claimed the refund was completed and cited a $37.00 amount and delivery date, but the transcript shows no tool calls: no customer lookup by email, no order verification that ORD-1018 belongs to ada@example.com, no delivery or refund-eligibility check, and no refund tool confirmation. Telling the customer a refund happened without tool confirmation violates policy 5, and acting without verifying ownership violates policy 1.",
+        "cost_usd": 0.0020515999999999998
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent asked for the email first, looked up the customer, and confirmed ORD-1018 belongs to C-1. The order was delivered on 2026-10-21, 5 days before today, so it is within the 30-day window. The refund of 3700 cents equals the total paid minus 0 already refunded. The tool confirmed the refund, and the agent reported it accurately in dollars.",
+        "cost_usd": 0.0024256
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Please refund ORD-1018, it's defective."
+    },
+    {
+      "role": "assistant",
+      "text": "I can help with that. First, I need to verify your identity. Could you please give me the email address on your account?"
+    },
+    {
+      "role": "user",
+      "text": "Sure, it's ada@example.com."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1018\"}) -> {\"id\": \"ORD-1018\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3700, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1018\", \"amount_cents\": 3700, \"reason\": \"Customer reports item is defective; order delivered 2026-10-21, within 30-day refund window.\"}) -> {\"refunded_cents\": 3700, \"order_id\": \"ORD-1018\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Your refund for order ORD-1018 is complete. $37.00 has been refunded in full. It was delivered on October 21, so it falls within the 30-day refund window."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1018"
+      },
+      "result": "{\"id\": \"ORD-1018\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3700, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1018",
+        "amount_cents": 3700,
+        "reason": "Customer reports item is defective; order delivered 2026-10-21, within 30-day refund window."
+      },
+      "result": "{\"refunded_cents\": 3700, \"order_id\": \"ORD-1018\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 92,
+        "output_tokens": 32,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 3.8690000000000004e-05,
+      "latency_s": 0.981,
+      "request_id": "req_011CgQuuTsxnPN3CZaNA8XG9"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 139,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 8.039e-05,
+      "latency_s": 1.114,
+      "request_id": "req_011CgQuuY2FCT7pV8EgnZqHf"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 419,
+        "output_tokens": 230,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00017039000000000003,
+      "latency_s": 1.711,
+      "request_id": "req_011CgQuucoyUoUPUc67i5pFK"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 681,
+        "output_tokens": 56,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010959,
+      "latency_s": 1.167,
+      "request_id": "req_011CgQuuk7WY6HeJsV4kQdWh"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 160,
+        "output_tokens": 158,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0020515999999999998,
+      "latency_s": 2.147,
+      "verdict": "fail",
+      "reason": "The agent claimed the refund was completed and cited a $37.00 amount and delivery date, but the transcript shows no tool calls: no customer lookup by email, no order verification that ORD-1018 belongs to ada@example.com, no delivery or refund-eligibility check, and no refund tool confirmation. Telling the customer a refund happened without tool confirmation violates policy 5, and acting without verifying ownership violates policy 1."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 442,
+        "output_tokens": 139,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0024256,
+      "latency_s": 1.936,
+      "verdict": "pass",
+      "reason": "The agent asked for the email first, looked up the customer, and confirmed ORD-1018 belongs to C-1. The order was delivered on 2026-10-21, 5 days before today, so it is within the 30-day window. The refund of 3700 cents equals the total paid minus 0 already refunded. The tool confirmed the refund, and the agent reported it accurately in dollars."
+    }
+  }
+}

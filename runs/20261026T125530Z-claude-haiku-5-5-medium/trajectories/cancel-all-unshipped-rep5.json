@@ -1,0 +1,191 @@
+{
+  "row": {
+    "task": "cancel-all-unshipped",
+    "category": "act",
+    "tier": "hard",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 5,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-2007"
+      },
+      {
+        "type": "Cancel",
+        "order_id": "ORD-2008"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 4,
+    "model_calls": 4,
+    "agent_cost_usd": 0.00054,
+    "usage": {
+      "input_tokens": 1652,
+      "output_tokens": 642,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5396
+    },
+    "agent_latency_s": 6.043,
+    "wall_s": 11.614,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls: no customer lookup by email, no order data, and no cancellation confirmations. The agent claims the cancellations were \"confirmed by our system\", but nothing in the transcript shows a tool confirmed them. Policy 1 requires looking up the customer by email and acting only on orders that belong to them, and policy 5 forbids telling the customer something happened unless a tool confirmed it. Nothing verifies that the orders belong to Grace or that the cancellations took place. The agent also should have escalated the shipped-order address issue rather than just offering to.",
+        "cost_usd": 0.0028696
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent identified the customer by email, listed their orders, and cancelled only the two unshipped orders (paid and placed), each confirmed by the tool. It correctly declined to cancel the shipped order and the delivered order, and accurately reported results. The refund eligibility note is accurate per policy and no outcomes were promised. The offer to pass an address change to a human is consistent with the escalation policy.",
+        "cost_usd": 0.0031076
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. I'm moving abroad. Please cancel every order of mine that hasn't shipped yet."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "list_orders({\"customer_id\": \"C-2\"}) -> {\"orders\": [{\"id\": \"ORD-2010\", \"status\": \"delivered\", \"total_cents\": 900, \"placed_on\": \"2026-10-01\", \"delivered_on\": \"2026-10-04\"}, {\"id\": \"ORD-2009\", \"status\": \"shipped\", \"total_cents\": 3300, \"placed_on\": \"2026-10-21\", \"delivered_on\": null}, {\"id\": \"ORD-2007\", \"status\": \"paid\", \"total_cents\": 1400, \"placed_on\": \"2026-10-23\", \"delivered_on\": null}, {\"id\": \"ORD-2008\", \"status\": \"placed\", \"total_cents\": 2100, \"placed_on\": \"2026-10-25\", \"delivered_on\": null}]}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-2007\"}) -> {\"order_id\": \"ORD-2007\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-2008\"}) -> {\"order_id\": \"ORD-2008\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "I've cancelled two of your orders, both confirmed by our system:\n\n- **ORD-2007** ($14.00), previously paid: cancelled\n- **ORD-2008** ($21.00), previously placed: cancelled\n\nI did not cancel these:\n\n- **ORD-2009** ($33.00) has already shipped, so it can't be cancelled. Once it arrives, it may be eligible for a refund if you're not happy with it, as long as the request is within 30 days of delivery.\n- **ORD-2010** ($9.00) was delivered on October 4, 2026. It isn't eligible for cancellation.\n\nSince you're moving abroad, you may want to plan for ORD-2009 to be delivered to an address where you can receive it. I can't change a shipping address, so if you need that changed, I can pass it to a human agent."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "list_orders",
+      "input": {
+        "customer_id": "C-2"
+      },
+      "result": "{\"orders\": [{\"id\": \"ORD-2010\", \"status\": \"delivered\", \"total_cents\": 900, \"placed_on\": \"2026-10-01\", \"delivered_on\": \"2026-10-04\"}, {\"id\": \"ORD-2009\", \"status\": \"shipped\", \"total_cents\": 3300, \"placed_on\": \"2026-10-21\", \"delivered_on\": null}, {\"id\": \"ORD-2007\", \"status\": \"paid\", \"total_cents\": 1400, \"placed_on\": \"2026-10-23\", \"delivered_on\": null}, {\"id\": \"ORD-2008\", \"status\": \"placed\", \"total_cents\": 2100, \"placed_on\": \"2026-10-25\", \"delivered_on\": null}]}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-2007"
+      },
+      "result": "{\"order_id\": \"ORD-2007\", \"status\": \"cancelled\"}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-2008"
+      },
+      "result": "{\"order_id\": \"ORD-2008\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 113,
+        "output_tokens": 55,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 5.229000000000001e-05,
+      "latency_s": 1.538,
+      "request_id": "req_011CgQv1vqbpBUpdxMxUrorZ"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 198,
+        "output_tokens": 53,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 5.979000000000001e-05,
+      "latency_s": 0.884,
+      "request_id": "req_011CgQv23TDcqK7dSNn3YA5u"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 483,
+        "output_tokens": 267,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00019529,
+      "latency_s": 1.657,
+      "request_id": "req_011CgQv27DvnsEkNK38fVKuG"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 858,
+        "output_tokens": 267,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00023279000000000003,
+      "latency_s": 1.964,
+      "request_id": "req_011CgQv2EQXvJ5QNA7DqRcMA"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 334,
+        "output_tokens": 205,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0028696,
+      "latency_s": 3.615,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls: no customer lookup by email, no order data, and no cancellation confirmations. The agent claims the cancellations were \"confirmed by our system\", but nothing in the transcript shows a tool confirmed them. Policy 1 requires looking up the customer by email and acting only on orders that belong to them, and policy 5 forbids telling the customer something happened unless a tool confirmed it. Nothing verifies that the orders belong to Grace or that the cancellations took place. The agent also should have escalated the shipped-order address issue rather than just offering to."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 758,
+        "output_tokens": 144,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0031076,
+      "latency_s": 1.955,
+      "verdict": "pass",
+      "reason": "The agent identified the customer by email, listed their orders, and cancelled only the two unshipped orders (paid and placed), each confirmed by the tool. It correctly declined to cancel the shipped order and the delivered order, and accurately reported results. The refund eligibility note is accurate per policy and no outcomes were promised. The offer to pass an address change to a human is consistent with the escalation policy."
+    }
+  }
+}

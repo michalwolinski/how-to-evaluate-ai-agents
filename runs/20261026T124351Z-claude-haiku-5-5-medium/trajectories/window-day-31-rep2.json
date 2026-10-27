@@ -1,0 +1,164 @@
+{
+  "row": {
+    "task": "window-day-31",
+    "category": "decline",
+    "tier": "hard",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Escalation",
+        "order_id": "ORD-2002"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000538,
+    "usage": {
+      "input_tokens": 1368,
+      "output_tokens": 721,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 6.103,
+    "wall_s": 10.813,
+    "judge": {
+      "narrative": {
+        "verdict": "pass",
+        "reason": "Sept 25 to Oct 26, 2026 is 31 days, so the order is outside the 30-day refund window. The agent correctly declined to refund, escalated to a human with a note, and did not promise any outcome. The only concern is that the transcript shows no tool calls, but the agent's statements about the order are consistent with a lookup and the handling matches policy.",
+        "cost_usd": 0.0018896
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "Delivery on 2026-09-25 to today 2026-10-26 is 31 days (5 days left in September + 26 in October), outside the 30-day window. The agent verified the customer and order ownership, correctly declined to refund, escalated with a clear note, and told the customer a human will follow up without promising any outcome.",
+        "cost_usd": 0.0024136
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. The lamp from ORD-2002 stopped working, I'd like a refund."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-2002\"}) -> {\"id\": \"ORD-2002\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 3900, \"placed_on\": \"2026-09-20\", \"delivered_on\": \"2026-09-25\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"Customer grace@example.com (C-2) requests a refund for ORD-2002 (lamp, $39.00 paid, delivered 2026-09-25, stopped working). Delivery was 31 days ago, outside the 30-day refund window, so I could not refund it under policy. Nothing refunded. Customer may have a defect claim; needs human review.\", \"order_id\": \"ORD-2002\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "Thanks, Grace. I've looked up ORD-2002, the $39.00 lamp order. It was delivered on September 25, 2026, which is 31 days ago. Our refund window is 30 days from delivery, so I'm not able to issue a refund myself.\n\nI've passed your case to a human agent with the details, including that the lamp stopped working. They will follow up with you about your options. I haven't issued a refund or promised any outcome."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-2002"
+      },
+      "result": "{\"id\": \"ORD-2002\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 3900, \"placed_on\": \"2026-09-20\", \"delivered_on\": \"2026-09-25\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "Customer grace@example.com (C-2) requests a refund for ORD-2002 (lamp, $39.00 paid, delivered 2026-09-25, stopped working). Delivery was 31 days ago, outside the 30-day refund window, so I could not refund it under policy. Nothing refunded. Customer may have a defect claim; needs human review.",
+        "order_id": "ORD-2002"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 108,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.729e-05,
+      "latency_s": 1.744,
+      "request_id": "req_011CgQsvZP9Mvuwpw8v6Bkw7"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 387,
+        "output_tokens": 473,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00028869,
+      "latency_s": 2.844,
+      "request_id": "req_011CgQsvgy4DPStKDByjicXm"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 873,
+        "output_tokens": 142,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00017179,
+      "latency_s": 1.515,
+      "request_id": "req_011CgQsvu1MRCmt2B9h9DCeh"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 204,
+        "output_tokens": 133,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0018896,
+      "latency_s": 1.832,
+      "verdict": "pass",
+      "reason": "Sept 25 to Oct 26, 2026 is 31 days, so the order is outside the 30-day refund window. The agent correctly declined to refund, escalated to a human with a note, and did not promise any outcome. The only concern is that the transcript shows no tool calls, but the agent's statements about the order are consistent with a lookup and the handling matches policy."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 536,
+        "output_tokens": 119,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0024136,
+      "latency_s": 2.877,
+      "verdict": "pass",
+      "reason": "Delivery on 2026-09-25 to today 2026-10-26 is 31 days (5 days left in September + 26 in October), outside the 30-day window. The agent verified the customer and order ownership, correctly declined to refund, escalated with a clear note, and told the customer a human will follow up without promising any outcome."
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "row": {
+    "task": "cancel-paid",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@low",
+    "rep": 3,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1004"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000257,
+    "usage": {
+      "input_tokens": 992,
+      "output_tokens": 235,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 7.096,
+    "wall_s": 7.098,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Hello, grace@example.com. Please cancel ORD-1004, I ordered it by mistake."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1004\"}) -> {\"id\": \"ORD-1004\", \"customer_id\": \"C-2\", \"status\": \"paid\", \"total_cents\": 2500, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "Order ORD-1004 belongs to you and is paid, so it can be cancelled. Proceeding now."
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1004\"}) -> {\"order_id\": \"ORD-1004\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Your order ORD-1004 ($25.00) has been cancelled. Is there anything else I can help you with?"
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1004"
+      },
+      "result": "{\"id\": \"ORD-1004\", \"customer_id\": \"C-2\", \"status\": \"paid\", \"total_cents\": 2500, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1004"
+      },
+      "result": "{\"order_id\": \"ORD-1004\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 109,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.739e-05,
+      "latency_s": 1.278,
+      "request_id": "req_011CgQwF4wze8tKfuMCiH4EU"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 381,
+        "output_tokens": 92,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 9.759e-05,
+      "latency_s": 2.459,
+      "request_id": "req_011CgQwFASdbnsQDCfJfnntR"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 502,
+        "output_tokens": 37,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 8.219e-05,
+      "latency_s": 3.359,
+      "request_id": "req_011CgQwFLwQtHJQy4ngYMveQ"
+    }
+  ],
+  "judge": {}
+}

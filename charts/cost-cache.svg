@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 352" width="1200" height="352" role="img" aria-label="Dumbbell chart on a log scale. Claude Haiku 5.5 at medium effort cost $0.00046 per successful episode, $0.00085 without caching; at low effort $0.00042 and $0.00082. Claude Haiku 4.5 cost $0.00852 either way, because its prefix was below the minimum cacheable length.">
+<title>Cost per successful episode</title>
+<rect width="1200" height="352" fill="#ffffff"/>
+<text x="40.0" y="40.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="20" fill="#0f172a" text-anchor="start" font-weight="600">Agent cost per successful episode, with and without prompt caching</text>
+<text x="40.0" y="64.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">Each row: what the run cost, and the same tokens priced as if nothing had been cached. Log scale.</text>
+<circle cx="46" cy="88" r="6" fill="#ea580c"/>
+<text x="58.0" y="93.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">Actual cost per successful episode</text>
+<circle cx="326" cy="88" r="6" fill="#64748b"/>
+<text x="338.0" y="93.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="normal">Same tokens, no caching</text>
+<line x1="330.0" x2="330.0" y1="110" y2="312" stroke="#e2e8f0" stroke-width="1"/>
+<text x="330.0" y="332.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">$0.0002</text>
+<line x1="481.2" x2="481.2" y1="110" y2="312" stroke="#e2e8f0" stroke-width="1"/>
+<text x="481.2" y="332.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">$0.0005</text>
+<line x1="595.6" x2="595.6" y1="110" y2="312" stroke="#e2e8f0" stroke-width="1"/>
+<text x="595.6" y="332.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">$0.001</text>
+<line x1="710.0" x2="710.0" y1="110" y2="312" stroke="#e2e8f0" stroke-width="1"/>
+<text x="710.0" y="332.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">$0.002</text>
+<line x1="861.2" x2="861.2" y1="110" y2="312" stroke="#e2e8f0" stroke-width="1"/>
+<text x="861.2" y="332.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">$0.005</text>
+<line x1="975.6" x2="975.6" y1="110" y2="312" stroke="#e2e8f0" stroke-width="1"/>
+<text x="975.6" y="332.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">$0.01</text>
+<line x1="1090.0" x2="1090.0" y1="110" y2="312" stroke="#e2e8f0" stroke-width="1"/>
+<text x="1090.0" y="332.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">$0.02</text>
+<text x="314.0" y="145.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="end" font-weight="normal">Claude Haiku 5.5, effort medium</text>
+<line x1="467.5" x2="568.8" y1="140" y2="140" stroke="#cbd5e1" stroke-width="2"/>
+<circle cx="568.8" cy="140" r="6" fill="#64748b" stroke="#ffffff" stroke-width="2"/>
+<text x="580.8" y="145.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">$0.00085</text>
+<circle cx="467.5" cy="140" r="6" fill="#ea580c" stroke="#ffffff" stroke-width="2"/>
+<text x="455.5" y="145.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="end" font-weight="600">$0.00046</text>
+<text x="314.0" y="209.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="end" font-weight="normal">Claude Haiku 5.5, effort low</text>
+<line x1="452.4" x2="562.9" y1="204" y2="204" stroke="#cbd5e1" stroke-width="2"/>
+<circle cx="562.9" cy="204" r="6" fill="#64748b" stroke="#ffffff" stroke-width="2"/>
+<text x="574.9" y="209.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">$0.00082</text>
+<circle cx="452.4" cy="204" r="6" fill="#ea580c" stroke="#ffffff" stroke-width="2"/>
+<text x="440.4" y="209.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="end" font-weight="600">$0.00042</text>
+<text x="314.0" y="273.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="end" font-weight="normal">Claude Haiku 4.5</text>
+<circle cx="949.2" cy="268" r="6" fill="#ea580c" stroke="#ffffff" stroke-width="2"/>
+<text x="937.2" y="273.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="end" font-weight="600">$0.00852</text>
+<text x="961.2" y="273.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="start" font-weight="normal">same: nothing was cached</text>
+</svg>

@@ -1,0 +1,124 @@
+{
+  "row": {
+    "task": "refund-damaged",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@low",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1001",
+        "amount_cents": 4999
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000347,
+    "usage": {
+      "input_tokens": 1145,
+      "output_tokens": 384,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 4.56,
+    "wall_s": 4.561,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Hi, I'm ada@example.com. Order ORD-1001 arrived broken. I'd like my money back, please."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1001\"}) -> {\"id\": \"ORD-1001\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 4999, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1001\", \"amount_cents\": 4999, \"reason\": \"Customer reports order arrived broken; delivered 2026-10-21, within 30-day refund window.\"}) -> {\"refunded_cents\": 4999, \"order_id\": \"ORD-1001\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Thanks, Ada. I've refunded the full $49.99 for order ORD-1001, which arrived broken. It was delivered on October 21, so it's within our 30-day refund window. The refund has been processed."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1001"
+      },
+      "result": "{\"id\": \"ORD-1001\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 4999, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1001",
+        "amount_cents": 4999,
+        "reason": "Customer reports order arrived broken; delivered 2026-10-21, within 30-day refund window."
+      },
+      "result": "{\"refunded_cents\": 4999, \"order_id\": \"ORD-1001\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 115,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.799e-05,
+      "latency_s": 1.411,
+      "request_id": "req_011CgQw4Xkz6CPvaZNGb53vZ"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 395,
+        "output_tokens": 208,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00015699,
+      "latency_s": 1.846,
+      "request_id": "req_011CgQw4dktthTNcJXN1h72c"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 635,
+        "output_tokens": 70,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00011199,
+      "latency_s": 1.303,
+      "request_id": "req_011CgQw4mduoXFMxaVWfSbrK"
+    }
+  ],
+  "judge": {}
+}

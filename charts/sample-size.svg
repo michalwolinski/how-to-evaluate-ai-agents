@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 530" width="1200" height="530" role="img" aria-label="Line chart on a log scale of episodes needed per configuration against the difference to detect from a 95% baseline. A 5-point drop needs 435 episodes, a 10-point drop 141; the 115 episodes used here detect only drops of about 12 points or more.">
+<title>Episodes needed per configuration</title>
+<rect width="1200" height="530" fill="#ffffff"/>
+<text x="40.0" y="40.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="20" fill="#0f172a" text-anchor="start" font-weight="600">Episodes per configuration needed to detect a drop from a 95% pass rate</text>
+<text x="40.0" y="64.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">Two-sided test at 5% significance, 80% power, two independent proportions; log scale.</text>
+<line x1="120" x2="1080" y1="460.0" y2="460.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="108.0" y="464.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="end" font-weight="normal">50</text>
+<line x1="120" x2="1080" y1="405.8" y2="405.8" stroke="#e2e8f0" stroke-width="1"/>
+<text x="108.0" y="409.8" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="end" font-weight="normal">100</text>
+<line x1="120" x2="1080" y1="351.6" y2="351.6" stroke="#e2e8f0" stroke-width="1"/>
+<text x="108.0" y="355.6" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="end" font-weight="normal">200</text>
+<line x1="120" x2="1080" y1="280.0" y2="280.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="108.0" y="284.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="end" font-weight="normal">500</text>
+<line x1="120" x2="1080" y1="225.8" y2="225.8" stroke="#e2e8f0" stroke-width="1"/>
+<text x="108.0" y="229.8" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="end" font-weight="normal">1,000</text>
+<line x1="120" x2="1080" y1="171.6" y2="171.6" stroke="#e2e8f0" stroke-width="1"/>
+<text x="108.0" y="175.6" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="end" font-weight="normal">2,000</text>
+<line x1="120" x2="1080" y1="100.0" y2="100.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="108.0" y="104.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="end" font-weight="normal">5,000</text>
+<text x="120.0" y="484.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">2 points</text>
+<text x="280.0" y="484.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">5 points</text>
+<text x="546.7" y="484.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">10 points</text>
+<text x="813.3" y="484.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">15 points</text>
+<text x="1080.0" y="484.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">20 points</text>
+<line x1="120" x2="1080" y1="394.9" y2="394.9" stroke="#64748b" stroke-width="2"/>
+<text x="1080.0" y="386.9" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="end" font-weight="normal">115 episodes per configuration in this article</text>
+<path d="M120.0,163.7 L173.3,221.3 L226.7,260.9 L280.0,290.9 L333.3,314.9 L386.7,334.8 L440.0,351.6 L493.3,366.2 L546.7,379.0 L600.0,390.9 L653.3,401.3 L706.7,410.7 L760.0,419.4 L813.3,427.3 L866.7,434.8 L920.0,441.9 L973.3,448.4 L1026.7,455.4 L1080.0,461.6" fill="none" stroke="#ea580c" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="653.3" cy="401.3" r="5" fill="#64748b" stroke="#ffffff" stroke-width="2"/>
+<text x="641.3" y="429.3" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="end" font-weight="normal">115 episodes detect a drop of 12 points or more</text>
+<circle cx="280.0" cy="290.9" r="5" fill="#ea580c" stroke="#ffffff" stroke-width="2"/>
+<text x="292.0" y="280.9" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="start" font-weight="600">95% vs 90%: 435 episodes</text>
+<text x="600.0" y="510.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" fill="#475569" text-anchor="middle" font-weight="normal">Difference to detect (percentage points below 95%)</text>
+</svg>

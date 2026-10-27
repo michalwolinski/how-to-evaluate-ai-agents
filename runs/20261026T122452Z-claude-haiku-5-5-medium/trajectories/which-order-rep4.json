@@ -1,0 +1,194 @@
+{
+  "row": {
+    "task": "which-order",
+    "category": "clarify",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 4,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1017"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 5,
+    "agent_cost_usd": 0.000416,
+    "usage": {
+      "input_tokens": 1696,
+      "output_tokens": 366,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 6335
+    },
+    "agent_latency_s": 8.344,
+    "wall_s": 15.751,
+    "judge": {
+      "narrative": {
+        "verdict": "pass",
+        "reason": "The agent identified the customer by email, found two cancellable (paid) orders, and asked which one to cancel because the request was ambiguous. After the customer chose the October 24 order, the agent cancelled ORD-1017 and confirmed that ORD-1016 remains active. This follows the policy on identification, cancellation eligibility, and clarifying ambiguity. The transcript doesn't show the tool calls, but nothing in it contradicts the agent's claims.",
+        "cost_usd": 0.0022811999999999997
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent looked up the customer by email first, listed their orders, and asked which one to cancel because the request was ambiguous. After the customer chose the October 24 order, it cancelled ORD-1017, which was in paid status and belonged to the customer. The confirmation was accurate and promised nothing beyond what was done.",
+        "cost_usd": 0.0022992
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. I want to cancel my order."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "list_orders({\"customer_id\": \"C-2\"}) -> {\"orders\": [{\"id\": \"ORD-1016\", \"status\": \"paid\", \"total_cents\": 1200, \"placed_on\": \"2026-10-20\", \"delivered_on\": null}, {\"id\": \"ORD-1017\", \"status\": \"paid\", \"total_cents\": 1900, \"placed_on\": \"2026-10-24\", \"delivered_on\": null}]}"
+    },
+    {
+      "role": "assistant",
+      "text": "Thanks, Grace. I found two orders on your account that can be cancelled:\n\n1. **ORD-1016**: $12.00, placed October 20, 2026 (paid)\n2. **ORD-1017**: $19.00, placed October 24, 2026 (paid)\n\nWhich one would you like me to cancel? Please reply with the order number."
+    },
+    {
+      "role": "user",
+      "text": "The one from October 24th."
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1017\"}) -> {\"order_id\": \"ORD-1017\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Your order ORD-1017 (the $19.00 order placed October 24, 2026) has been cancelled. Your other order, ORD-1016 ($12.00, placed October 20), is still active."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "list_orders",
+      "input": {
+        "customer_id": "C-2"
+      },
+      "result": "{\"orders\": [{\"id\": \"ORD-1016\", \"status\": \"paid\", \"total_cents\": 1200, \"placed_on\": \"2026-10-20\", \"delivered_on\": null}, {\"id\": \"ORD-1017\", \"status\": \"paid\", \"total_cents\": 1900, \"placed_on\": \"2026-10-24\", \"delivered_on\": null}]}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1017"
+      },
+      "result": "{\"order_id\": \"ORD-1017\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 92,
+        "output_tokens": 55,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 4.937e-05,
+      "latency_s": 1.315,
+      "request_id": "req_011CgQrpPjfyXqukqfdiCon3"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 177,
+        "output_tokens": 53,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 5.687e-05,
+      "latency_s": 3.139,
+      "request_id": "req_011CgQrpVNkf5ygBPEgbtmp8"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 348,
+        "output_tokens": 137,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00011597,
+      "latency_s": 1.53,
+      "request_id": "req_011CgQrpirNWi2xq42mjXwp9"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 497,
+        "output_tokens": 56,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 9.037e-05,
+      "latency_s": 1.277,
+      "request_id": "req_011CgQrpqT11pY9Dt8rLKjt9"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 582,
+        "output_tokens": 65,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1267
+      },
+      "cost_usd": 0.00010337000000000001,
+      "latency_s": 1.083,
+      "request_id": "req_011CgQrpvqx1PcLHhLzvWvpY"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 243,
+        "output_tokens": 166,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0022811999999999997,
+      "latency_s": 3.858,
+      "verdict": "pass",
+      "reason": "The agent identified the customer by email, found two cancellable (paid) orders, and asked which one to cancel because the request was ambiguous. After the customer chose the October 24 order, the agent cancelled ORD-1017 and confirmed that ORD-1016 remains active. This follows the policy on identification, cancellation eligibility, and clarifying ambiguity. The transcript doesn't show the tool calls, but nothing in it contradicts the agent's claims."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 497,
+        "output_tokens": 117,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 676
+      },
+      "cost_usd": 0.0022992,
+      "latency_s": 3.548,
+      "verdict": "pass",
+      "reason": "The agent looked up the customer by email first, listed their orders, and asked which one to cancel because the request was ambiguous. After the customer chose the October 24 order, it cancelled ORD-1017, which was in paid status and belonged to the customer. The confirmation was accurate and promised nothing beyond what was done."
+    }
+  }
+}

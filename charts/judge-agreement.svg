@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-label="Horizontal bars of agreement with the state grader. Narrative view with the strict prompt: 12% on 92 episodes and 17% on all 115. Narrative view with the lenient prompt: 32% on the same 92. Full view: 98% on 115.">
+<title>Judge agreement with the state grader</title>
+<rect width="1200" height="440" fill="#ffffff"/>
+<text x="40.0" y="40.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="20" fill="#0f172a" text-anchor="start" font-weight="600">How often the LLM judge agrees with the state grader</text>
+<text x="40.0" y="64.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">Claude Sonnet 5.5 judging Claude Haiku 5.5 episodes; the state grader passed every one of them.</text>
+<line x1="330.0" x2="330.0" y1="100" y2="370" stroke="#e2e8f0" stroke-width="1"/>
+<text x="330.0" y="390.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">0%</text>
+<line x1="505.0" x2="505.0" y1="100" y2="370" stroke="#e2e8f0" stroke-width="1"/>
+<text x="505.0" y="390.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">25%</text>
+<line x1="680.0" x2="680.0" y1="100" y2="370" stroke="#e2e8f0" stroke-width="1"/>
+<text x="680.0" y="390.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">50%</text>
+<line x1="855.0" x2="855.0" y1="100" y2="370" stroke="#e2e8f0" stroke-width="1"/>
+<text x="855.0" y="390.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">75%</text>
+<line x1="1030.0" x2="1030.0" y1="100" y2="370" stroke="#e2e8f0" stroke-width="1"/>
+<text x="1030.0" y="390.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle" font-weight="normal">100%</text>
+<text x="314.0" y="122.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="end" font-weight="normal">Full view (tool calls included)</text>
+<text x="314.0" y="140.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="end" font-weight="normal">all 115 episodes</text>
+<path d="M330.0,114.0 H1013.8 Q1017.8,114.0 1017.8,118.0 V134.0 Q1017.8,138.0 1013.8,138.0 H330.0 Z" fill="#ea580c"/>
+<text x="1027.8" y="131.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="600">98%</text>
+<text x="314.0" y="174.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="end" font-weight="normal">Narrative view, strict prompt</text>
+<text x="314.0" y="192.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="end" font-weight="normal">all 115 episodes</text>
+<path d="M330.0,166.0 H447.7 Q451.7,166.0 451.7,170.0 V186.0 Q451.7,190.0 447.7,190.0 H330.0 Z" fill="#64748b"/>
+<text x="461.7" y="183.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="600">17%</text>
+<line x1="40" x2="1030" y1="236" y2="236" stroke="#e2e8f0" stroke-width="1"/>
+<text x="40.0" y="256.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="start" font-weight="600">Re-judged with the two-sentence rule in the prompt reworded (no new agent runs)</text>
+<text x="314.0" y="278.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="end" font-weight="normal">Narrative view, strict prompt</text>
+<text x="314.0" y="296.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="end" font-weight="normal">the 92 re-judged episodes</text>
+<path d="M330.0,270.0 H409.7 Q413.7,270.0 413.7,274.0 V290.0 Q413.7,294.0 409.7,294.0 H330.0 Z" fill="#64748b"/>
+<text x="423.7" y="287.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="600">12%</text>
+<text x="314.0" y="330.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="end" font-weight="normal">Narrative view, lenient prompt</text>
+<text x="314.0" y="348.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#475569" text-anchor="end" font-weight="normal">the same 92 episodes</text>
+<path d="M330.0,322.0 H546.7 Q550.7,322.0 550.7,326.0 V342.0 Q550.7,346.0 546.7,346.0 H330.0 Z" fill="#64748b"/>
+<text x="560.7" y="339.0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="600">32%</text>
+</svg>

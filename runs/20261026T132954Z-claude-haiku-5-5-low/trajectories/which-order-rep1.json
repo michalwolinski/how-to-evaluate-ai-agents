@@ -1,0 +1,153 @@
+{
+  "row": {
+    "task": "which-order",
+    "category": "clarify",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@low",
+    "rep": 1,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1017"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 5,
+    "agent_cost_usd": 0.000398,
+    "usage": {
+      "input_tokens": 1644,
+      "output_tokens": 332,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 6745
+    },
+    "agent_latency_s": 5.744,
+    "wall_s": 5.745,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. I want to cancel my order."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "list_orders({\"customer_id\": \"C-2\"}) -> {\"orders\": [{\"id\": \"ORD-1016\", \"status\": \"paid\", \"total_cents\": 1200, \"placed_on\": \"2026-10-20\", \"delivered_on\": null}, {\"id\": \"ORD-1017\", \"status\": \"paid\", \"total_cents\": 1900, \"placed_on\": \"2026-10-24\", \"delivered_on\": null}]}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Grace, thanks for reaching out. I found two orders on your account that are currently paid and not yet shipped:\n\n- **ORD-1016**: $12.00, placed October 20, 2026\n- **ORD-1017**: $19.00, placed October 24, 2026\n\nWhich one would you like to cancel? Please reply with the order number."
+    },
+    {
+      "role": "user",
+      "text": "The one from October 24th."
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1017\"}) -> {\"order_id\": \"ORD-1017\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Your order ORD-1017 ($19.00, placed October 24, 2026) has been cancelled. Your other order, ORD-1016 ($12.00), is still active."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "list_orders",
+      "input": {
+        "customer_id": "C-2"
+      },
+      "result": "{\"orders\": [{\"id\": \"ORD-1016\", \"status\": \"paid\", \"total_cents\": 1200, \"placed_on\": \"2026-10-20\", \"delivered_on\": null}, {\"id\": \"ORD-1017\", \"status\": \"paid\", \"total_cents\": 1900, \"placed_on\": \"2026-10-24\", \"delivered_on\": null}]}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1017"
+      },
+      "result": "{\"order_id\": \"ORD-1017\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 92,
+        "output_tokens": 55,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 5.0190000000000006e-05,
+      "latency_s": 1.001,
+      "request_id": "req_011CgQvx9Mg5ZD8XdZZxTtvg"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 177,
+        "output_tokens": 53,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 5.769e-05,
+      "latency_s": 1.126,
+      "request_id": "req_011CgQvxDi7yo9HyEc1QmRJg"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 348,
+        "output_tokens": 111,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010379000000000001,
+      "latency_s": 1.265,
+      "request_id": "req_011CgQvxJUMduMYmogFP7SUZ"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 471,
+        "output_tokens": 56,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 8.859e-05,
+      "latency_s": 1.169,
+      "request_id": "req_011CgQvxPsJUJntTftLjrR4S"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 556,
+        "output_tokens": 57,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 9.759e-05,
+      "latency_s": 1.183,
+      "request_id": "req_011CgQvxUpxBUEzWWHyHD8vj"
+    }
+  ],
+  "judge": {}
+}

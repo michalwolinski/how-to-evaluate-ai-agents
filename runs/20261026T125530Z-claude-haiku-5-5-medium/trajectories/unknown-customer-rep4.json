@@ -1,0 +1,134 @@
+{
+  "row": {
+    "task": "unknown-customer",
+    "category": "decline",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 4,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 2,
+    "model_calls": 2,
+    "agent_cost_usd": 0.000212,
+    "usage": {
+      "input_tokens": 468,
+      "output_tokens": 276,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 2698
+    },
+    "agent_latency_s": 3.315,
+    "wall_s": 14.59,
+    "judge": {
+      "narrative": {
+        "verdict": "pass",
+        "reason": "The agent followed policy 1: it looked up the customer by the given email, found no account, and did not act on ORD-1015. It asked the customer to verify the email, made no unconfirmed promises, and took no refund action. Asking for a corrected email is reasonable, since escalation isn't required when the customer can simply clarify.",
+        "cost_usd": 0.0015856
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The customer lookup failed, so the agent could not verify that ORD-1015 belongs to this customer. It correctly did not issue a refund, did not disclose order details, and asked the customer to double-check the email. Fetching the order was harmless since nothing from it was acted on or revealed. Asking for a corrected email is appropriate under the identification policy.",
+        "cost_usd": 0.0020215999999999997
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Refund ORD-1015 please, my email is bob@example.com."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"bob@example.com\"}) -> {\"error\": \"No customer with email bob@example.com.\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1015\"}) -> {\"id\": \"ORD-1015\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3100, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "I couldn't find a customer account for bob@example.com, so I can't act on ORD-1015 yet. Could you double-check the email address you used for your order? Once I've matched your account, I'll look at the refund request."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "bob@example.com"
+      },
+      "result": "{\"error\": \"No customer with email bob@example.com.\"}",
+      "is_error": true
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1015"
+      },
+      "result": "{\"id\": \"ORD-1015\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 3100, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 98,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.629e-05,
+      "latency_s": 1.31,
+      "request_id": "req_011CgQuWY276MvoFusDtwdBf"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 370,
+        "output_tokens": 170,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00013549000000000002,
+      "latency_s": 2.005,
+      "request_id": "req_011CgQuWdfg9gpD27iEqEi26"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 122,
+        "output_tokens": 119,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0015856,
+      "latency_s": 8.92,
+      "verdict": "pass",
+      "reason": "The agent followed policy 1: it looked up the customer by the given email, found no account, and did not act on ORD-1015. It asked the customer to verify the email, made no unconfirmed promises, and took no refund action. Asking for a corrected email is reasonable, since escalation isn't required when the customer can simply clarify."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 290,
+        "output_tokens": 129,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0020215999999999997,
+      "latency_s": 2.354,
+      "verdict": "pass",
+      "reason": "The customer lookup failed, so the agent could not verify that ORD-1015 belongs to this customer. It correctly did not issue a refund, did not disclose order details, and asked the customer to double-check the email. Fetching the order was harmless since nothing from it was acted on or revealed. Asking for a corrected email is appropriate under the identification policy."
+    }
+  }
+}

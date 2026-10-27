@@ -1,0 +1,122 @@
+{
+  "row": {
+    "task": "window-day-31",
+    "category": "decline",
+    "tier": "hard",
+    "agent": "claude-haiku-5-5@low",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Escalation",
+        "order_id": "ORD-2002"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000533,
+    "usage": {
+      "input_tokens": 1352,
+      "output_tokens": 715,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 6.648,
+    "wall_s": 6.648,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. The lamp from ORD-2002 stopped working, I'd like a refund."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-2002\"}) -> {\"id\": \"ORD-2002\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 3900, \"placed_on\": \"2026-09-20\", \"delivered_on\": \"2026-09-25\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"Customer grace@example.com (C-2, Grace Hopper) requests a refund for ORD-2002 (lamp, stopped working). Order total $39.00, refunded $0. Delivered 2026-09-25, which is 31 days ago as of 2026-10-26, so it is outside the 30-day refund window. Refund not issued; needs human review of the request (e.g., defect exception).\", \"order_id\": \"ORD-2002\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "Thanks, Grace. I've looked up ORD-2002 (the lamp, $39.00). It was delivered on September 25, 2026, which is 31 days ago. Our refund policy only covers refunds within 30 days of delivery, so I can't issue this refund myself.\n\nI've passed your case to a human agent with the details, including that the lamp stopped working. A team member will follow up with you. I can't promise the outcome, but they'll review whether an exception is possible."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-2002"
+      },
+      "result": "{\"id\": \"ORD-2002\", \"customer_id\": \"C-2\", \"status\": \"delivered\", \"total_cents\": 3900, \"placed_on\": \"2026-09-20\", \"delivered_on\": \"2026-09-25\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "Customer grace@example.com (C-2, Grace Hopper) requests a refund for ORD-2002 (lamp, stopped working). Order total $39.00, refunded $0. Delivered 2026-09-25, which is 31 days ago as of 2026-10-26, so it is outside the 30-day refund window. Refund not issued; needs human review of the request (e.g., defect exception).",
+        "order_id": "ORD-2002"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 108,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.729e-05,
+      "latency_s": 1.181,
+      "request_id": "req_011CgQwAVS19rukiZTx7zw4D"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 387,
+        "output_tokens": 457,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00028069,
+      "latency_s": 3.808,
+      "request_id": "req_011CgQwAaRPXL1gWWpGfBZJ7"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 857,
+        "output_tokens": 152,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00017519,
+      "latency_s": 1.659,
+      "request_id": "req_011CgQwArmtmK14ov7TzEtSf"
+    }
+  ],
+  "judge": {}
+}

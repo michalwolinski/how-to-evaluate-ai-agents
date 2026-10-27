@@ -1,0 +1,132 @@
+{
+  "row": {
+    "task": "refund-damaged",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-4-5",
+    "rep": 3,
+    "status": "completed",
+    "served_model": "claude-haiku-4-5-20251001",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1001",
+        "amount_cents": 4999
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.006882,
+    "usage": {
+      "input_tokens": 4987,
+      "output_tokens": 379,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 5.253,
+    "wall_s": 5.255,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Hi, I'm ada@example.com. Order ORD-1001 arrived broken. I'd like my money back, please."
+    },
+    {
+      "role": "assistant",
+      "text": "I'll help you with that. Let me look up your account and get the details on order ORD-1001."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1001\"}) -> {\"id\": \"ORD-1001\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 4999, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "assistant",
+      "text": "Great! I can see that order ORD-1001 belongs to you and was delivered on October 21st. Since it's been 5 days since delivery (well within the 30-day refund window) and you haven't received any prior refunds on this order, I can process a full refund for you.\n\nLet me issue that refund now:"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1001\", \"amount_cents\": 4999, \"reason\": \"Item arrived broken\"}) -> {\"refunded_cents\": 4999, \"order_id\": \"ORD-1001\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done! I've issued a refund of $49.99 to your account for order ORD-1001. The refund should be processed within a few business days depending on your payment method.\n\nI'm sorry the item arrived broken. If you have any other questions or need anything else, just let me know!"
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1001"
+      },
+      "result": "{\"id\": \"ORD-1001\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 4999, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1001",
+        "amount_cents": 4999,
+        "reason": "Item arrived broken"
+      },
+      "result": "{\"refunded_cents\": 4999, \"order_id\": \"ORD-1001\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1399,
+        "output_tokens": 127,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002034,
+      "latency_s": 1.564,
+      "request_id": "req_011CgQx8e9SBdn9K4hnrW6tb"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1686,
+        "output_tokens": 181,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002591,
+      "latency_s": 2.291,
+      "request_id": "req_011CgQx8ktyydvkJ7cQDn2tT"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 1902,
+        "output_tokens": 71,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0.002257,
+      "latency_s": 1.398,
+      "request_id": "req_011CgQx8vgc8ZWgovYd9qSJ8"
+    }
+  ],
+  "judge": {}
+}

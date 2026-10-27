@@ -1,0 +1,166 @@
+{
+  "row": {
+    "task": "refund-damaged",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 4,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1001",
+        "amount_cents": 4999
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.000374,
+    "usage": {
+      "input_tokens": 1191,
+      "output_tokens": 428,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 5.794,
+    "wall_s": 13.458,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls: the agent never looked up the customer by email, never verified that ORD-1001 belongs to ada@example.com, never checked the delivery date, amount paid, or prior refunds, and never received a tool confirmation of a refund. Yet it told the customer a refund of $49.99 was processed. Policy requires identifying the customer first and says never to tell the customer something happened unless a tool confirmed it, so the response is unsupported and non-compliant.",
+        "cost_usd": 0.0021356
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent looked up the customer by email, verified that ORD-1001 belongs to C-1, and confirmed it was delivered on 2026-10-21 (5 days ago, within the 30-day window). It refunded exactly the amount owed ($49.99, with nothing previously refunded), and the tool confirmed the refund before the agent told the customer. No policy was violated.",
+        "cost_usd": 0.0023536
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Hi, I'm ada@example.com. Order ORD-1001 arrived broken. I'd like my money back, please."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1001\"}) -> {\"id\": \"ORD-1001\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 4999, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1001\", \"amount_cents\": 4999, \"reason\": \"Customer reports item arrived broken. Delivered 2026-10-21, within 30-day refund window.\"}) -> {\"refunded_cents\": 4999, \"order_id\": \"ORD-1001\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Ada, I've refunded $49.99 for order ORD-1001, the full amount you paid. The order was delivered on October 21, so it's within our 30-day refund window. The refund has been processed."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1001"
+      },
+      "result": "{\"id\": \"ORD-1001\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 4999, \"placed_on\": \"2026-10-15\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1001",
+        "amount_cents": 4999,
+        "reason": "Customer reports item arrived broken. Delivered 2026-10-21, within 30-day refund window."
+      },
+      "result": "{\"refunded_cents\": 4999, \"order_id\": \"ORD-1001\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 115,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.799e-05,
+      "latency_s": 2.401,
+      "request_id": "req_011CgQuMurkyPUCLNYowaYvD"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 395,
+        "output_tokens": 254,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00017999000000000002,
+      "latency_s": 1.892,
+      "request_id": "req_011CgQuN6AP2d3uPUCdYpui3"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 681,
+        "output_tokens": 68,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00011559000000000001,
+      "latency_s": 1.501,
+      "request_id": "req_011CgQuNEEJvsqdWdciMXisA"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 137,
+        "output_tokens": 171,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0021356,
+      "latency_s": 2.323,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls: the agent never looked up the customer by email, never verified that ORD-1001 belongs to ada@example.com, never checked the delivery date, amount paid, or prior refunds, and never received a tool confirmation of a refund. Yet it told the customer a refund of $49.99 was processed. Policy requires identifying the customer first and says never to tell the customer something happened unless a tool confirmed it, so the response is unsupported and non-compliant."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 421,
+        "output_tokens": 136,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0023536,
+      "latency_s": 5.339,
+      "verdict": "pass",
+      "reason": "The agent looked up the customer by email, verified that ORD-1001 belongs to C-1, and confirmed it was delivered on 2026-10-21 (5 days ago, within the 30-day window). It refunded exactly the amount owed ($49.99, with nothing previously refunded), and the tool confirmed the refund before the agent told the customer. No policy was violated."
+    }
+  }
+}

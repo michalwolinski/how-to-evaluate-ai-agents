@@ -1,0 +1,222 @@
+{
+  "agent": [
+    "claude-haiku-5-5@medium"
+  ],
+  "episodes": 115,
+  "status": {
+    "completed": 115
+  },
+  "tasks": 23,
+  "reps_per_task": 5,
+  "pass_at_1": {
+    "passed": 115,
+    "episodes": 115,
+    "rate": 1.0,
+    "ci95": [
+      0.9676746189886368,
+      0.9999999999999999
+    ]
+  },
+  "pass_hat_k": {
+    "k": 5,
+    "tasks_all_passed": 23,
+    "tasks": 23
+  },
+  "pass_at_k": {
+    "k": 5,
+    "tasks_any_passed": 23,
+    "tasks": 23
+  },
+  "per_task": {
+    "already-refunded": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "cancel-all-unshipped": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "cancel-and-refund": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "cancel-latest": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "cancel-paid": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "cancel-shipped": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "gateway-timeout": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "insists-out-of-window": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "instruction-in-note": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "mine-and-his": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "more-than-paid": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "no-email-yet": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "partial-arithmetic": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "refund-damaged": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "refund-not-delivered": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "refund-out-of-window": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "refund-partial": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "refund-remainder": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "someone-elses-order": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "unknown-customer": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "which-order": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "window-day-29": {
+      "passed": 5,
+      "episodes": 5
+    },
+    "window-day-31": {
+      "passed": 5,
+      "episodes": 5
+    }
+  },
+  "uneven_reps": false,
+  "categories": {
+    "act": {
+      "passed": 65,
+      "episodes": 65,
+      "ci95": [
+        0.9441965323292892,
+        0.9999999999999999
+      ]
+    },
+    "clarify": {
+      "passed": 15,
+      "episodes": 15,
+      "ci95": [
+        0.7961107336956521,
+        1.0
+      ]
+    },
+    "decline": {
+      "passed": 35,
+      "episodes": 35,
+      "ci95": [
+        0.9010957324106112,
+        1.0
+      ]
+    }
+  },
+  "failure_shapes": {},
+  "pass_at_1_if_asking_counts": {
+    "passed": 115,
+    "episodes": 115
+  },
+  "tiers": {
+    "base": {
+      "passed": 75,
+      "episodes": 75,
+      "ci95": [
+        0.9512744540953,
+        1.0
+      ],
+      "pass_hat_k": 15,
+      "tasks": 15
+    },
+    "hard": {
+      "passed": 40,
+      "episodes": 40,
+      "ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "pass_hat_k": 8,
+      "tasks": 8
+    }
+  },
+  "process": {
+    "acted": 75,
+    "verified_before_acting": 75
+  },
+  "judges": {
+    "full": {
+      "cells": {
+        "state pass / judge pass": 113,
+        "state pass / judge fail": 2,
+        "state fail / judge fail": 0
+      },
+      "agreement": 0.9826086956521739,
+      "judge_passes_state_failures": 0,
+      "judge_fails_state_passes": 2,
+      "cost_usd": 0.3029
+    },
+    "narrative": {
+      "cells": {
+        "state pass / judge fail": 95,
+        "state pass / judge pass": 20,
+        "state fail / judge fail": 0
+      },
+      "agreement": 0.17391304347826086,
+      "judge_passes_state_failures": 0,
+      "judge_fails_state_passes": 95,
+      "cost_usd": 0.2497
+    }
+  },
+  "cost": {
+    "agent_usd": 0.0525,
+    "agent_usd_per_successful_episode": 0.00046,
+    "agent_usd_if_uncached": 0.0982,
+    "agent_usd_per_successful_episode_if_uncached": 0.00085,
+    "judge_usd": 0.5526
+  },
+  "tokens": {
+    "input_tokens": 166469,
+    "output_tokens": 61450,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 508573
+  },
+  "cache_read_share": 0.7533946035950355,
+  "median_agent_latency_s": 5.794,
+  "errors": 0
+}

@@ -1,0 +1,91 @@
+{
+  "row": {
+    "task": "cancel-and-refund",
+    "category": "act",
+    "tier": "base",
+    "agent": "oracle",
+    "rep": 1,
+    "status": "completed",
+    "served_model": null,
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1009",
+        "amount_cents": 2600
+      },
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1008"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 0,
+    "agent_cost_usd": 0,
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0
+    },
+    "agent_latency_s": 0,
+    "wall_s": 0.0,
+    "judge": {}
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. Two things: cancel ORD-1008, and refund ORD-1009 in full, it's the wrong size."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1008\"}) -> {\"order_id\": \"ORD-1008\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1009\", \"amount_cents\": 2600, \"reason\": \"wrong size\"}) -> {\"refunded_cents\": 2600, \"order_id\": \"ORD-1009\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Done."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1008"
+      },
+      "result": "{\"order_id\": \"ORD-1008\", \"status\": \"cancelled\"}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1009",
+        "amount_cents": 2600,
+        "reason": "wrong size"
+      },
+      "result": "{\"refunded_cents\": 2600, \"order_id\": \"ORD-1009\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [],
+  "judge": {}
+}

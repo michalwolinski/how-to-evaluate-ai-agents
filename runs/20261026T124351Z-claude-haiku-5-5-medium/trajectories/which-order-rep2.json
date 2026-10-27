@@ -1,0 +1,195 @@
+{
+  "row": {
+    "task": "which-order",
+    "category": "clarify",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1017"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 5,
+    "agent_cost_usd": 0.0004,
+    "usage": {
+      "input_tokens": 1640,
+      "output_tokens": 338,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 6745
+    },
+    "agent_latency_s": 6.185,
+    "wall_s": 10.297,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls at all: no customer lookup, no order lookup, and no cancel call or confirmation. The agent nonetheless told the customer ORD-1017 'has been cancelled'. Policy 5 forbids telling the customer something happened unless a tool confirmed it. Without any tool output, the order details and the cancellation are unverified, so the request was not handled correctly.",
+        "cost_usd": 0.0020736
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent looked up the customer by email, listed her orders, and asked which one to cancel because the request was ambiguous. After she chose the October 24th order (ORD-1017, status paid, so cancellable), it cancelled that order. The tool confirmed the cancellation, and the agent reported it accurately without making any unsupported claims.",
+        "cost_usd": 0.0023715999999999997
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "grace@example.com. I want to cancel my order."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "list_orders({\"customer_id\": \"C-2\"}) -> {\"orders\": [{\"id\": \"ORD-1016\", \"status\": \"paid\", \"total_cents\": 1200, \"placed_on\": \"2026-10-20\", \"delivered_on\": null}, {\"id\": \"ORD-1017\", \"status\": \"paid\", \"total_cents\": 1900, \"placed_on\": \"2026-10-24\", \"delivered_on\": null}]}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Grace, thanks for reaching out. I found two orders on your account that are still in the paid stage:\n\n1. **ORD-1016**: $12.00, placed October 20, 2026\n2. **ORD-1017**: $19.00, placed October 24, 2026\n\nWhich one would you like to cancel? Please reply with the order number."
+    },
+    {
+      "role": "user",
+      "text": "The one from October 24th."
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1017\"}) -> {\"order_id\": \"ORD-1017\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Your order ORD-1017 (the $19.00 order placed October 24, 2026) has been cancelled. Your other order, ORD-1016 ($12.00, placed October 20), is still active."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "list_orders",
+      "input": {
+        "customer_id": "C-2"
+      },
+      "result": "{\"orders\": [{\"id\": \"ORD-1016\", \"status\": \"paid\", \"total_cents\": 1200, \"placed_on\": \"2026-10-20\", \"delivered_on\": null}, {\"id\": \"ORD-1017\", \"status\": \"paid\", \"total_cents\": 1900, \"placed_on\": \"2026-10-24\", \"delivered_on\": null}]}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1017"
+      },
+      "result": "{\"order_id\": \"ORD-1017\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 92,
+        "output_tokens": 55,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 5.0190000000000006e-05,
+      "latency_s": 1.106,
+      "request_id": "req_011CgQss3yEd29xLeN4NKnGS"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 177,
+        "output_tokens": 53,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 5.769e-05,
+      "latency_s": 1.07,
+      "request_id": "req_011CgQss8g1Qm1yV7Xy2X9nW"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 348,
+        "output_tokens": 109,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010279000000000001,
+      "latency_s": 1.675,
+      "request_id": "req_011CgQssDF6US3Trpxk4wfSS"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 469,
+        "output_tokens": 56,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 8.839000000000001e-05,
+      "latency_s": 1.134,
+      "request_id": "req_011CgQssLQTGiJvRwPBDMbuS"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 554,
+        "output_tokens": 65,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010139000000000002,
+      "latency_s": 1.2,
+      "request_id": "req_011CgQssRGecoQJPLt7j3aRW"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 241,
+        "output_tokens": 144,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0020736,
+      "latency_s": 1.991,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls at all: no customer lookup, no order lookup, and no cancel call or confirmation. The agent nonetheless told the customer ORD-1017 'has been cancelled'. Policy 5 forbids telling the customer something happened unless a tool confirmed it. Without any tool output, the order details and the cancellation are unverified, so the request was not handled correctly."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 495,
+        "output_tokens": 123,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0023715999999999997,
+      "latency_s": 2.12,
+      "verdict": "pass",
+      "reason": "The agent looked up the customer by email, listed her orders, and asked which one to cancel because the request was ambiguous. After she chose the October 24th order (ORD-1017, status paid, so cancellable), it cancelled that order. The tool confirmed the cancellation, and the agent reported it accurately without making any unsupported claims."
+    }
+  }
+}

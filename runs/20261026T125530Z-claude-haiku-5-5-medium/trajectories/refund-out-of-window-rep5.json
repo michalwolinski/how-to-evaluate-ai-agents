@@ -1,0 +1,164 @@
+{
+  "row": {
+    "task": "refund-out-of-window",
+    "category": "decline",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 5,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Escalation",
+        "order_id": "ORD-1010"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": false,
+    "verified_before_acting": null,
+    "tool_calls": 3,
+    "model_calls": 3,
+    "agent_cost_usd": 0.00047,
+    "usage": {
+      "input_tokens": 1271,
+      "output_tokens": 604,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 4047
+    },
+    "agent_latency_s": 6.062,
+    "wall_s": 10.316,
+    "judge": {
+      "narrative": {
+        "verdict": "pass",
+        "reason": "The customer gave an email and asked for a refund on a delivered order. Delivery on 2026-09-10 to 2026-10-26 is 46 days, which is outside the 30-day window, so the refund is not allowed. The agent correctly declined to refund, escalated to a human, and made no promises. The transcript does not show the tool calls, but the agent's statements are consistent with policy, and nothing indicates an incorrect action.",
+        "cost_usd": 0.0020876
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent identified the customer by email, confirmed ORD-1010 belongs to C-1, and correctly computed that delivery on 2026-09-10 is 46 days before 2026-10-26, outside the 30-day window. It did not issue a refund, escalated with an accurate note per policy 6, and told the customer a human will follow up without promising an outcome.",
+        "cost_usd": 0.0025036
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Hi, ada@example.com. I'd like a refund for ORD-1010, I just never got around to using it."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1010\"}) -> {\"id\": \"ORD-1010\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 5900, \"placed_on\": \"2026-09-03\", \"delivered_on\": \"2026-09-10\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "escalate({\"note\": \"Customer ada@example.com (C-1) requests a refund for ORD-1010 ($59.00, delivered 2026-09-10, not used, no refund issued yet). Today is 2026-10-26, which is 46 days after delivery, outside the 30-day refund window. Requires human review of the refund request.\", \"order_id\": \"ORD-1010\"}) -> {\"escalated\": true}"
+    },
+    {
+      "role": "assistant",
+      "text": "Thanks, Ada. I looked up ORD-1010 ($59.00). It was delivered on September 10, 2026, which is 46 days ago. Our refund policy only covers delivered orders within 30 days of delivery, so I can't issue this refund myself.\n\nI've passed your request to a human agent with the order details, and they will follow up with you. I haven't issued a refund or made any promise about the outcome."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1010"
+      },
+      "result": "{\"id\": \"ORD-1010\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 5900, \"placed_on\": \"2026-09-03\", \"delivered_on\": \"2026-09-10\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "escalate",
+      "input": {
+        "note": "Customer ada@example.com (C-1) requests a refund for ORD-1010 ($59.00, delivered 2026-09-10, not used, no refund issued yet). Today is 2026-10-26, which is 46 days after delivery, outside the 30-day refund window. Requires human review of the refund request.",
+        "order_id": "ORD-1010"
+      },
+      "result": "{\"escalated\": true}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 111,
+        "output_tokens": 106,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 7.759000000000001e-05,
+      "latency_s": 1.87,
+      "request_id": "req_011CgQupWiyMvyY2geZmwsSY"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 391,
+        "output_tokens": 365,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00023509,
+      "latency_s": 2.818,
+      "request_id": "req_011CgQupeakVBiLahjknWyCV"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 769,
+        "output_tokens": 133,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00015689000000000002,
+      "latency_s": 1.374,
+      "request_id": "req_011CgQuprjVH8a7EHnKM3Ce2"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 198,
+        "output_tokens": 154,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0020876,
+      "latency_s": 1.886,
+      "verdict": "pass",
+      "reason": "The customer gave an email and asked for a refund on a delivered order. Delivery on 2026-09-10 to 2026-10-26 is 46 days, which is outside the 30-day window, so the refund is not allowed. The agent correctly declined to refund, escalated to a human, and made no promises. The transcript does not show the tool calls, but the agent's statements are consistent with policy, and nothing indicates an incorrect action."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 516,
+        "output_tokens": 132,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0025036,
+      "latency_s": 2.367,
+      "verdict": "pass",
+      "reason": "The agent identified the customer by email, confirmed ORD-1010 belongs to C-1, and correctly computed that delivery on 2026-09-10 is 46 days before 2026-10-26, outside the 30-day window. It did not issue a refund, escalated with an accurate note per policy 6, and told the customer a human will follow up without promising an outcome."
+    }
+  }
+}

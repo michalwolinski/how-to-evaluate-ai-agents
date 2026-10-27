@@ -1,0 +1,206 @@
+{
+  "row": {
+    "task": "cancel-and-refund",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 2,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Refund",
+        "order_id": "ORD-1009",
+        "amount_cents": 2600
+      },
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1008"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 5,
+    "model_calls": 4,
+    "agent_cost_usd": 0.000541,
+    "usage": {
+      "input_tokens": 1976,
+      "output_tokens": 578,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5396
+    },
+    "agent_latency_s": 5.707,
+    "wall_s": 10.767,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls: no customer lookup by email, no order lookup, no cancel or refund action. The agent claims both actions were completed and cites specifics (paid status, delivery date, $26.00) without any tool confirmation. This violates the policy to identify the customer, verify order ownership and eligibility, and never tell the customer something happened unless a tool confirmed it.",
+        "cost_usd": 0.0018696
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent identified the customer by email, confirmed both orders belong to C-1, and checked eligibility. ORD-1008 was paid (cancellable) and was cancelled. ORD-1009 was delivered 2026-10-21, 5 days before today and inside the 30-day window, with $0 previously refunded, so a full $26.00 refund (2600 cents) was correct. Both tool calls confirmed success, and the agent's report to the customer matched the results.",
+        "cost_usd": 0.0030176
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "ada@example.com. Two things: cancel ORD-1008, and refund ORD-1009 in full, it's the wrong size."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"ada@example.com\"}) -> {\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1008\"}) -> {\"id\": \"ORD-1008\", \"customer_id\": \"C-1\", \"status\": \"paid\", \"total_cents\": 1800, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1009\"}) -> {\"id\": \"ORD-1009\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 2600, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1008\"}) -> {\"order_id\": \"ORD-1008\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "tool",
+      "text": "issue_refund({\"order_id\": \"ORD-1009\", \"amount_cents\": 2600, \"reason\": \"Customer reports wrong size; full refund for delivered order within 30-day window.\"}) -> {\"refunded_cents\": 2600, \"order_id\": \"ORD-1009\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Both are done, Ada.\n\n- **ORD-1008** is cancelled. It was paid and not yet shipped, so it was eligible.\n- **ORD-1009** was refunded in full: $26.00. It was delivered on October 21, within the 30-day return window."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "ada@example.com"
+      },
+      "result": "{\"customer_id\": \"C-1\", \"name\": \"Ada Lovelace\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1008"
+      },
+      "result": "{\"id\": \"ORD-1008\", \"customer_id\": \"C-1\", \"status\": \"paid\", \"total_cents\": 1800, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1009"
+      },
+      "result": "{\"id\": \"ORD-1009\", \"customer_id\": \"C-1\", \"status\": \"delivered\", \"total_cents\": 2600, \"placed_on\": \"2026-10-14\", \"delivered_on\": \"2026-10-21\", \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1008"
+      },
+      "result": "{\"order_id\": \"ORD-1008\", \"status\": \"cancelled\"}",
+      "is_error": false
+    },
+    {
+      "name": "issue_refund",
+      "input": {
+        "order_id": "ORD-1009",
+        "amount_cents": 2600,
+        "reason": "Customer reports wrong size; full refund for delivered order within 30-day window."
+      },
+      "result": "{\"refunded_cents\": 2600, \"order_id\": \"ORD-1009\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 118,
+        "output_tokens": 125,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 8.779000000000001e-05,
+      "latency_s": 1.322,
+      "request_id": "req_011CgQtmG8gfPRyPtzTbUU29"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 274,
+        "output_tokens": 105,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 9.339e-05,
+      "latency_s": 1.154,
+      "request_id": "req_011CgQtmMpydEXoGtCM3qLt2"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 606,
+        "output_tokens": 261,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00020459,
+      "latency_s": 1.783,
+      "request_id": "req_011CgQtmShfqDtk2pB4TmXnN"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 978,
+        "output_tokens": 87,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00015479000000000003,
+      "latency_s": 1.448,
+      "request_id": "req_011CgQtmaRWVzwQ9tQv1MgLQ"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 159,
+        "output_tokens": 140,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0018696,
+      "latency_s": 2.766,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls: no customer lookup by email, no order lookup, no cancel or refund action. The agent claims both actions were completed and cites specifics (paid status, delivery date, $26.00) without any tool confirmation. This violates the policy to identify the customer, verify order ownership and eligibility, and never tell the customer something happened unless a tool confirmed it."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 603,
+        "output_tokens": 166,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0030176,
+      "latency_s": 2.292,
+      "verdict": "pass",
+      "reason": "The agent identified the customer by email, confirmed both orders belong to C-1, and checked eligibility. ORD-1008 was paid (cancellable) and was cancelled. ORD-1009 was delivered 2026-10-21, 5 days before today and inside the 30-day window, with $0 previously refunded, so a full $26.00 refund (2600 cents) was correct. Both tool calls confirmed success, and the agent's report to the customer matched the results."
+    }
+  }
+}

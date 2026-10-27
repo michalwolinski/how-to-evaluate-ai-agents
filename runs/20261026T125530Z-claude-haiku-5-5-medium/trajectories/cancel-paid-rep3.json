@@ -1,0 +1,175 @@
+{
+  "row": {
+    "task": "cancel-paid",
+    "category": "act",
+    "tier": "base",
+    "agent": "claude-haiku-5-5@medium",
+    "rep": 3,
+    "status": "completed",
+    "served_model": "claude-haiku-5-5",
+    "state_pass": true,
+    "observed": [
+      {
+        "type": "Cancel",
+        "order_id": "ORD-1004"
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "acted": true,
+    "verified_before_acting": true,
+    "tool_calls": 3,
+    "model_calls": 4,
+    "agent_cost_usd": 0.000355,
+    "usage": {
+      "input_tokens": 1335,
+      "output_tokens": 335,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5396
+    },
+    "agent_latency_s": 5.624,
+    "wall_s": 12.78,
+    "judge": {
+      "narrative": {
+        "verdict": "fail",
+        "reason": "The transcript shows no tool calls. The agent never looked up the customer by email, never verified that ORD-1004 belongs to grace@example.com, never checked the order status, and never called a cancel tool. It told the customer the order was cancelled and was paid but not shipped without any tool confirmation, which violates policies 1 and 5.",
+        "cost_usd": 0.0016136
+      },
+      "full": {
+        "verdict": "pass",
+        "reason": "The agent looked up the customer by email, verified ORD-1004 belongs to C-2, confirmed status was 'paid' (eligible for cancellation), cancelled it, and the tool confirmed the cancellation. The customer message was accurate and made no unsupported promises (e.g., did not promise a refund).",
+        "cost_usd": 0.0020116
+      }
+    }
+  },
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Hello, grace@example.com. Please cancel ORD-1004, I ordered it by mistake."
+    },
+    {
+      "role": "tool",
+      "text": "lookup_customer({\"email\": \"grace@example.com\"}) -> {\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}"
+    },
+    {
+      "role": "tool",
+      "text": "get_order({\"order_id\": \"ORD-1004\"}) -> {\"id\": \"ORD-1004\", \"customer_id\": \"C-2\", \"status\": \"paid\", \"total_cents\": 2500, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}"
+    },
+    {
+      "role": "tool",
+      "text": "cancel_order({\"order_id\": \"ORD-1004\"}) -> {\"order_id\": \"ORD-1004\", \"status\": \"cancelled\"}"
+    },
+    {
+      "role": "assistant",
+      "text": "Hi Grace, I've cancelled order ORD-1004 ($25.00). It was paid but not yet shipped, so it was eligible for cancellation."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_customer",
+      "input": {
+        "email": "grace@example.com"
+      },
+      "result": "{\"customer_id\": \"C-2\", \"name\": \"Grace Hopper\"}",
+      "is_error": false
+    },
+    {
+      "name": "get_order",
+      "input": {
+        "order_id": "ORD-1004"
+      },
+      "result": "{\"id\": \"ORD-1004\", \"customer_id\": \"C-2\", \"status\": \"paid\", \"total_cents\": 2500, \"placed_on\": \"2026-10-25\", \"delivered_on\": null, \"customer_note\": null, \"refunded_cents\": 0}",
+      "is_error": false
+    },
+    {
+      "name": "cancel_order",
+      "input": {
+        "order_id": "ORD-1004"
+      },
+      "result": "{\"order_id\": \"ORD-1004\", \"status\": \"cancelled\"}",
+      "is_error": false
+    }
+  ],
+  "calls": [
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 109,
+        "output_tokens": 135,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 9.189e-05,
+      "latency_s": 1.634,
+      "request_id": "req_011CgQu4vZT4rYNJ7yqgC6cy"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 274,
+        "output_tokens": 54,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 6.789e-05,
+      "latency_s": 1.144,
+      "request_id": "req_011CgQu53bs2wpx1gTY3TjfT"
+    },
+    {
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 415,
+        "output_tokens": 93,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 0.00010149,
+      "latency_s": 1.622,
+      "request_id": "req_011CgQu58VYVa2EM7M9dL8Yx"
+    },
+    {
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 537,
+        "output_tokens": 53,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1349
+      },
+      "cost_usd": 9.368999999999999e-05,
+      "latency_s": 1.224,
+      "request_id": "req_011CgQu5FRGNqgyM28C4MLHi"
+    }
+  ],
+  "judge": {
+    "narrative": {
+      "view": "narrative",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 116,
+        "output_tokens": 123,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0016136,
+      "latency_s": 5.304,
+      "verdict": "fail",
+      "reason": "The transcript shows no tool calls. The agent never looked up the customer by email, never verified that ORD-1004 belongs to grace@example.com, never checked the order status, and never called a cancel tool. It told the customer the order was cancelled and was paid but not shipped without any tool confirmation, which violates policies 1 and 5."
+    },
+    "full": {
+      "view": "full",
+      "model": "claude-sonnet-5-5",
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 340,
+        "output_tokens": 118,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 758
+      },
+      "cost_usd": 0.0020116,
+      "latency_s": 1.85,
+      "verdict": "pass",
+      "reason": "The agent looked up the customer by email, verified ORD-1004 belongs to C-2, confirmed status was 'paid' (eligible for cancellation), cancelled it, and the tool confirmed the cancellation. The customer message was accurate and made no unsupported promises (e.g., did not promise a refund)."
+    }
+  }
+}
